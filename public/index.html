@@ -3,18 +3,36 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="theme-color" content="#f4f3ed">
+    <meta name="theme-color" content="#f5f1e9">
     <title>Görsel Model Testi</title>
     <link rel="stylesheet" href="/styles.css">
     <script type="module" src="/app.js"></script>
   </head>
   <body>
-    <header class="masthead"><a href="/" class="brand"><span aria-hidden="true">◒</span> Görsel Model Testi</a></header>
-    <main class="shell">
-      <div class="intro">
-        <h1>Görselleri karşılaştır.</h1>
-        <p>Bir test aç, aynı prompttan çıkan görsellere 1–5 yıldız ver. Test sonunda kendi sıralamanı ve topluluğun sonuçlarını gör.</p>
+    <header class="masthead">
+      <div class="masthead-inner">
+        <a href="/" class="brand"><span class="brand-mark" aria-hidden="true"></span>Görsel Model Testi</a>
+        <nav aria-label="Sayfa bölümleri" id="section-links" hidden>
+          <a href="#archive-title">Test arşivi</a>
+          <a href="#rankings-title">Sıralamalar</a>
+        </nav>
       </div>
+    </header>
+    <main class="shell">
+      <section class="intro" aria-labelledby="intro-title">
+        <div class="intro-copy">
+          <h1 id="intro-title">Görselleri<br>karşılaştır.</h1>
+          <p>Bir test aç, aynı prompttan çıkan görsellere 1–5 yıldız ver. Test sonunda kendi sıralamanı ve topluluğun sonuçlarını gör.</p>
+          <a class="action intro-action" href="#archive-title" hidden>Testleri keşfet <span class="arrow arrow-down" aria-hidden="true"></span></a>
+        </div>
+        <figure class="intro-sample">
+          <div class="sample-pair">
+            <img src="/media/5e528bd161e0c4fcbe1014b8.webp" alt="Gün ışığında yeşil şişe, kırmızı demlik, metal kâse ve mavi kutu" fetchpriority="high">
+            <img src="/media/509a26e0c53af5ea9c162ca9.webp" alt="Aynı nesnelerin farklı açıdan düzenlendiği ikinci görsel">
+          </div>
+          <figcaption><span>Aynı prompt, iki farklı yorum.</span><span>Test 03</span></figcaption>
+        </figure>
+      </section>
       <p id="home-status" role="status">Testler yükleniyor…</p>
       <div id="dashboard" class="dashboard" hidden></div>
     </main>

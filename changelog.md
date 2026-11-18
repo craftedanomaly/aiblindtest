@@ -4,6 +4,13 @@
 
 ## 2026-11-18
 
+### Görsel test arayüzü iyileştirmeleri
+
+- Impeccable yerel Codex skill dizinine kuruldu ve mevcut arayüzü iyileştirmek için kullanıldı. Skill dosyaları repoya eklenmedi.
+- `public/index.html`, `public/app.js` ve `public/styles.css` ana sayfada aynı prompttan iki gerçek örnek, test kapakları, arşiv ve sıralama bağlantıları ve yarıda bırakılan testlere devam etiketi sunar. Kör değerlendirmede prompt ilerlemesi görünür. Görsel alanı, yıldız kontrolleri ve sonuç galerisi dar ekranlara uyarlandı.
+- API ve veritabanı işleyişi değişmedi. `npm test` ve `git diff --check` geçti. Playwright ile 320–1360 px aralığında yerleşim, masaüstü ve dokunmatik prompt açma, izole ortamda puanlama ve sonuçlar, gerçek arşivde 288 görsel sayısı ve klavye odağı doğrulandı. Canlı veritabanına oy yazılmadı. Impeccable taraması mevcut açık ve sıcak arka planı işaretledi. Arşivin mevcut görsel diliyle tutarlılık için bu palet korundu.
+- Migration gerekmiyor. Canlı dağıtım durumu GitHub ve Vercel bağlantısına bağlı.
+
 ### Yayın sonrası sır ve veri erişimi denetimi
 
 - Git geçmişindeki tek commit ve 305 dosya nesnesi, yerel Studio/yayın ortamındaki 15 gerçek yapılandırma değeriyle karşılaştırıldı; eşleşme bulunmadı. Özel anahtar, sağlayıcı token'ı, JWT ve imzalı bağlantı kalıpları taramasında bulgu yoktu. Anahtar değerleri rapora veya Git'e yazılmadı.
