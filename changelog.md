@@ -4,6 +4,14 @@
 
 ## 2026-11-18
 
+### Yayın sonrası sır ve veri erişimi denetimi
+
+- Git geçmişindeki tek commit ve 305 dosya nesnesi, yerel Studio/yayın ortamındaki 15 gerçek yapılandırma değeriyle karşılaştırıldı; eşleşme bulunmadı. Özel anahtar, sağlayıcı token'ı, JWT ve imzalı bağlantı kalıpları taramasında bulgu yoktu. Anahtar değerleri rapora veya Git'e yazılmadı.
+- Veri setinde URL, e-posta adresi veya UUID kalıbı bulunmadı; 288 WebP dosyasında EXIF/XMP bölümü yoktu. Bu kontroller, prompt ve görsellerdeki tüm olası kişisel içerik için kapsamlı bir içerik denetimi anlamına gelmez.
+- Canlı Supabase'de yalnızca public anahtarla kampanya ve oy tablolarını doğrudan okuma girişimleri 401 döndü. Kampanya anahtarı olmadan veya yanlış anahtarla durum okuma işlevi de 401 döndü. Oy yazılmadı, migration uygulanmadı.
+- Herkese açık kaynak reposunda prompt, görsel ve model eşleşmeleri erişilebilirdir. Eşleşmelerin bilinmesi kör değerlendirmeyi etkileyebilir. Anonim çerez farklı tarayıcılar veya otomasyon üzerinden çoklu oyu kesin engellemez.
+- Yalnızca denetim kaydı eklendi; uygulama kodu ve dağıtım ayarları değiştirilmedi. Bu denetimde uygulama testleri yeniden çalıştırılmadı. `git diff --check` ve `git diff --cached --check` geçti.
+
 ### Bağımsız GitHub ve Vercel yayın paketi
 
 - Studio içindeki `public-model-test` uygulaması `craftedanomaly/aiblindtest` için bağımsız repo köküne alındı. Studio Git geçmişi ve uzak repo ayarı taşınmadı. Uygulama kodu değiştirilmedi.
