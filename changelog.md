@@ -4,6 +4,12 @@
 
 ## 2026-11-18
 
+### Tam ekran görsel üzerinde yüzen puanlama kontrolleri
+
+- `public/app.js` ve `public/styles.css` ile testte görsel kırpılmadan tüm ekranı kullanır. Prompt sol üstte açılır. Küçük görseller masaüstünde sol kenarda, dikey telefonda puanlama alanının üzerinde yatay dizilir. Hangi görsele oy verildiği ve kaçının puanlandığı yıldızlarla aynı yerde gösterilir.
+- Sağ üstteki düğme yüzen kontrolleri gizler ve geri getirir. Testi bitirme sol altta, sonraki prompt veya sonuçlar sağ alttadır.
+- `npm test`, JavaScript sözdizimi, Impeccable taraması ve `git diff --check` geçti. Chrome ile 320–1917 px arasında altı boyutta görsel alanının ekranı kapladığı ve kontrollerin çakışmadığı doğrulandı. Fare, klavye ve dokunmatik puanlama, otomatik geçiş, bitirme uyarısı, görsel modu, dört kat yakınlaştırma, iki eksende kaydırma ve ekranı döndürme denendi. Kontroller sırasında canlı oy gönderilmedi. Migration gerekmiyor.
+
 ### Puanlama ekranında araç çubuklarının hizalanması
 
 - `public/app.js` önceki prompt düğmesini başlığın yanına, yalnızca görsel düğmesini kapatma düğmesinin yanına alır. Puanlanan görsel sayısı küçük resimlerin yanında durur. Sonraki prompt ve testi bitirme düğmeleri alt çubuğun iki ucundadır.

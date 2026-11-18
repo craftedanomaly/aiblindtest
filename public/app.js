@@ -121,19 +121,20 @@ function updateControls() {
   const rated = prompt.images.filter(({ id }) => review.ratings[id]).length;
   const final = review.index === review.test.prompts.length - 1;
   dialog.querySelector("#rating-progress").textContent = `${rated}/${prompt.images.length} rated`;
-  dialog.querySelector("#rating-label").textContent = `Rating for image ${review.active + 1}`;
+  dialog.querySelector("#rating-label").textContent = `Rate image ${String(review.active + 1).padStart(2, "0")}`;
   for (const [index, button] of [...dialog.querySelectorAll(".option")].entries()) {
     button.setAttribute("aria-current", index === review.active ? "true" : "false");
     const score = review.ratings[prompt.images[index].id];
     button.querySelector("span").hidden = !score;
-    button.querySelector("span").textContent = score ? `★ ${score}` : "";
+    button.querySelector("span").textContent = score || "";
+    button.setAttribute("aria-description", score ? `Rated ${score} out of 5` : "Unrated");
   }
   for (const input of dialog.querySelectorAll(".stars input")) {
     input.checked = Number(input.value) === review.ratings[image.id];
     input.parentElement.classList.toggle("filled", Number(input.value) <= (review.ratings[image.id] ?? 0));
   }
   const next = dialog.querySelector("[data-next]");
-  next.textContent = final ? "View results" : rated === prompt.images.length ? "Next" : "Skip";
+  next.querySelector("span").textContent = final ? "View results" : rated === prompt.images.length ? "Next" : "Skip";
   next.disabled = review.saving;
   dialog.querySelector("[data-finish]").disabled = review.saving;
 }
@@ -216,40 +217,45 @@ function focusReview() {
   dialog.querySelector(".review-grid").focus({ preventScroll: true });
 }
 
+function reviewIcon(path, className = "") {
+  return `<svg class="${className}" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${path}"/></svg>`;
+}
+
 function renderPrompt() {
   const { test, index } = review;
   const prompt = test.prompts[index];
   dialog.innerHTML = `<div class="review-grid" tabindex="-1">
-    <header class="review-head">
-      <button type="button" class="icon-button" data-back aria-label="Previous prompt" title="Previous prompt" ${index === 0 ? "disabled" : ""}>‹</button>
-      <div class="prompt"><p class="quiet">Prompt ${index + 1}/${test.prompts.length}</p>
-        <button type="button" class="prompt-title" aria-expanded="false" aria-controls="full-prompt" data-prompt><span>${escapeHtml(prompt.title)}</span></button>
-        <div class="prompt-text" id="full-prompt" tabindex="0">${escapeHtml(prompt.prompt)}</div>
-      </div>
-      <button type="button" class="icon-button image-only-toggle" data-image-only aria-label="Image-only view" aria-pressed="false" title="Hide controls">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-          <path class="expand-icon" d="M9 4H4v5m11-5h5v5m0 6v5h-5m-6 0H4v-5"/>
-          <path class="restore-icon" d="M4 9h5V4m11 5h-5V4m5 11h-5v5M4 15h5v5"/>
-        </svg>
-      </button>
-      <button type="button" class="icon-button" data-close aria-label="Back to home" title="Back to home">✕</button>
-    </header>
-    <progress class="prompt-progress" value="${index + 1}" max="${test.prompts.length}" aria-label="Prompt progress"></progress>
     <div class="image-stage">
       <img id="active-image" alt="" fetchpriority="high" draggable="false">
       <p class="stage-status" id="image-status" role="status">Loading image…</p>
     </div>
-    <footer class="review-foot">
-      <div class="review-toolbar">
-        <button class="finish-link" type="button" data-finish>Finish test</button>
-        <div class="review-strip">
-          <div class="options" role="group" aria-label="Images for this prompt" aria-keyshortcuts="ArrowLeft ArrowRight">${prompt.images.map(({ id }, i) => `<button type="button" class="option" data-image="${i}" aria-label="Image ${i + 1}"><img src="${imageUrl(id)}" alt="" loading="lazy"><span hidden></span></button>`).join("")}</div>
-          <p id="rating-progress" class="quiet" role="status"></p>
-        </div>
-        <fieldset class="stars"><legend id="rating-label" class="sr-only">Image rating</legend>
-        ${stars.map((score) => `<label><input type="radio" value="${score}" name="stars"><span aria-hidden="true">★</span><span class="sr-only">${score} ${score === 1 ? "star" : "stars"}</span></label>`).join("")}</fieldset>
-        <button type="button" class="action" data-next ${index < test.prompts.length - 1 ? 'aria-keyshortcuts="Space"' : ""}>Skip</button>
+    <header class="prompt-card">
+      <button type="button" class="tool-button" data-back aria-label="Previous prompt" title="Previous prompt" ${index === 0 ? "disabled" : ""}>${reviewIcon("M15 5l-7 7 7 7")}</button>
+      <div class="prompt">
+        <div class="prompt-meta"><span>Prompt ${index + 1} / ${test.prompts.length}</span><progress value="${index + 1}" max="${test.prompts.length}" aria-label="Prompt progress"></progress></div>
+        <button type="button" class="prompt-title" aria-expanded="false" aria-controls="full-prompt" data-prompt><span>${escapeHtml(prompt.title)}</span>${reviewIcon("m6 9 6 6 6-6")}</button>
+        <div class="prompt-text" id="full-prompt" tabindex="0">${escapeHtml(prompt.prompt)}</div>
       </div>
+    </header>
+    <div class="view-tools">
+      <button type="button" class="tool-button image-only-toggle" data-image-only aria-label="Image-only view" aria-pressed="false" title="Hide controls">
+        ${reviewIcon("M9 4H4v5m11-5h5v5m0 6v5h-5m-6 0H4v-5","expand-icon")}
+        ${reviewIcon("M4 9h5V4m11 5h-5V4m5 11h-5v5M4 15h5v5","restore-icon")}
+      </button>
+      <button type="button" class="tool-button" data-close aria-label="Back to home" title="Back to home">${reviewIcon("m6 6 12 12M18 6 6 18")}</button>
+    </div>
+    <div class="options" role="group" aria-label="Images for this prompt" aria-keyshortcuts="ArrowLeft ArrowRight">
+      ${prompt.images.map(({ id }, i) => `<button type="button" class="option" data-image="${i}" aria-label="Image ${i + 1}"><img src="${imageUrl(id)}" alt="" loading="lazy"><span hidden></span></button>`).join("")}
+    </div>
+    <footer class="review-foot">
+      <button class="session-link" type="button" data-finish>Finish test</button>
+      <div class="rating-dock">
+        <div class="rating-caption"><strong id="rating-label"></strong><span id="rating-progress" role="status"></span></div>
+        <fieldset class="stars" aria-labelledby="rating-label">
+          ${stars.map((score) => `<label><input type="radio" value="${score}" name="stars">${reviewIcon("m12 2.8 2.85 5.78 6.38.93-4.62 4.5 1.09 6.36L12 17.37l-5.7 3 1.09-6.36-4.62-4.5 6.38-.93Z")}<span class="sr-only">${score} ${score === 1 ? "star" : "stars"}</span></label>`).join("")}
+        </fieldset>
+      </div>
+      <button type="button" class="session-link" data-next ${index < test.prompts.length - 1 ? 'aria-keyshortcuts="Space"' : ""}><span>Skip</span>${reviewIcon("M4 12h15m-6-6 6 6-6 6")}</button>
       <p id="review-error" class="warning" role="status"></p>
     </footer>
   </div>`;
