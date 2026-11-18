@@ -4,6 +4,12 @@
 
 ## 2026-11-18
 
+### Test uzunluğu seçimi ve dokunmatik görsel gezinme
+
+- `public/index.html`, `public/styles.css` ve `public/app.js` ile yeni katılımcı 10, 25, 50 veya 100 prompt seçebilir. Başlangıç değeri 10. Promptlar karıştırılıp seçilen sayıda alınır. Tarayıcı seçilen seti, sırasını ve son konumu saklar. Önceki taslaklar tam uzunluklarıyla devam eder.
+- Son prompta kadar düğmede **Next** yazar. Telefonda görsel üzerinde sola kaydırma sonraki, sağa kaydırma önceki görseli açar. İki parmakla yakınlaştırma ve yakınlaştırılmış görselde gezinme korunur.
+- `npm test`, JavaScript sözdizimi ve `git diff --check` geçti. Chrome ile dört uzunluk, rastgele seçim, yenileme sonrası devam, eski taslak, bitirme uyarısı, iki kaydırma yönü, pinch zoom ve dikey/yatay ekran yerleşimi doğrulandı. İzole veritabanında otomatik kayıt testi tekrar geçti. Önceki migration canlı API üzerinden doğrulandı. Yeni migration gerekmiyor.
+
 ### Test bitmeden yıldızları kaydetme
 
 - `migrations/20261118_partial_ratings.sql` devam eden oyları topluluk istatistiklerine dahil eder. Eski kayıtlar tamamlanmış kalır. Aynı görselin yeni puanı eskisinin yerini alır. Tekrarlanan veya gecikmiş kayıtlar toplamı artırmaz. Kişisel model sonuçları test bitirildiğinde açılır.

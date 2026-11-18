@@ -13,8 +13,17 @@
     <main class="landing" id="landing">
       <img class="landing-image" src="/media/52dac3a2c5b5bd951ac2a24b.webp" alt="" fetchpriority="high">
       <section class="hero" id="hero" aria-labelledby="hero-title">
-        <h1 id="hero-title">The Blind<br>Image Test</h1>
+        <h1 id="hero-title">The Blind<br> Image Test</h1>
         <p class="hero-description">Rate images made from the same prompt without knowing which AI model made them.</p>
+        <fieldset class="prompt-count" id="prompt-count" hidden>
+          <legend>How many prompts?</legend>
+          <div>
+            <label><input type="radio" name="prompt-count" value="10" checked><span>10</span></label>
+            <label><input type="radio" name="prompt-count" value="25"><span>25</span></label>
+            <label><input type="radio" name="prompt-count" value="50"><span>50</span></label>
+            <label><input type="radio" name="prompt-count" value="100"><span>100</span></label>
+          </div>
+        </fieldset>
         <div class="hero-actions">
           <button type="button" class="action" id="start-test" disabled>Start test <span class="arrow" aria-hidden="true"></span></button>
           <button type="button" class="action secondary" id="open-community" disabled>Community results <span class="arrow" aria-hidden="true"></span></button>

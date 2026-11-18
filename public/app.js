@@ -4,6 +4,7 @@ const hero = document.querySelector("#hero");
 const community = document.querySelector("#community");
 const communityContent = document.querySelector("#community-content");
 const startTest = document.querySelector("#start-test");
+const promptCount = document.querySelector("#prompt-count");
 const openCommunity = document.querySelector("#open-community");
 const backHome = document.querySelector("#back-home");
 const dialog = document.querySelector("#review");
@@ -46,8 +47,9 @@ function renderHome() {
     return;
   }
   const completed = home.completed.includes(test.id);
-  const saved = storedDraft(test.id);
-  const label = completed ? "View your results" : (saved || home.inProgress?.includes(test.id)) ? "Resume test" : "Start test";
+  const resumable = storedDraft(test.id) || home.inProgress?.includes(test.id);
+  promptCount.hidden = Boolean(completed || resumable);
+  const label = completed ? "View your results" : resumable ? "Resume test" : "Start test";
   document.querySelector("#autosave-notice").hidden = !home.inProgress;
   startTest.innerHTML = `${label} <span class="arrow" aria-hidden="true"></span>`;
   startTest.disabled = false;
@@ -81,7 +83,7 @@ function storedDraft(id) {
 
 function saveDraft() {
   const { test, ratings, revisions, index } = review;
-  const draft = { ratings, revisions, index, promptId: test.prompts[index].id, promptOrder: test.prompts.map(({ id }) => id) };
+  const draft = { ratings, revisions, index, promptCount: test.prompts.length, promptId: test.prompts[index].id, promptOrder: test.prompts.map(({ id }) => id) };
   try { localStorage.setItem(draftKey(test.id), JSON.stringify(draft)); } catch {}
 }
 
@@ -201,15 +203,16 @@ function updateControls() {
     input.parentElement.classList.toggle("filled", Number(input.value) <= (review.ratings[image.id] ?? 0));
   }
   const next = dialog.querySelector("[data-next]");
-  next.querySelector("span").textContent = final ? "View results" : rated === prompt.images.length ? "Next" : "Skip";
+  next.querySelector("span").textContent = final ? "View results" : "Next";
   next.disabled = review.saving;
   dialog.querySelector("[data-finish]").disabled = review.saving;
 }
 
-function imageZoom(stage) {
+function imageZoom(stage, onSwipe) {
   const image = stage.querySelector("img");
   const touches = new Map();
   let scale = 1;
+  let swipeOrigin;
   let x = 0;
   let y = 0;
   const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
@@ -226,12 +229,13 @@ function imageZoom(stage) {
 
   stage.addEventListener("pointerdown", (event) => {
     if (event.pointerType !== "touch" || event.target.closest("button") || touches.size >= 2) return;
+    swipeOrigin = touches.size === 0 && scale === 1 ? { x: event.clientX, y: event.clientY } : undefined;
     touches.set(event.pointerId, { x: event.clientX, y: event.clientY });
     stage.setPointerCapture(event.pointerId);
   });
 
   stage.addEventListener("pointermove", (event) => {
-    if (!touches.has(event.pointerId) || !image.naturalWidth) return;
+    if (!touches.has(event.pointerId) || !image.naturalWidth || (scale === 1 && touches.size === 1)) return;
     const before = gesture();
     touches.set(event.pointerId, { x: event.clientX, y: event.clientY });
     const after = gesture();
@@ -249,12 +253,21 @@ function imageZoom(stage) {
     image.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
   });
 
-  for (const name of ["pointerup", "pointercancel", "lostpointercapture"]) {
-    stage.addEventListener(name, (event) => touches.delete(event.pointerId));
+  function endTouch(event) {
+    if (!touches.delete(event.pointerId)) return;
+    const origin = swipeOrigin;
+    swipeOrigin = undefined;
+    if (!origin || event.type !== "pointerup") return;
+    const dx = event.clientX - origin.x;
+    const dy = event.clientY - origin.y;
+    if (Math.abs(dx) >= 45 && Math.abs(dx) > Math.abs(dy) * 1.4) onSwipe(dx < 0 ? 1 : -1);
   }
+
+  for (const name of ["pointerup", "pointercancel", "lostpointercapture"]) stage.addEventListener(name, endTouch);
 
   return () => {
     touches.clear();
+    swipeOrigin = undefined;
     x = y = 0;
     scale = 1;
     image.style.removeProperty("transform");
@@ -322,17 +335,21 @@ function renderPrompt() {
           ${stars.map((score) => `<label><input type="radio" value="${score}" name="stars">${reviewIcon("m12 2.8 2.85 5.78 6.38.93-4.62 4.5 1.09 6.36L12 17.37l-5.7 3 1.09-6.36-4.62-4.5 6.38-.93Z")}<span class="sr-only">${score} ${score === 1 ? "star" : "stars"}</span></label>`).join("")}
         </fieldset>
       </div>
-      <button type="button" class="session-link" data-next ${index < test.prompts.length - 1 ? 'aria-keyshortcuts="Space"' : ""}><span>Skip</span>${reviewIcon("M4 12h15m-6-6 6 6-6 6")}</button>
+      <button type="button" class="session-link" data-next ${index < test.prompts.length - 1 ? 'aria-keyshortcuts="Space"' : ""}><span>Next</span>${reviewIcon("M4 12h15m-6-6 6 6-6 6")}</button>
       <p id="review-error" class="warning" role="status"></p>
     </footer>
   </div>`;
-  resetImageZoom = imageZoom(dialog.querySelector(".image-stage"));
+  resetImageZoom = imageZoom(dialog.querySelector(".image-stage"), (direction) => {
+    if (!review.saving) selectImage(review.active + direction);
+  });
   const firstUnrated = prompt.images.findIndex(({ id }) => !review.ratings[id]);
   selectImage(Math.max(0, firstUnrated));
   focusReview();
 }
 
 async function openTest() {
+  const selectedCount = Number(promptCount.querySelector(":checked").value);
+  promptCount.disabled = true;
   startTest.disabled = true;
   openCommunity.disabled = true;
   homeStatus.textContent = "Opening the test…";
@@ -347,7 +364,13 @@ async function openTest() {
       return;
     }
     const saved = storedDraft(result.test.id);
-    const prompts = orderPrompts(result.test.prompts, saved).map((prompt) => ({ ...prompt, images: shuffled(prompt.images) }));
+    // Legacy drafts and server-only resumes use the whole catalog so existing ratings stay in view.
+    const fullCount = result.test.prompts.length;
+    const savedCount = Number.isInteger(saved?.promptCount) && saved.promptCount > 0 ? saved.promptCount : fullCount;
+    const count = saved ? savedCount : result.draft ? fullCount : selectedCount;
+    const prompts = orderPrompts(result.test.prompts, saved)
+      .slice(0, count)
+      .map((prompt) => ({ ...prompt, images: shuffled(prompt.images) }));
     const test = { ...result.test, prompts };
     const validIds = new Set(test.prompts.flatMap(({ images }) => images.map(({ id }) => id)));
     const ratings = Object.fromEntries(Object.entries(saved?.ratings ?? {}).filter(([id, value]) => validIds.has(id) && stars.includes(value)));
@@ -372,6 +395,7 @@ async function openTest() {
   } catch (error) {
     homeStatus.textContent = error.message || "Could not open the test. Try again.";
   } finally {
+    promptCount.disabled = false;
     startTest.disabled = false;
     openCommunity.disabled = false;
   }
