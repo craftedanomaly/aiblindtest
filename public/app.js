@@ -211,10 +211,14 @@ function selectImage(index) {
   updateControls();
 }
 
+function focusReview() {
+  dialog.querySelector(".review-grid").focus({ preventScroll: true });
+}
+
 function renderPrompt() {
   const { test, index } = review;
   const prompt = test.prompts[index];
-  dialog.innerHTML = `<div class="review-grid">
+  dialog.innerHTML = `<div class="review-grid" tabindex="-1">
     <header class="review-head">
       <div class="prompt"><p class="quiet">${escapeHtml(test.title)} · Prompt ${index + 1}/${test.prompts.length}</p>
         <button type="button" class="prompt-title" aria-expanded="false" aria-controls="full-prompt" data-prompt><span>${escapeHtml(prompt.title)}</span></button>
@@ -236,21 +240,21 @@ function renderPrompt() {
     <footer class="review-foot">
       <div class="review-strip">
         <button type="button" class="icon-button" data-back aria-label="Previous prompt" ${index === 0 ? "disabled" : ""}>‹</button>
-        <div class="options" role="group" aria-label="Images for this prompt">${prompt.images.map(({ id }, i) => `<button type="button" class="option" data-image="${i}" aria-label="Image ${i + 1}"><img src="${imageUrl(id)}" alt="" loading="lazy"><span hidden></span></button>`).join("")}</div>
+        <div class="options" role="group" aria-label="Images for this prompt" aria-keyshortcuts="ArrowLeft ArrowRight">${prompt.images.map(({ id }, i) => `<button type="button" class="option" data-image="${i}" aria-label="Image ${i + 1}"><img src="${imageUrl(id)}" alt="" loading="lazy"><span hidden></span></button>`).join("")}</div>
         <p id="rating-progress" class="quiet" role="status"></p>
       </div>
       <div class="review-actions">
         <button class="finish-link" type="button" data-finish>Finish test</button>
         <fieldset class="stars"><legend id="rating-label" class="sr-only">Image rating</legend>
         ${stars.map((score) => `<label><input type="radio" value="${score}" name="stars"><span aria-hidden="true">★</span><span class="sr-only">${score} ${score === 1 ? "star" : "stars"}</span></label>`).join("")}</fieldset>
-        <button type="button" class="action" data-next>Skip</button>
+        <button type="button" class="action" data-next ${index < test.prompts.length - 1 ? 'aria-keyshortcuts="Space"' : ""}>Skip</button>
       </div>
       <p id="review-error" class="warning" role="status"></p>
     </footer>
   </div>`;
   resetImageZoom = imageZoom(dialog.querySelector(".image-stage"));
   selectImage(0);
-  dialog.querySelector("[data-prompt]").focus();
+  focusReview();
 }
 
 async function openTest() {
@@ -360,7 +364,30 @@ function setImageOnly(button, enabled) {
   button.focus({ preventScroll: true });
 }
 
+dialog.addEventListener("keydown", (event) => {
+  if (!review || review.saving || finishConfirmation.open || event.defaultPrevented || event.isComposing ||
+      event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+  if (event.target.closest("input, .prompt-text")) return;
+
+  if (event.key === " ") {
+    if (event.target.closest("button, a")) return;
+    event.preventDefault();
+    if (!event.repeat && review.index < review.test.prompts.length - 1) advance();
+    return;
+  }
+
+  if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+  event.preventDefault();
+  const index = review.active + (event.key === "ArrowRight" ? 1 : -1);
+  const option = dialog.querySelector(`[data-image="${index}"]`);
+  if (!option) return;
+  selectImage(index);
+  option.scrollIntoView({ block: "nearest", inline: "nearest" });
+  if (event.target.closest("[data-image]")) option.focus({ preventScroll: true });
+});
+
 dialog.addEventListener("click", (event) => {
+  if (review && !review.saving && event.detail > 0 && event.target.matches('input[name="stars"]')) focusReview();
   const button = event.target.closest("button");
   if (!button) return;
   if ("close" in button.dataset) { dialog.close(); return; }
@@ -370,7 +397,10 @@ dialog.addEventListener("click", (event) => {
   }
   if (!review || review.saving) return;
   if ("prompt" in button.dataset) button.setAttribute("aria-expanded", button.getAttribute("aria-expanded") === "false" ? "true" : "false");
-  if ("image" in button.dataset) selectImage(Number(button.dataset.image));
+  if ("image" in button.dataset) {
+    selectImage(Number(button.dataset.image));
+    if (event.detail > 0) focusReview();
+  }
   if ("back" in button.dataset && review.index) {
     review.index--;
     saveDraft();

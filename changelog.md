@@ -4,6 +4,11 @@
 
 ## 2026-11-18
 
+### Test için klavye kısayolları
+
+- `public/app.js` puanlama ekranında Space ile sonraki prompta, sol ve sağ oklarla aynı prompttaki önceki veya sonraki görsele geçiş ekler. Space basılı tutulduğunda birden fazla prompt atlanmaz ve son promptta oy gönderilmez. Klavyeyle odaklanılan düğmeler, yıldızlar ve prompt metni kendi tuş davranışını korur.
+- `npm test`, JavaScript sözdizimi ve `git diff --check` geçti. Playwright ile geçişler, ilk ve son görsel sınırları, küçük görsel odağı, yıldızların fare ve klavyeyle kullanımı, onay penceresi ve son prompt davranışı doğrulandı. Canlıya oy yazılmadı. Migration gerekmiyor.
+
 ### Yeni testlerde rastgele prompt sırası
 
 - `public/app.js`, her yeni denemede 100 promptun sırasını karıştırır. Bir deneme yarıda bırakılırsa prompt sırası, geçerli prompt ve puanlar tarayıcı taslağından geri yüklenir. Eski taslaklar kaldığı prompttan açılır. Görsellerin prompt içindeki karışımı devam eder.
