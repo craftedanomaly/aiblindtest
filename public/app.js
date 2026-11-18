@@ -209,6 +209,7 @@ function selectImage(index) {
   image.src = imageUrl(prompt.images[index].id);
   if (image.complete && image.naturalWidth) image.onload();
   updateControls();
+  dialog.querySelector('[data-image][aria-current="true"]').scrollIntoView({ block: "nearest", inline: "nearest" });
 }
 
 function focusReview() {
@@ -253,7 +254,8 @@ function renderPrompt() {
     </footer>
   </div>`;
   resetImageZoom = imageZoom(dialog.querySelector(".image-stage"));
-  selectImage(0);
+  const firstUnrated = prompt.images.findIndex(({ id }) => !review.ratings[id]);
+  selectImage(Math.max(0, firstUnrated));
   focusReview();
 }
 
@@ -382,7 +384,6 @@ dialog.addEventListener("keydown", (event) => {
   const option = dialog.querySelector(`[data-image="${index}"]`);
   if (!option) return;
   selectImage(index);
-  option.scrollIntoView({ block: "nearest", inline: "nearest" });
   if (event.target.closest("[data-image]")) option.focus({ preventScroll: true });
 });
 
@@ -412,10 +413,26 @@ dialog.addEventListener("click", (event) => {
 
 dialog.addEventListener("change", (event) => {
   if (!review || review.saving || event.target.name !== "stars") return;
-  const image = review.test.prompts[review.index].images[review.active];
-  review.ratings[image.id] = Number(event.target.value);
+  const { index, active, test, ratings } = review;
+  const { images } = test.prompts[index];
+  const imageId = images[active].id;
+  const wasUnrated = !ratings[imageId];
+  ratings[imageId] = Number(event.target.value);
+
+  const nextUnrated = images.findIndex(({ id }, position) => position > active && !ratings[id]);
+  const firstUnrated = nextUnrated >= 0 ? nextUnrated : images.findIndex(({ id }) => !ratings[id]);
+  if (firstUnrated < 0 && wasUnrated && index < test.prompts.length - 1) {
+    advance();
+    return;
+  }
+
   saveDraft();
-  updateControls();
+  if (firstUnrated >= 0) {
+    selectImage(firstUnrated);
+    focusReview();
+  } else {
+    updateControls();
+  }
 });
 
 dialog.addEventListener("cancel", (event) => {

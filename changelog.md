@@ -4,6 +4,11 @@
 
 ## 2026-11-18
 
+### Yıldız verdikten sonra otomatik ilerleme
+
+- `public/app.js`, yıldız verildiğinde sıradaki puanlanmamış görseli seçer ve seçili küçük görseli görünür tutar. Prompt tamamlanınca bir sonraki prompt açılır. Tamamlanmış bir promptta eski puanı değiştirmek promptu atlamaz. Son promptta kullanıcı sonuçlar düğmesine kendisi basar.
+- `npm test`, JavaScript sözdizimi ve `git diff --check` geçti. Playwright ile fare, dokunmatik ve klavye puanlaması, puanlanan görselleri atlama, başa dönüp kalan görseli seçme, otomatik prompt geçişi ve son promptta gönderim yapılmaması doğrulandı. Migration gerekmiyor.
+
 ### Test için klavye kısayolları
 
 - `public/app.js` puanlama ekranında Space ile sonraki prompta, sol ve sağ oklarla aynı prompttaki önceki veya sonraki görsele geçiş ekler. Space basılı tutulduğunda birden fazla prompt atlanmaz ve son promptta oy gönderilmez. Klavyeyle odaklanılan düğmeler, yıldızlar ve prompt metni kendi tuş davranışını korur.
