@@ -4,6 +4,12 @@
 
 ## 2026-11-18
 
+### Erken bitirme onayı ve yeni ana sayfa görseli
+
+- `public/app.js`, `public/index.html` ve `public/styles.css` test boyunca sol altta **Finish test** düğmesi gösterir. Onay penceresi kalan puanlanmamış görsel sayısını ve sonuçların verilen puanlarla sınırlı olacağını açıklar. İptal mevcut puanları korur. Tüm görseller puanlandıysa uyarı atlanır. Puan yoksa sonuç ekranı boş durumu gösterir ve oy gönderilmez.
+- Sonuç galerisi yalnızca puanlanan görselleri gösterir. Ana sayfadaki araba görselinin yerini mevcut test arşivinden fırtınalı kıyı sahnesi aldı. Arşiv, API ve veritabanı değişmedi.
+- `npm test`, JavaScript sözdizimi ve `git diff --check` geçti. Playwright masaüstü ve mobilde iptal, kısmi puanla bitirme, puansız bitirme ve tüm görselleri puanlama akışlarını doğruladı. Gerçek arşivde sayaç 278'den 277'ye indi. Canlıya oy yazılmadı. Impeccable'ın diyalog kenar boşluğu uyarısı tarayıcıda ölçüldü ve görsel olarak kontrol edildi. Migration gerekmiyor.
+
 ### Crafted Anomaly bağlantısı ve yalnızca görsel modu
 
 - `public/index.html` ve `public/app.js` ana sayfa, topluluk sonuçları ve kişisel sonuçların sağ altına **Crafted Anomaly Project** bağlantısı ekler. Hedefin `craftedanomaly.com` olduğu ve açıldığı doğrulandı.

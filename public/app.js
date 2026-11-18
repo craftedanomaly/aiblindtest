@@ -7,6 +7,7 @@ const startTest = document.querySelector("#start-test");
 const openCommunity = document.querySelector("#open-community");
 const backHome = document.querySelector("#back-home");
 const dialog = document.querySelector("#review");
+const finishConfirmation = document.querySelector("#finish-confirmation");
 const stars = [1, 2, 3, 4, 5];
 const number = new Intl.NumberFormat("en", { maximumFractionDigits: 2 });
 const integer = new Intl.NumberFormat("en", { maximumFractionDigits: 0 });
@@ -81,14 +82,17 @@ function shuffled(images) {
 }
 
 function renderResult(test) {
-  const ranked = test.prompts.flatMap((prompt) => prompt.images.map((image) => ({ ...image, prompt: prompt.title })))
-    .sort((a, b) => (b.stars ?? 0) - (a.stars ?? 0));
+  const ranked = test.prompts.flatMap((prompt) => prompt.images
+    .filter((image) => Number.isInteger(image.stars))
+    .map((image) => ({ ...image, prompt: prompt.title })))
+    .sort((a, b) => b.stars - a.stars);
   dialog.innerHTML = `<div class="result"><main class="result-inner">
     <header class="result-top"><h2 tabindex="-1">Your results</h2><button class="action secondary" type="button" data-close>Back to home</button></header>
+    ${ranked.length ? "" : '<p class="result-note">You didn’t rate any images, so no ratings were submitted.</p>'}
     <div class="result-boards">${board("Your rankings", home.personal)}${board("Community rankings", home.community, true)}</div>
-    <h3 class="gallery-heading">Image rankings</h3>
+    ${ranked.length ? `<h3 class="gallery-heading">Image rankings</h3>
     <div class="result-grid">${ranked.map((image) => `<figure><img loading="lazy" src="${imageUrl(image.id)}" alt="${escapeHtml(image.model)}">
-      <figcaption><div><strong>${escapeHtml(image.model)}</strong><span class="result-score">${image.stars ? `${image.stars} / 5` : "Unrated"}</span></div><p class="quiet">${escapeHtml(image.prompt)}</p></figcaption></figure>`).join("")}</div>
+      <figcaption><div><strong>${escapeHtml(image.model)}</strong><span class="result-score">${image.stars} / 5</span></div><p class="quiet">${escapeHtml(image.prompt)}</p></figcaption></figure>`).join("")}</div>` : ""}
   </main><footer class="result-footer"><a class="project-credit" href="https://craftedanomaly.com/">Crafted Anomaly Project</a></footer></div>`;
   dialog.querySelector("h2").focus();
 }
@@ -112,11 +116,8 @@ function updateControls() {
   }
   const next = dialog.querySelector("[data-next]");
   next.textContent = final ? "View results" : rated === prompt.images.length ? "Next" : "Skip";
-  const hasRatings = Object.keys(review.ratings).length > 0;
-  next.disabled = review.saving || (final && !hasRatings);
-  const finish = dialog.querySelector('[data-finish]');
-  finish.hidden = final || !hasRatings;
-  finish.disabled = review.saving;
+  next.disabled = review.saving;
+  dialog.querySelector("[data-finish]").disabled = review.saving;
 }
 
 function selectImage(index) {
@@ -166,7 +167,7 @@ function renderPrompt() {
         ${stars.map((score) => `<label><input type="radio" value="${score}" name="stars"><span aria-hidden="true">★</span><span class="sr-only">${score} ${score === 1 ? "star" : "stars"}</span></label>`).join("")}</fieldset>
         <button type="button" class="action" data-next>Skip</button>
       </div>
-      <div class="review-status"><p id="rating-progress" class="quiet" role="status"></p><button class="finish-link" type="button" data-finish hidden>Finish test</button></div>
+      <div class="review-status"><button class="finish-link" type="button" data-finish>Finish test</button><p id="rating-progress" class="quiet" role="status"></p></div>
       <p id="review-error" class="warning" role="status"></p>
     </footer>
   </div>`;
@@ -202,16 +203,40 @@ async function openTest() {
   }
 }
 
-async function advance(finish = false) {
+function advance() {
   if (!review || review.saving) return;
-  if (!finish && review.index < review.test.prompts.length - 1) {
+  if (review.index < review.test.prompts.length - 1) {
     review.index++;
     saveDraft();
     renderPrompt();
     return;
   }
-  if (!Object.keys(review.ratings).length) return;
+  requestFinish();
+}
+
+function requestFinish() {
+  if (!review || review.saving) return;
+  const imageCount = review.test.prompts.reduce((total, prompt) => total + prompt.images.length, 0);
+  const remaining = imageCount - Object.keys(review.ratings).length;
+  if (!remaining) {
+    void finishTest();
+    return;
+  }
+  const label = remaining === 1 ? "image" : "images";
+  finishConfirmation.querySelector("#finish-remaining").textContent = `You still have ${integer.format(remaining)} unrated ${label}.`;
+  finishConfirmation.returnValue = "";
+  finishConfirmation.showModal();
+}
+
+async function finishTest() {
+  if (!review || review.saving) return;
   const current = review;
+  if (!Object.keys(current.ratings).length) {
+    try { localStorage.removeItem(draftKey(current.test.id)); } catch {}
+    review = null;
+    renderResult(current.test);
+    return;
+  }
   current.saving = true;
   updateControls();
   const status = dialog.querySelector("#review-error");
@@ -242,6 +267,10 @@ community.addEventListener("keydown", (event) => {
   if (event.key === "Escape") showCommunity(false);
 });
 
+finishConfirmation.addEventListener("close", () => {
+  if (finishConfirmation.returnValue === "finish") void finishTest();
+});
+
 function setImageOnly(button, enabled) {
   button.setAttribute("aria-pressed", String(enabled));
   button.title = enabled ? "Show controls (Esc)" : "Hide controls";
@@ -264,8 +293,8 @@ dialog.addEventListener("click", (event) => {
     saveDraft();
     renderPrompt();
   }
-  if ("next" in button.dataset) void advance();
-  if ("finish" in button.dataset) void advance(true);
+  if ("next" in button.dataset) advance();
+  if ("finish" in button.dataset) requestFinish();
 });
 
 dialog.addEventListener("change", (event) => {

@@ -1,6 +1,6 @@
 # Görsel Model Testi
 
-Studio arşivinden dışarı aktarılmış karşılaştırmaları tek bir kör testte sunan bağımsız İngilizce uygulama. Başlığa gelince veya dokununca tam prompt açılır. Katılımcı görsellere 1–5 yıldız verebilir ve en az bir görseli puanladıktan sonra testi bitirebilir. Modeller ve kişisel sıralama test sonunda, topluluk sıralaması ana sayfadan görünür.
+Studio arşivinden dışarı aktarılmış karşılaştırmaları tek bir kör testte sunan bağımsız İngilizce uygulama. Başlığa gelince veya dokununca tam prompt açılır. Katılımcı görsellere 1–5 yıldız verebilir ve testi istediği an bitirebilir. Erken bitirirken kalan görsel sayısı gösterilir. Kişisel sonuçlar verilen puanlarla hesaplanır ve hiç puan verilmediyse oy kaydedilmez. Topluluk sıralaması ana sayfadan da açılır.
 
 ## Paketin içeriği
 

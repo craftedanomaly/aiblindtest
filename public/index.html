@@ -11,7 +11,7 @@
   </head>
   <body>
     <main class="landing" id="landing">
-      <img class="landing-image" src="/media/e9626880c6348e2f9508bd00.webp" alt="" fetchpriority="high">
+      <img class="landing-image" src="/media/52dac3a2c5b5bd951ac2a24b.webp" alt="" fetchpriority="high">
       <section class="hero" id="hero" aria-labelledby="hero-title">
         <h1 id="hero-title">The Blind<br>Image Test</h1>
         <p class="hero-description">Rate images made from the same prompt without knowing which AI model made them.</p>
@@ -30,5 +30,14 @@
       <a class="project-credit" href="https://craftedanomaly.com/">Crafted Anomaly Project</a>
     </main>
     <dialog id="review" aria-label="Blind image review"></dialog>
+    <dialog class="finish-confirmation" id="finish-confirmation" aria-labelledby="finish-title" aria-describedby="finish-remaining finish-note">
+      <h2 id="finish-title">Finish the test early?</h2>
+      <p id="finish-remaining"></p>
+      <p class="quiet" id="finish-note">Your results will only reflect the images you rated.</p>
+      <form method="dialog" class="confirmation-actions">
+        <button type="submit" class="action secondary" value="continue" autofocus>Keep rating</button>
+        <button type="submit" class="action" value="finish">Finish test</button>
+      </form>
+    </dialog>
   </body>
 </html>
