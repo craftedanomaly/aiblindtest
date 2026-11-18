@@ -21,7 +21,7 @@ Uygulama çalışma zamanında Studio anahtarı, R2 anahtarı veya Supabase serv
 
 ## Vercel'e GitHub üzerinden dağıtım
 
-Bu repo bağımsız yayın paketidir; tek testte 59 prompt ve 284 WebP görsel Git'e dahildir. Mevcut kampanyanın Supabase migration'ı ve kaydı hazırlanmıştır; aynı veritabanı ve kampanya anahtarıyla tekrar kayıt gerekmez.
+Bu repo bağımsız yayın paketidir; tek testte 58 prompt ve 278 WebP görsel Git'e dahildir. Mevcut kampanyanın Supabase migration'ı ve kaydı hazırlanmıştır; aynı veritabanı ve kampanya anahtarıyla tekrar kayıt gerekmez.
 
 1. Vercel'de **Add New → Project** üzerinden `craftedanomaly/aiblindtest` reposunu içe aktar.
 2. **Root Directory** repo kökü (`./`), **Framework Preset** `Other` olsun. Build Command için override açma; bu uygulama derleme gerektirmez. Output Directory `public` değeri `vercel.json` ile ayarlıdır.

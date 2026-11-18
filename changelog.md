@@ -4,6 +4,12 @@
 
 ## 2026-11-18
 
+### Maybach promptunun kaldırılması ve ana ekran hizası
+
+- Maybach promptu `data/benchmark.json` dosyasından, ona ait altı WebP de `public/media/` klasöründen çıkarıldı. Tek testte 58 prompt ve 278 görsel kaldı. Mevcut test ve kampanya kimlikleri korundu. Veritabanı migration'ı gerekmiyor.
+- `public/styles.css` masaüstü açılışında başlığı, açıklamayı ve düğmeleri yaklaşık 46 px sağa alır (1440 px genişlikte). Mobil hizalama korundu.
+- `npm test`, Impeccable taraması, medya envanteri ve `git diff --check` geçti. Playwright 320–1440 px aralığında taşma olmadığını, masaüstü ve mobil konumları ve iki izole puanlama akışını doğruladı. Canlı veritabanına test oyu yazılmadı.
+
 ### Tek İngilizce test ve tam ekran açılış
 
 - `data/benchmark.json` dört arşivi tek teste birleştirir. Meeple Press promptu ve dört WebP dosyası yayın paketinden çıkarıldı. Kalan 59 promptun sırası ve 284 görselin model eşleşmeleri doğrulandı. Bir promptun Türkçe açıklaması İngilizceye çevrildi. Görsellerde istenen özel ad ve metinler korundu.

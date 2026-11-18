@@ -195,7 +195,7 @@ td.score { color: var(--accent); font-weight: 700; }
   padding-block: 1.75rem;
 }
 
-.hero { width: min(100%, 31rem); padding-right: clamp(1rem, 4vw, 3rem); }
+.hero { max-width: 31rem; margin-left: clamp(1.5rem, 3.2vw, 3rem); padding-right: clamp(1rem, 4vw, 3rem); }
 .hero h1 {
   font: 700 clamp(4.1rem, 7.5vw, 6rem)/.89 "Barlow Condensed", "Arial Narrow", sans-serif;
   letter-spacing: -.015em;
@@ -279,7 +279,7 @@ td.score { color: var(--accent); font-weight: 700; }
 @media (max-width: 850px) {
   .landing { grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); }
   .hero, .community-panel { margin-right: 1.5rem; }
-  .hero { width: auto; padding-right: 0; }
+  .hero { margin-left: 0; padding-right: 0; }
 }
 @media (max-width: 620px) {
   .landing { grid-template-columns: minmax(0, 1fr); align-items: end; padding-inline: max(1.25rem, env(safe-area-inset-left)) max(1.25rem, env(safe-area-inset-right)); }

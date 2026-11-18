@@ -219,37 +219,6 @@
           ]
         },
         {
-          "id": "ab1e2c27e898ad4c28a05f25",
-          "title": "İmg1 a mechanic is handling the",
-          "prompt": "@img1 a mechanic is handling the grip in front of the engine, extreme close up, year 1926 inside a zeppelin, the mechanic wearing maybach gloves @img2 cinematic natural neutral colors, shot on 35mm film",
-          "images": [
-            {
-              "id": "5115e111002ea8974d496de1",
-              "model": "gemini-nano-banana-2.1"
-            },
-            {
-              "id": "0e8c748e76b282f6ad83a7c4",
-              "model": "kling/v4/image"
-            },
-            {
-              "id": "0aafc280efe765f4b5151464",
-              "model": "openai/gpt-image-2.6-sunburst"
-            },
-            {
-              "id": "ed892c93d58d770b0f42493f",
-              "model": "blackforestlabs/flux-3/image"
-            },
-            {
-              "id": "34dc2551219a93489848581b",
-              "model": "bytedance/seedream-5.5"
-            },
-            {
-              "id": "ddc6f02f3062f667476d2beb",
-              "model": "gemini-3-pro-image"
-            }
-          ]
-        },
-        {
           "id": "d6bf4699f312127cae77a845",
           "title": "A playful mixed-media editorial image featuring",
           "prompt": "A playful mixed-media editorial image featuring a giant flat vector-style illustrated girl integrated into a realistic street photography scene on a rainy day in the city. The composition captures a wet urban street from an eye-level perspective, with reflective pavement, puddles, traffic lights, storefronts, parked cars, neon reflections, and soft rainy atmosphere creating a cinematic documentary-style environment.\n\nAmong the realistic city surroundings, one oversized illustrated female character walks naturally down the sidewalk holding a large umbrella, blending into the scene like a surreal animated public-art intervention. She has exaggerated long limbs, oversized wide-leg pants, huge fashionable sneakers, a simplified smiling face with minimal black line-art facial details, and stylized hair tied in a large rounded ponytail. Her posture feels dynamic and relaxed, mid-step as if casually strolling through the rain, one hand holding the umbrella above her head while the other rests inside her pocket.\n\nThe illustration uses a bold limited color palette of vivid ultramarine blue, cream white, pale pink skin tones, black outlines, and warm yellow sneakers. Clean flat vector shapes only, no gradients, crisp edges, contemporary editorial illustration style.\n\nThe background is a realistic rainy urban street photograph with wet asphalt, reflective puddles, blurred headlights, metallic surfaces, shop windows, subtle steam from street vents, muted advertising signs, and realistic rain droplets visible in the atmosphere. The environment feels authentic and slightly gritty, with soft reflections bouncing across the ground and windows.\n\nSoft overcast cinematic lighting, low contrast, muted realistic tones, subtle film grain, authentic rainy-day city mood. The contrast between the colorful flat illustration and the moody realistic rainy environment creates playful visual tension.\n\nComposition is centered and balanced, with strong leading lines from the wet street and reflections guiding attention toward the illustrated character. 35mm analog street photography aesthetic, editorial campaign style, contemporary urban realism mixed with clean modern vector illustration, joyful surrealism, authentic city texture.",
