@@ -4,6 +4,12 @@
 
 ## 2026-11-18
 
+### Crafted Anomaly bağlantısı ve yalnızca görsel modu
+
+- `public/index.html` ve `public/app.js` ana sayfa, topluluk sonuçları ve kişisel sonuçların sağ altına **Crafted Anomaly Project** bağlantısı ekler. Hedefin `craftedanomaly.com` olduğu ve açıldığı doğrulandı.
+- Test görselinin sağ üstündeki düğme promptu, ilerlemeyi, küçük görselleri ve puanlama araçlarını gizler. Aynı düğme veya Escape kontrolleri geri getirir. Seçili görsel ve puanlar korunur. `public/styles.css` sonuç bağlantısını galeri kaydırmasından ayrı tutar ve kısa yatay ekranlarda ana sayfa düğmeleriyle çakışmayı önler.
+- `npm test`, JavaScript sözdizimi kontrolü, Impeccable taraması ve `git diff --check` geçti. Playwright 320–1440 px aralığında yerleşimi, masaüstü ve dokunmatik görsel modunu, Escape çıkışını, puanın korunmasını ve sonuç bağlantısının konumunu doğruladı. Oylar izole veritabanına yazıldı. Migration gerekmiyor.
+
 ### Maybach promptunun kaldırılması ve ana ekran hizası
 
 - Maybach promptu `data/benchmark.json` dosyasından, ona ait altı WebP de `public/media/` klasöründen çıkarıldı. Tek testte 58 prompt ve 278 görsel kaldı. Mevcut test ve kampanya kimlikleri korundu. Veritabanı migration'ı gerekmiyor.

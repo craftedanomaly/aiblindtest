@@ -89,7 +89,7 @@ function renderResult(test) {
     <h3 class="gallery-heading">Image rankings</h3>
     <div class="result-grid">${ranked.map((image) => `<figure><img loading="lazy" src="${imageUrl(image.id)}" alt="${escapeHtml(image.model)}">
       <figcaption><div><strong>${escapeHtml(image.model)}</strong><span class="result-score">${image.stars ? `${image.stars} / 5` : "Unrated"}</span></div><p class="quiet">${escapeHtml(image.prompt)}</p></figcaption></figure>`).join("")}</div>
-  </main></div>`;
+  </main><footer class="result-footer"><a class="project-credit" href="https://craftedanomaly.com/">Crafted Anomaly Project</a></footer></div>`;
   dialog.querySelector("h2").focus();
 }
 
@@ -148,7 +148,16 @@ function renderPrompt() {
       <button type="button" class="icon-button" data-close aria-label="Back to home">✕</button>
     </header>
     <progress class="prompt-progress" value="${index + 1}" max="${test.prompts.length}" aria-label="Prompt progress"></progress>
-    <div class="image-stage"><img id="active-image" alt="" fetchpriority="high"><p class="stage-status" id="image-status" role="status">Loading image…</p></div>
+    <div class="image-stage">
+      <img id="active-image" alt="" fetchpriority="high">
+      <p class="stage-status" id="image-status" role="status">Loading image…</p>
+      <button type="button" class="icon-button image-only-toggle" data-image-only aria-label="Image-only view" aria-pressed="false" title="Hide controls">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path class="expand-icon" d="M9 4H4v5m11-5h5v5m0 6v5h-5m-6 0H4v-5"/>
+          <path class="restore-icon" d="M4 9h5V4m11 5h-5V4m5 11h-5v5M4 15h5v5"/>
+        </svg>
+      </button>
+    </div>
     <footer class="review-foot">
       <div class="options" role="group" aria-label="Images for this prompt">${prompt.images.map(({ id }, i) => `<button type="button" class="option" data-image="${i}" aria-label="Image ${i + 1}"><img src="${imageUrl(id)}" alt="" loading="lazy"><span hidden></span></button>`).join("")}</div>
       <div class="review-actions">
@@ -233,10 +242,20 @@ community.addEventListener("keydown", (event) => {
   if (event.key === "Escape") showCommunity(false);
 });
 
+function setImageOnly(button, enabled) {
+  button.setAttribute("aria-pressed", String(enabled));
+  button.title = enabled ? "Show controls (Esc)" : "Hide controls";
+  button.focus({ preventScroll: true });
+}
+
 dialog.addEventListener("click", (event) => {
   const button = event.target.closest("button");
   if (!button) return;
   if ("close" in button.dataset) { dialog.close(); return; }
+  if ("imageOnly" in button.dataset) {
+    setImageOnly(button, button.getAttribute("aria-pressed") === "false");
+    return;
+  }
   if (!review || review.saving) return;
   if ("prompt" in button.dataset) button.setAttribute("aria-expanded", button.getAttribute("aria-expanded") === "false" ? "true" : "false");
   if ("image" in button.dataset) selectImage(Number(button.dataset.image));
@@ -258,6 +277,12 @@ dialog.addEventListener("change", (event) => {
 });
 
 dialog.addEventListener("cancel", (event) => {
+  const imageOnly = dialog.querySelector('[data-image-only][aria-pressed="true"]');
+  if (imageOnly) {
+    event.preventDefault();
+    setImageOnly(imageOnly, false);
+    return;
+  }
   const prompt = dialog.querySelector("[data-prompt][aria-expanded='true']");
   if (prompt) {
     event.preventDefault();
