@@ -221,31 +221,31 @@ function renderPrompt() {
   const prompt = test.prompts[index];
   dialog.innerHTML = `<div class="review-grid" tabindex="-1">
     <header class="review-head">
-      <div class="prompt"><p class="quiet">${escapeHtml(test.title)} · Prompt ${index + 1}/${test.prompts.length}</p>
+      <button type="button" class="icon-button" data-back aria-label="Previous prompt" title="Previous prompt" ${index === 0 ? "disabled" : ""}>‹</button>
+      <div class="prompt"><p class="quiet">Prompt ${index + 1}/${test.prompts.length}</p>
         <button type="button" class="prompt-title" aria-expanded="false" aria-controls="full-prompt" data-prompt><span>${escapeHtml(prompt.title)}</span></button>
         <div class="prompt-text" id="full-prompt" tabindex="0">${escapeHtml(prompt.prompt)}</div>
       </div>
-      <button type="button" class="icon-button" data-close aria-label="Back to home">✕</button>
-    </header>
-    <progress class="prompt-progress" value="${index + 1}" max="${test.prompts.length}" aria-label="Prompt progress"></progress>
-    <div class="image-stage">
-      <img id="active-image" alt="" fetchpriority="high" draggable="false">
-      <p class="stage-status" id="image-status" role="status">Loading image…</p>
       <button type="button" class="icon-button image-only-toggle" data-image-only aria-label="Image-only view" aria-pressed="false" title="Hide controls">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
           <path class="expand-icon" d="M9 4H4v5m11-5h5v5m0 6v5h-5m-6 0H4v-5"/>
           <path class="restore-icon" d="M4 9h5V4m11 5h-5V4m5 11h-5v5M4 15h5v5"/>
         </svg>
       </button>
+      <button type="button" class="icon-button" data-close aria-label="Back to home" title="Back to home">✕</button>
+    </header>
+    <progress class="prompt-progress" value="${index + 1}" max="${test.prompts.length}" aria-label="Prompt progress"></progress>
+    <div class="image-stage">
+      <img id="active-image" alt="" fetchpriority="high" draggable="false">
+      <p class="stage-status" id="image-status" role="status">Loading image…</p>
     </div>
     <footer class="review-foot">
-      <div class="review-strip">
-        <button type="button" class="icon-button" data-back aria-label="Previous prompt" ${index === 0 ? "disabled" : ""}>‹</button>
-        <div class="options" role="group" aria-label="Images for this prompt" aria-keyshortcuts="ArrowLeft ArrowRight">${prompt.images.map(({ id }, i) => `<button type="button" class="option" data-image="${i}" aria-label="Image ${i + 1}"><img src="${imageUrl(id)}" alt="" loading="lazy"><span hidden></span></button>`).join("")}</div>
-        <p id="rating-progress" class="quiet" role="status"></p>
-      </div>
-      <div class="review-actions">
+      <div class="review-toolbar">
         <button class="finish-link" type="button" data-finish>Finish test</button>
+        <div class="review-strip">
+          <div class="options" role="group" aria-label="Images for this prompt" aria-keyshortcuts="ArrowLeft ArrowRight">${prompt.images.map(({ id }, i) => `<button type="button" class="option" data-image="${i}" aria-label="Image ${i + 1}"><img src="${imageUrl(id)}" alt="" loading="lazy"><span hidden></span></button>`).join("")}</div>
+          <p id="rating-progress" class="quiet" role="status"></p>
+        </div>
         <fieldset class="stars"><legend id="rating-label" class="sr-only">Image rating</legend>
         ${stars.map((score) => `<label><input type="radio" value="${score}" name="stars"><span aria-hidden="true">★</span><span class="sr-only">${score} ${score === 1 ? "star" : "stars"}</span></label>`).join("")}</fieldset>
         <button type="button" class="action" data-next ${index < test.prompts.length - 1 ? 'aria-keyshortcuts="Space"' : ""}>Skip</button>

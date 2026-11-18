@@ -4,6 +4,12 @@
 
 ## 2026-11-18
 
+### Puanlama ekranında araç çubuklarının hizalanması
+
+- `public/app.js` önceki prompt düğmesini başlığın yanına, yalnızca görsel düğmesini kapatma düğmesinin yanına alır. Puanlanan görsel sayısı küçük resimlerin yanında durur. Sonraki prompt ve testi bitirme düğmeleri alt çubuğun iki ucundadır.
+- `public/styles.css` üst ve alt çubuklara aynı yatay hizayı verir. Küçük resimler, sayaç ve yıldızlar masaüstünde tek satırda bir araya gelir. Dar ekranda iki kısa satıra ayrılırlar. Yalnızca görsel modunda sadece görüntüye dönme düğmesi görünür.
+- `npm test`, JavaScript sözdizimi, Impeccable taraması ve `git diff --check` geçti. Playwright ile 320–1917 px arasında altı ekran boyutunda hizalama ve taşma kontrol edildi. Prompt açma, görüntü modu ve otomatik puanlama geçişi doğrulandı. Canlı veritabanına oy yazılmadı. Migration gerekmiyor.
+
 ### Yıldız verdikten sonra otomatik ilerleme
 
 - `public/app.js`, yıldız verildiğinde sıradaki puanlanmamış görseli seçer ve seçili küçük görseli görünür tutar. Prompt tamamlanınca bir sonraki prompt açılır. Tamamlanmış bir promptta eski puanı değiştirmek promptu atlamaz. Son promptta kullanıcı sonuçlar düğmesine kendisi basar.
