@@ -4,6 +4,11 @@
 
 ## 2026-11-18
 
+### Instagram Story tanıtım görseli
+
+- Testteki fırtınalı kıyı görseli ve puanlama ekranının gerçek tarayıcı görüntüsü ile İngilizce bir Story afişi hazırlandı. Grafik düzen HTML ve CSS ile yapıldı ve 1080 × 1920 PNG olarak dışa aktarıldı.
+- Dışa aktarılan dosyanın boyutları, yazı tipi ve Story arayüzü için ayrılan kenar boşlukları kontrol edildi. Afiş ayrı bir teslim dosyasıdır. Uygulama kodu değişmedi.
+
 ### Test uzunluğu seçimi ve dokunmatik görsel gezinme
 
 - `public/index.html`, `public/styles.css` ve `public/app.js` ile yeni katılımcı 10, 25, 50 veya 100 prompt seçebilir. Başlangıç değeri 10. Promptlar karıştırılıp seçilen sayıda alınır. Tarayıcı seçilen seti, sırasını ve son konumu saklar. Önceki taslaklar tam uzunluklarıyla devam eder.
