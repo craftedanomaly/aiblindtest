@@ -1,13 +1,13 @@
 {
   "benchmarkId": "studio-image-tests-v1",
   "models": {
-    "bytedance/seedream-5.5": "Seedream 5.5",
-    "kling/v4/image": "Kling Image 4",
     "openai/gpt-image-2.6-sunburst": "GPT Image 2.6 Sunburst",
     "gemini-nano-banana-2.1": "Nano Banana 2.1",
+    "qwen/qwen-image-3-pro": "Qwen Image 3 Pro",
+    "bytedance/seedream-5.5": "Seedream 5.5",
+    "kling/v4/image": "Kling Image 4",
     "blackforestlabs/flux-3/image": "FLUX 3 Image",
-    "gemini-3-pro-image": "Nano Banana Pro",
-    "qwen/qwen-image-3-pro": "Qwen Image 3 Pro"
+    "gemini-3-pro-image": "Nano Banana Pro"
   },
   "tests": [
     {
@@ -1529,6 +1529,1076 @@
             {
               "id": "9842c9f6720660511d43f14d",
               "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "117c78e70e238fa7af635af5",
+          "title": "A completely ordinary smartphone photo of",
+          "prompt": "A completely ordinary smartphone photo of three friends waiting for a late-night bus on a wet city street, harsh streetlights reflecting on the pavement, slightly messy framing, subtle motion blur, uneven phone HDR, realistic skin texture, dark jackets, casual body language, authentic candid energy, imperfect but believable phone camera realism.",
+          "images": [
+            {
+              "id": "6bd86177fe16ec18ba1d6a5a",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "aaa7570669cb66ab04767059",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "de588e4e65c153c6cac37c92",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "2abf89ea50d6245d67736ec6",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "6d33af20968a72f3e70e3c1a",
+              "model": "kling/v4/image"
+            }
+          ]
+        },
+        {
+          "id": "a33d06b1af823f3265268705",
+          "title": "A natural phone camera snapshot taken",
+          "prompt": "A natural phone camera snapshot taken inside a small apartment kitchen at breakfast time, an open loaf of bread, a half-cut cucumber, tea glasses, clutter on the counter, soft daylight from the window mixed with weak indoor lighting, slightly overexposed highlights, casual composition, realistic domestic mess, no cinematic polish.",
+          "images": [
+            {
+              "id": "6aff8faa0d5bf21ed79da8f6",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "08feb0c803baafae35617cc9",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "1855a2ebf738e980df4c9f1c",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "de4475a88a7984ba7def2a32",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "22b0d0412548b358372c09b1",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "b2fae47c43ff163d5e804322",
+          "title": "A realistic smartphone photo of a",
+          "prompt": "A realistic smartphone photo of a couple sitting on a ferry at dusk, reflections on the window, city lights outside, one person looking at their phone, the other staring out, slightly noisy low-light image, unposed posture, natural color processing, ordinary framing, believable handheld phone photography.",
+          "images": [
+            {
+              "id": "42c43d63d1e7a0b6fc43d42b",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "1fa01622ea276065bf539dea",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "e6c168b888ebb7a0a4847be3",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "88dc0556bc57f84d92e3016a",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "ec9d91e35d2bb7b279a785e7",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "70e4af772f0d4eeabf529c5c",
+          "title": "A phone camera photo of a",
+          "prompt": "A phone camera photo of a group dinner at a restaurant, plates partially eaten, water glasses, uneven mixed lighting, slight blur from movement, realistic skin tones under difficult warm lights, crowded table, spontaneous moment, unplanned composition, authentic social snapshot.",
+          "images": [
+            {
+              "id": "5d3e29f9da7909d2956c42e6",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "822abaa9390c113aa84958d9",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "050dec27f53df102e2d1a638",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "404c47e5a108d1282b779b5a",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "bfac7d5898e8c2964580b62f",
+              "model": "bytedance/seedream-5.5"
+            }
+          ]
+        },
+        {
+          "id": "b26c167474ae7beb9a708c2d",
+          "title": "A natural smartphone selfie taken in",
+          "prompt": "A natural smartphone selfie taken in an elevator mirror, two friends in casual clothes, overhead fluorescent lighting, a slightly dirty mirror, visible phone in hand, realistic facial proportions, no beautification, everyday expression, cramped composition, true-to-life phone camera image.",
+          "images": [
+            {
+              "id": "4e1e6939a0b14cbc981343b0",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "6ce8cd96f742e6ec0f76bc81",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "ac3c2a3d52329dc23018f12f",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "05ce83c7507bb46ec9bb0e25",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "5c7d54586d35c2d4516a9375",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "549c7ea5cded7fffc412d8cb",
+          "title": "A believable phone photo of a",
+          "prompt": "A believable phone photo of a rainy neighborhood street in the early evening, parked cars, wet sidewalks, a grocery bag hanging from someone’s arm entering the frame, muted colors, slight lens smudging, average dynamic range, realistic phone-camera sharpening, documentary everyday realism.",
+          "images": [
+            {
+              "id": "3bc556468f520fe720bfe97d",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "e0cb703a43a406f0b052aafd",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "87cbc769086b1b19e826b009",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "e67b63aba65834f41480c145",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "b50a2d24efcad1f396ee2c64",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "3f4933b1fef9db3c4991d55f",
+          "title": "A casual smartphone picture of an",
+          "prompt": "A casual smartphone picture of an unmade bed and a chair covered with clothes in a small bedroom, weak morning light, soft shadows, slightly tilted framing, humble lived-in atmosphere, visible imperfections, realistic texture and detail, no stylization, authentic phone camera capture.",
+          "images": [
+            {
+              "id": "cf7af6518d009581b894713f",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "26c9fa28a18808e23afa93ea",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "41c511c8d223de5f63931443",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "9dcdfaf10b0c81a2d442676b",
+              "model": "openai/gpt-image-2.6-sunburst"
+            }
+          ]
+        },
+        {
+          "id": "9f2dfcd00e5221fcc419cd50",
+          "title": "A realistic smartphone photo from a",
+          "prompt": "A realistic smartphone photo from a beach picnic at sunset, plastic cups, snack bags, sandals in the sand, people partially cropped at the edges, a friend laughing while turning away, automatic phone exposure balancing bright sky and darker foreground, relaxed candid vibe, natural and unstaged.",
+          "images": [
+            {
+              "id": "a9ffb641c990835a39c82349",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "1080c3e6e4672f17ab3a759d",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "c8026c505ff0321f4acb8abc",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "d5fce7f875873232cd3e4ac9",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "019e173b9f0103202025bfec",
+              "model": "kling/v4/image"
+            }
+          ]
+        },
+        {
+          "id": "37f722c6a3181ea6d215bfe3",
+          "title": "A gritty 1970s American crime film",
+          "prompt": "A gritty 1970s American crime film frame: a tired detective in a tan trench coat stands in a diner parking lot at night, sodium-vapor streetlights, muted colors, visible film grain, slightly dirty lens flare, lonely urban tension, understated realism, moody but not glamorous.",
+          "images": [
+            {
+              "id": "48bdafb0ad9ccea6ccbdb233",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "9231750a02c083f4aedf7da6",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "62ac2a077651ca02824492a0",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "e04a4f8343750c5c049ea497",
+              "model": "openai/gpt-image-2.6-sunburst"
+            }
+          ]
+        },
+        {
+          "id": "0f7c4df68598b28ad8245418",
+          "title": "A 1990s suburban American coming-of-age movie",
+          "prompt": "A 1990s suburban American coming-of-age movie frame: teenagers hanging out in front of a convenience store after school, washed sunlight, oversized shirts and denim, relaxed body language, warm nostalgia, soft 35mm grain, emotionally open and slightly bittersweet.",
+          "images": [
+            {
+              "id": "72ed8af8f8ffa528374279b4",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "975f0c53a415521d0ee131a9",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "84081a29ef668e815574a5cf",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "fffa4ceff5f00b90b45b9f25",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "7480d6923dfb08122f62d259",
+          "title": "A polished contemporary American prestige drama",
+          "prompt": "A polished contemporary American prestige drama frame: a wealthy family gathered around a long dining table in a modern house at night, carefully motivated practical lights, restrained but rich color grading, elegant production design, emotional distance embedded in clean cinematic composition.",
+          "images": [
+            {
+              "id": "d0c84fe669c01306033259d3",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "572d1ffeb5a7b47779593834",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "1bcac6a8514df4bfa2006530",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "5cb5ec372a46fd41658e2dc5",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "b4c24947927465b8dcf4eac4",
+              "model": "openai/gpt-image-2.6-sunburst"
+            }
+          ]
+        },
+        {
+          "id": "1cfb5c8c1b23c34ec5fb36f4",
+          "title": "A classic American road movie frame",
+          "prompt": "A classic American road movie frame: a dusty gas station in the desert at golden hour, an old car parked near a vending machine, a lone traveler leaning against the hood, wide open sky, faded tones, subtle anamorphic softness, freedom and melancholy mixed together.",
+          "images": [
+            {
+              "id": "3a277be08562f2b97db1e06e",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "f06e85637e91f8153e03106c",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "eb3a1cfe3bde7dd4139a95c3",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "78f79e2d64ebd53a40b9ad59",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "af2a66db2431e5229990b82f",
+          "title": "A sleek 1980s American thriller frame",
+          "prompt": "A sleek 1980s American thriller frame: a woman in a sharp white suit walking through a glass office tower at night, cool blue reflections, polished floors, high-contrast lighting, controlled camera composition, corporate menace, glossy but tense visual style.",
+          "images": [
+            {
+              "id": "399624aa2a129d1503780354",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "c8cabc08ae15e1e861be696d",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "8437f16b1343545c4c8de993",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "a7164b442b815f9cc3bc8b52",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "f135d236b2c041a95c762109",
+              "model": "qwen/qwen-image-3-pro"
+            }
+          ]
+        },
+        {
+          "id": "f1cd99a0e0270514956c75b9",
+          "title": "A modern independent American film frame",
+          "prompt": "A modern independent American film frame: two estranged brothers talking outside a laundromat under flat afternoon light, naturalistic color, handheld intimacy, raw emotional awkwardness, modest urban environment, subtle grain, restrained realism with a human-centered composition.",
+          "images": [
+            {
+              "id": "4b8392491427b8e9bd5a0729",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "7ff6a370d3d2fc7930a98e61",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "bbfed2c01583292c59158b4e",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "5415dc2ef6ca492be1fde465",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "75317ea36de37ddf32414cd5",
+              "model": "bytedance/seedream-5.5"
+            }
+          ]
+        },
+        {
+          "id": "fdec84645176424a303336a1",
+          "title": "A quiet Italian seaside film frame",
+          "prompt": "A quiet Italian seaside film frame: an aging man smoking alone at a sun-bleached café terrace, pale pastel walls, heat haze in the distance, dry Mediterranean light, slow contemplative mood, understated composition, poetic realism with a faded 35mm texture.",
+          "images": [
+            {
+              "id": "facfbf9bb2015a9fb794f5be",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "591a649c93ae620d2d918801",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "e4c28bdddb171340f2dbce00",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "7329dc0a2e067ce9a2bd1176",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "fc768daf59f179c162990a9c",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "db6b5d2d4d5c74349078f79a",
+          "title": "A French arthouse apartment interior a",
+          "prompt": "A French arthouse apartment interior: a young woman sitting on the floor beside a record player, late afternoon light through tall windows, cigarette smoke drifting, books and clothes casually scattered, elegant but spontaneous framing, intimate, intelligent, emotionally unresolved atmosphere.",
+          "images": [
+            {
+              "id": "0d356e6f3eb78321ab75e830",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "0872e2a2d4e0a1e3e04a3405",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "525d7a75196407b36b2a95b6",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "337820532560c9990ed932f6",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "bc4f9a63de383fc854e1257f",
+          "title": "A cold Northern European drama frame",
+          "prompt": "A cold Northern European drama frame: a teenager waiting for a train on an empty platform in winter, steel gray sky, minimal palette, severe architectural lines, heavy silence, subtle digital cleanliness, emotionally restrained and visually austere.",
+          "images": [
+            {
+              "id": "7ee75ce97fe132baf65629af",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "e63833ab396b558840d20d4b",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "64ceebddd00baba091576af9",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "11265134a4c31ebe3c14b0f7",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "7f3080e238eefcba9f729e48",
+              "model": "bytedance/seedream-5.5"
+            }
+          ]
+        },
+        {
+          "id": "628e0a0688b1338c8a42ee6b",
+          "title": "A British social-realist film frame two",
+          "prompt": "A British social-realist film frame: two friends eating takeaway outside a row of brick flats, overcast daylight, fluorescent convenience store glow behind them, lived-in realism, muted colors, sharp but unglamorous detail, honest urban melancholy.",
+          "images": [
+            {
+              "id": "e5d134f049ade3a61eaa8033",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "a06c110acc79c5efd8c13a80",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "6de7969c7b7f3e89d94af5dc",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "caa6949ab207c9e0eafc496a",
+              "model": "openai/gpt-image-2.6-sunburst"
+            }
+          ]
+        },
+        {
+          "id": "f2b80ed10373b2f5d18545d5",
+          "title": "A Spanish contemporary melodrama frame a",
+          "prompt": "A Spanish contemporary melodrama frame: a middle-aged woman standing in a vividly colored kitchen, bold red and turquoise surfaces, emotional tension in her stillness, clean composition, expressive design, saturated but tasteful palette, domestic intensity.",
+          "images": [
+            {
+              "id": "3ad5e5300df91f8ca6ee785c",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "c88bd7d91ad339833c581f13",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "0c3cec04b5dc38d89ca15f61",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "b9195de2b361b60ca5d5a3ee",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "40018dd0ae44163de557b968",
+          "title": "A 1960s Eastern European black-and-white film",
+          "prompt": "A 1960s Eastern European black-and-white film frame: factory workers leaving a large industrial gate at dawn, mist in the air, stark geometry, restrained human emotion, textured monochrome grain, serious political undertone, austere poetic realism.",
+          "images": [
+            {
+              "id": "5c2d00e12e20af8507c29c4f",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "e25bddfa93c8910cf6d6fca7",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "fd21ee77830e75319528ad04",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "b905ce8f50c5748f836e1d80",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "de30bc131180e42515c20a7c",
+              "model": "qwen/qwen-image-3-pro"
+            }
+          ]
+        },
+        {
+          "id": "46ed910167e5542286b17fcc",
+          "title": "A restrained Japanese family drama frame",
+          "prompt": "A restrained Japanese family drama frame: a grandmother and her grandson sitting at a low table in a quiet home, soft daylight through shoji screens, delicate neutral palette, stillness, tatami textures, precise composition, gentle emotional undercurrent, calm observational realism.",
+          "images": [
+            {
+              "id": "8d5fce0fa0472877b58d3973",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "04ad85f92b045287501c2727",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "b1c888f66c9cd4cbdd24810b",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "7eabc24b33c07bf907c261e0",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "28eb176758c2d5da0daf5dff",
+              "model": "kling/v4/image"
+            }
+          ]
+        },
+        {
+          "id": "b64b53a25f5aea46c74d72c1",
+          "title": "A neon-soaked contemporary South Korean night",
+          "prompt": "A neon-soaked contemporary South Korean night scene: a young man eating instant noodles alone in a convenience store at 2 AM, cool fluorescent interior light mixing with colorful signs outside, glass reflections, clean but melancholic mood, urban loneliness with polished realism.",
+          "images": [
+            {
+              "id": "a4bead1ff73eab7b75f55762",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "97f2ad938e01a7fcd4494731",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "d22c3bc2d5d2817d939bb58e",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "bf9cccc3a03f0eb43ae717fb",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "9cab25251a93df00c8e3bd74",
+              "model": "openai/gpt-image-2.6-sunburst"
+            }
+          ]
+        },
+        {
+          "id": "e7842e0e9f1134a4c62952ce",
+          "title": "A lush romantic Hong Kong-style nighttime",
+          "prompt": "A lush romantic Hong Kong-style nighttime street frame: crowded wet alley, hanging signs, narrow depth of field, rich emerald and amber light, emotional intimacy, passing umbrellas, kinetic urban atmosphere, glossy and dreamlike while grounded in human feeling.",
+          "images": [
+            {
+              "id": "f179790c16fd9185278da7f0",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "463fd99d0a83d393318a6bc9",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "ffc8b27707a91b40f26cb563",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "1a5d95d0995869b282b1066e",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "906f7ea38977a840ca21b2c4",
+              "model": "bytedance/seedream-5.5"
+            }
+          ]
+        },
+        {
+          "id": "2b3db77a669de1612e616c06",
+          "title": "A grand Chinese period-film frame a",
+          "prompt": "A grand Chinese period-film frame: a solitary woman in flowing silk standing in a courtyard under light snow, layered rooflines behind her, soft gray sky, controlled elegance, delicate color palette, painterly composition, stately and emotionally reserved.",
+          "images": [
+            {
+              "id": "660d8a38fbbbfeb88fbe1ff2",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "b6031b4dc3e34449b997ee0e",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "58c30dd43399bfee4b6f66a7",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "ce7f0502c03ab55541ae45a5",
+              "model": "kling/v4/image"
+            }
+          ]
+        },
+        {
+          "id": "8ccd2a7e4bc461aec54b7d0a",
+          "title": "A Southeast Asian tropical slow-cinema frame",
+          "prompt": "A Southeast Asian tropical slow-cinema frame: a man repairing a fan on a shaded veranda in the late afternoon, dense greenery beyond, heavy humid air, soft low-contrast light, patient composition, everyday gestures treated with cinematic tenderness.",
+          "images": [
+            {
+              "id": "12e658530164be8eec223966",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "cce7fc6ad8b9249425b0e04c",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "9217dbd3c608aa9d4df59e58",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "f43d7cd72530de531c354fbf",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "f68aa271550dddc529468941",
+              "model": "qwen/qwen-image-3-pro"
+            }
+          ]
+        },
+        {
+          "id": "4121cce0665f542e30072d1c",
+          "title": "An Indian urban drama frame at",
+          "prompt": "An Indian urban drama frame at festival time: a crowded lane glowing with strings of lights, a young woman paused in the middle of the crowd, deep marigold and magenta tones, expressive atmosphere, layered movement around still emotion, rich visual density.",
+          "images": [
+            {
+              "id": "4afc60c1665b57e4dd4653c9",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "99eb320761f94c75c259c687",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "87134eddae933ffa3fc7b0bf",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "104a0d9a35ff3a0536861772",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "ff4a92cd9835304956236eca",
+              "model": "qwen/qwen-image-3-pro"
+            }
+          ]
+        },
+        {
+          "id": "59a11d34b260b4bf4aed2139",
+          "title": "A premium perfume advertisement a sculptural",
+          "prompt": "A premium perfume advertisement: a sculptural glass perfume bottle resting on black volcanic stone, fine mist in the air, cool blue twilight, sharp highlights, elegant shadows, ultra-luxury beauty campaign aesthetics, sensual, refined, and impeccably art-directed.",
+          "images": [
+            {
+              "id": "2baf9194ce5a3e14491d791a",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "c6d2222a5b1e713870c8952b",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "5255c2ad834f27025caaa14e",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "0583ea116e8611b98de4a8a1",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "7026bca0ab982ed7297f4833",
+              "model": "qwen/qwen-image-3-pro"
+            }
+          ]
+        },
+        {
+          "id": "1a37b0436f7ff97080412b07",
+          "title": "A clean high-end skincare ad a",
+          "prompt": "A clean high-end skincare ad: a translucent jar of moisturizer floating above rippling water, bright white background, soft diffused lighting, minimal modern luxury, crisp reflections, serene spa-like mood, polished commercial beauty aesthetic.",
+          "images": [
+            {
+              "id": "d2645d6475e4952a789e2307",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "875f33eaa3387ea5d890fbdb",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "f612cf2dd5a1ffa448e4f551",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "3d7a573133bbb7e5ff6ef0d5",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "7260fa18e13a8b2eff7b0874",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "f276ede3865abe5c583db8fd",
+          "title": "A cinematic sportswear campaign image a",
+          "prompt": "A cinematic sportswear campaign image: a runner pausing under an overpass after rain, dramatic moisture in the air, urban concrete textures, sharp athletic styling, energetic but premium look, high contrast, commercial confidence, bold contemporary ad photography.",
+          "images": [
+            {
+              "id": "ce93f333a52e76ca0770fc05",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "6ae22b6fe2edec24b9277858",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "fbc653a5c55cf9ffdc4cc80b",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "91e425b29395bb727ba072e9",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "b1b6f59e2bc7e22f30182968",
+              "model": "kling/v4/image"
+            }
+          ]
+        },
+        {
+          "id": "988b13bf0e5107c504d5dacb",
+          "title": "A gourmet food commercial still a",
+          "prompt": "A gourmet food commercial still: a perfectly glazed roast chicken on a rustic table, steam rising, warm directional light, dark moody background, rich edible textures, premium culinary styling, inviting but elegant visual language.",
+          "images": [
+            {
+              "id": "84a78c0892083678615a9cd3",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "70f056f621273065991185d6",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "928dbd3d0f3618613c04ac42",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "b8c8c7c88328366fddaa1753",
+              "model": "bytedance/seedream-5.5"
+            }
+          ]
+        },
+        {
+          "id": "dae9c6dca344b5756c0f9306",
+          "title": "A luxury watch advertisement a stainless",
+          "prompt": "A luxury watch advertisement: a stainless steel wristwatch resting against folded charcoal silk, controlled studio reflections, deep shadows, precise highlights, dark sophisticated palette, hyper-clean product photography, understated opulence.",
+          "images": [
+            {
+              "id": "c22abc87cd9ef6fbbec49958",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "8541f7088d78cbb1033a6537",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "27c5440d3c53bfcbd78440d9",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "d0ea8dc474ef0eab71d9629d",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "a2b5cc356ebcca565f2b169e",
+              "model": "openai/gpt-image-2.6-sunburst"
+            }
+          ]
+        },
+        {
+          "id": "08209f679461334f7f3b651c",
+          "title": "A travel campaign image for an",
+          "prompt": "A travel campaign image for an ultra-premium resort: an infinity pool blending into the sea at sunrise, a single person in a white robe standing at the edge, pale gold light, immaculate styling, aspirational calm, clean upscale leisure aesthetic.",
+          "images": [
+            {
+              "id": "f9a041c8a5209de7a4fda54c",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "0dbf16671cc6df64c0ec881b",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "8a5ec406899487915dfba804",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "ef9cb6fb5531de0f29372882",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "c1eed6f910269f85225f9da6",
+              "model": "openai/gpt-image-2.6-sunburst"
+            }
+          ]
+        },
+        {
+          "id": "1b2c894ed3a003e80012d1b2",
+          "title": "An experimental black-and-white image of a",
+          "prompt": "An experimental black-and-white image of a dancer in a dark studio, captured with layered long exposures, ghosted limbs, fragments of motion frozen inside blur, strong contrast, tactile grain, surreal rhythm, elegant and unsettling gallery-like image.",
+          "images": [
+            {
+              "id": "399fef1625f752c05f9b6574",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "f7908eabaf436fd2fe530853",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "139439931cb1d53e8ed9d60c",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "1c2a0ecd4ce15df4c9d44c84",
+              "model": "bytedance/seedream-5.5"
+            }
+          ]
+        },
+        {
+          "id": "9e4f84a909f2d534d3a97559",
+          "title": "A dreamlike frame where a hotel",
+          "prompt": "A dreamlike frame where a hotel corridor appears to fold into itself, multiple doorways bending in impossible perspective, dim amber practical lights, soft film grain, subtle surrealism, psychologically unstable space, cinematic and uncanny rather than horror-driven.",
+          "images": [
+            {
+              "id": "5182c89c96d7e1a8a795968c",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "a6f7f5274278dd7ddee6dbd3",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "5c79762afabaa99fb3eec26b",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "97e74518bd92ef086fdd072f",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "9924dcf39683ad75cd3ee3ee",
+          "title": "A visual experiment combining mirror reflections",
+          "prompt": "A visual experiment combining mirror reflections and transparent fabric: a person standing behind semi-sheer curtains while fragmented reflections float across the image, pale desaturated palette, soft focus edges, abstract emotional ambiguity, poetic and contemporary.",
+          "images": [
+            {
+              "id": "1e6e09dab7df3c83fd8ed95b",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "b6116adc4ae56f2d834e5139",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "4e323e508b4d2ba205796ebe",
+              "model": "kling/v4/image"
+            }
+          ]
+        },
+        {
+          "id": "698dc852ec13d08936a675b2",
+          "title": "A heavily stylized experimental color film",
+          "prompt": "A heavily stylized experimental color film frame: a woman submerged in deep cobalt blue light with a sharp red beam crossing her face, minimal set, strong negative space, highly graphic composition, emotional abstraction, bold art-film intensity.",
+          "images": [
+            {
+              "id": "6858776d948164ebd09c281e",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "98387232486dad9a24ba9b6d",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "26521580cfb9f5d6539ba3f6",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "59c834ff8cb021326cf1afe7",
+              "model": "openai/gpt-image-2.6-sunburst"
+            }
+          ]
+        },
+        {
+          "id": "393d477ee5f80dc1f787fabf",
+          "title": "A handmade analog collage composed of",
+          "prompt": "A handmade analog collage composed of torn magazine photographs, old architecture engravings, flowers, and fragments of the night sky, layered on aged paper, visible cut edges, imperfect glue marks, poetic surrealist composition, tactile and richly textured.",
+          "images": [
+            {
+              "id": "7e8fc5de702fd1788396f106",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "c96bfb1e8c999e6ec38390ae",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "7cec9d84e8970f814c35d50f",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "ced9e4c6312a71302e6ab903",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "9b46131d4df53081d2cb52f1",
+              "model": "openai/gpt-image-2.6-sunburst"
+            }
+          ]
+        },
+        {
+          "id": "0349aad35bd05cae3014f41f",
+          "title": "A bold contemporary fashion collage a",
+          "prompt": "A bold contemporary fashion collage: a model in a tailored suit combined with fragmented newspaper typography, painted brush marks, scanned fabric textures, abrupt scale changes, clean editorial layout, raw but stylish visual energy.",
+          "images": [
+            {
+              "id": "a98637652a01138a7ae087cf",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "b2041ff963d5a2d3ddebe499",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "5cb299a12896e91de1f579e8",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "f9cad01ec72e259a66549911",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "b0093816ebf4c33adae741a5",
+              "model": "openai/gpt-image-2.6-sunburst"
+            }
+          ]
+        },
+        {
+          "id": "6e81f137888e00e69a597841",
+          "title": "A retro-futurist collage poster 1950s household",
+          "prompt": "A retro-futurist collage poster: 1950s household imagery mixed with rockets, moon maps, geometric color fields, halftone textures, cut-paper shapes, playful optimism, mid-century print feel, highly graphic and witty.",
+          "images": [
+            {
+              "id": "db6a41ac48b679d619e8b343",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "bb323c60aaf20ac55db284da",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "ce69f1bbcab900da443bf104",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "d6a8d22a2066c41b29cc3e90",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "787ab8bc4a865c6db9025530",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "95482fe03967eaefc36c3992",
+          "title": "A Fauvist-inspired interior scene a woman",
+          "prompt": "A Fauvist-inspired interior scene: a woman reading by a window in a vividly colored room, electric orange walls, deep blue shadows, emerald plants, expressive simplified forms, emotionally charged color relationships, painterly flatness and decorative intensity.",
+          "images": [
+            {
+              "id": "64f79c10bdaec128c72b6434",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "546c9464139c59eecf42fe21",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "bd69b4c3a830d1223200157f",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "4dbccacb28084d555455140e",
+              "model": "kling/v4/image"
+            }
+          ]
+        },
+        {
+          "id": "37c68e46f20e63b083f573ef",
+          "title": "A Constructivist-inspired graphic image a worker",
+          "prompt": "A Constructivist-inspired graphic image: a worker ascending a staircase, built from bold diagonal forms, strong red, black, cream, and steel gray palette, dramatic geometric composition, high visual impact, poster-like force, political-modernist energy.",
+          "images": [
+            {
+              "id": "b9751c320b9495c6163fcba7",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "76ed797c0b0121d31e0a2860",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "76ceb2533e02edd613d5d980",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "27b1004f776031c1b112cdfa",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "096e35613b84d417268fdefa",
+              "model": "openai/gpt-image-2.6-sunburst"
+            }
+          ]
+        },
+        {
+          "id": "f1194385d900e8ae2439a3a5",
+          "title": "An Art Nouveau-inspired visual study a",
+          "prompt": "An Art Nouveau-inspired visual study: a woman with flowing hair surrounded by irises and curling ornamental lines, soft jewel tones, decorative elegance, elongated forms, intricate organic patterning, refined poster-meets-illustration aesthetic, graceful and luxurious.",
+          "images": [
+            {
+              "id": "3109077081387a6582403509",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "0010378339542edd3d40f4ba",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "78986a850162cf5f5f160379",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "a4f38aa05811f72b0d9d8d49",
+              "model": "bytedance/seedream-5.5"
             }
           ]
         }

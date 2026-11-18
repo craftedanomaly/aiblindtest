@@ -13,6 +13,7 @@ const number = new Intl.NumberFormat("en", { maximumFractionDigits: 2 });
 const integer = new Intl.NumberFormat("en", { maximumFractionDigits: 0 });
 let home;
 let review;
+let resetImageZoom;
 
 const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
 const imageUrl = (id) => `/media/${encodeURIComponent(id)}.webp`;
@@ -82,6 +83,7 @@ function shuffled(images) {
 }
 
 function renderResult(test) {
+  resetImageZoom = undefined;
   const ranked = test.prompts.flatMap((prompt) => prompt.images
     .filter((image) => Number.isInteger(image.stars))
     .map((image) => ({ ...image, prompt: prompt.title })))
@@ -120,10 +122,66 @@ function updateControls() {
   dialog.querySelector("[data-finish]").disabled = review.saving;
 }
 
+function imageZoom(stage) {
+  const image = stage.querySelector("img");
+  const touches = new Map();
+  let scale = 1;
+  let x = 0;
+  let y = 0;
+  const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+  function gesture() {
+    const [first, second] = touches.values();
+    if (!second) return { ...first, distance: 0 };
+    return {
+      x: (first.x + second.x) / 2,
+      y: (first.y + second.y) / 2,
+      distance: Math.hypot(first.x - second.x, first.y - second.y),
+    };
+  }
+
+  stage.addEventListener("pointerdown", (event) => {
+    if (event.pointerType !== "touch" || event.target.closest("button") || touches.size >= 2) return;
+    touches.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    stage.setPointerCapture(event.pointerId);
+  });
+
+  stage.addEventListener("pointermove", (event) => {
+    if (!touches.has(event.pointerId) || !image.naturalWidth) return;
+    const before = gesture();
+    touches.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    const after = gesture();
+    const nextScale = before.distance ? clamp(scale * after.distance / before.distance, 1, 4) : scale;
+    const ratio = nextScale / scale;
+    const { left, top, width, height } = stage.getBoundingClientRect();
+    const fit = Math.min(width / image.naturalWidth, height / image.naturalHeight);
+    const maxX = Math.max(0, (image.naturalWidth * fit * nextScale - width) / 2);
+    const maxY = Math.max(0, (image.naturalHeight * fit * nextScale - height) / 2);
+    const centerX = left + width / 2;
+    const centerY = top + height / 2;
+    x = clamp((x + centerX - before.x) * ratio + after.x - centerX, -maxX, maxX);
+    y = clamp((y + centerY - before.y) * ratio + after.y - centerY, -maxY, maxY);
+    scale = nextScale;
+    image.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+  });
+
+  for (const name of ["pointerup", "pointercancel", "lostpointercapture"]) {
+    stage.addEventListener(name, (event) => touches.delete(event.pointerId));
+  }
+
+  return () => {
+    touches.clear();
+    x = y = 0;
+    scale = 1;
+    image.style.removeProperty("transform");
+  };
+}
+
 function selectImage(index) {
   const prompt = review.test.prompts[review.index];
   if (!prompt.images[index]) return;
   review.active = index;
+  resetImageZoom?.();
   const image = dialog.querySelector("#active-image");
   const status = dialog.querySelector("#image-status");
   status.hidden = false;
@@ -150,7 +208,7 @@ function renderPrompt() {
     </header>
     <progress class="prompt-progress" value="${index + 1}" max="${test.prompts.length}" aria-label="Prompt progress"></progress>
     <div class="image-stage">
-      <img id="active-image" alt="" fetchpriority="high">
+      <img id="active-image" alt="" fetchpriority="high" draggable="false">
       <p class="stage-status" id="image-status" role="status">Loading image…</p>
       <button type="button" class="icon-button image-only-toggle" data-image-only aria-label="Image-only view" aria-pressed="false" title="Hide controls">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
@@ -160,17 +218,21 @@ function renderPrompt() {
       </button>
     </div>
     <footer class="review-foot">
-      <div class="options" role="group" aria-label="Images for this prompt">${prompt.images.map(({ id }, i) => `<button type="button" class="option" data-image="${i}" aria-label="Image ${i + 1}"><img src="${imageUrl(id)}" alt="" loading="lazy"><span hidden></span></button>`).join("")}</div>
-      <div class="review-actions">
+      <div class="review-strip">
         <button type="button" class="icon-button" data-back aria-label="Previous prompt" ${index === 0 ? "disabled" : ""}>‹</button>
+        <div class="options" role="group" aria-label="Images for this prompt">${prompt.images.map(({ id }, i) => `<button type="button" class="option" data-image="${i}" aria-label="Image ${i + 1}"><img src="${imageUrl(id)}" alt="" loading="lazy"><span hidden></span></button>`).join("")}</div>
+        <p id="rating-progress" class="quiet" role="status"></p>
+      </div>
+      <div class="review-actions">
+        <button class="finish-link" type="button" data-finish>Finish test</button>
         <fieldset class="stars"><legend id="rating-label" class="sr-only">Image rating</legend>
         ${stars.map((score) => `<label><input type="radio" value="${score}" name="stars"><span aria-hidden="true">★</span><span class="sr-only">${score} ${score === 1 ? "star" : "stars"}</span></label>`).join("")}</fieldset>
         <button type="button" class="action" data-next>Skip</button>
       </div>
-      <div class="review-status"><button class="finish-link" type="button" data-finish>Finish test</button><p id="rating-progress" class="quiet" role="status"></p></div>
       <p id="review-error" class="warning" role="status"></p>
     </footer>
   </div>`;
+  resetImageZoom = imageZoom(dialog.querySelector(".image-stage"));
   selectImage(0);
   dialog.querySelector("[data-prompt]").focus();
 }
@@ -272,6 +334,7 @@ finishConfirmation.addEventListener("close", () => {
 });
 
 function setImageOnly(button, enabled) {
+  resetImageZoom?.();
   button.setAttribute("aria-pressed", String(enabled));
   button.title = enabled ? "Show controls (Esc)" : "Hide controls";
   button.focus({ preventScroll: true });
@@ -322,9 +385,12 @@ dialog.addEventListener("cancel", (event) => {
 
 dialog.addEventListener("close", () => {
   review = null;
+  resetImageZoom = undefined;
   renderHome();
   startTest.focus({ preventScroll: true });
 });
+
+window.addEventListener("resize", () => resetImageZoom?.());
 
 try { home = await request(); renderHome(); }
 catch (error) { homeStatus.textContent = error.message || "Could not load the test. Reload the page to try again."; }

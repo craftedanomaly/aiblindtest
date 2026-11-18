@@ -21,7 +21,7 @@ Uygulama çalışma zamanında Studio anahtarı, R2 anahtarı veya Supabase serv
 
 ## Vercel'e GitHub üzerinden dağıtım
 
-Bu repo bağımsız yayın paketidir; tek testte 58 prompt ve 278 WebP görsel Git'e dahildir. Mevcut kampanyanın Supabase migration'ı ve kaydı hazırlanmıştır; aynı veritabanı ve kampanya anahtarıyla tekrar kayıt gerekmez.
+Bu repo bağımsız yayın paketidir; tek testte 100 prompt ve 472 WebP görsel Git'e dahildir. Mevcut kampanyanın Supabase migration'ı ve kaydı hazırlanmıştır; aynı veritabanı ve kampanya anahtarıyla tekrar kayıt gerekmez.
 
 1. Vercel'de **Add New → Project** üzerinden `craftedanomaly/aiblindtest` reposunu içe aktar.
 2. **Root Directory** repo kökü (`./`), **Framework Preset** `Other` olsun. Build Command için override açma; bu uygulama derleme gerektirmez. Output Directory `public` değeri `vercel.json` ile ayarlıdır.
@@ -40,4 +40,4 @@ Oy ortalamaları yıldız verilen görseller üzerinden hesaplanır. Ziyaretçi 
 
 ## Kaynak repodan arşivi yenile
 
-Studio kaynak reposunun kökünde mevcut Supabase ve R2 erişimleriyle `node --env-file-if-exists=.env.local scripts/export-public-model-test.mjs` çalıştır. Birden çok Studio sahibi varsa kaynak sahibi `BENCHMARK_STUDIO_OWNER_ID` ile seçilir. Eski medya dosyalarını tekrar dönüştürmek için `BENCHMARK_REBUILD_MEDIA=1` kullanılabilir. Oluşan `data/benchmark.json` ve `public/media/` dosyalarını bu bağımsız repoya kopyala, kontrollerden sonra commit edip pushla. Studio kaynak reposu bu dosyaları Git dışında tutmaya devam eder.
+Studio kaynak reposunun kökünde mevcut Supabase ve R2 erişimleriyle `node --env-file-if-exists=.env.local scripts/export-public-model-test.mjs` çalıştır. Birden çok Studio sahibi varsa kaynak sahibi `BENCHMARK_STUDIO_OWNER_ID` ile seçilir. Eski medya dosyalarını tekrar dönüştürmek için `BENCHMARK_REBUILD_MEDIA=1` kullanılabilir. Dışa aktarımdan yalnızca yayınlanacak yeni promptları ve ilgili WebP dosyalarını mevcut birleşik teste ekle. Böylece önceki çıkarmalar ve test kimliği korunur. Studio kaynak reposu bu dosyaları Git dışında tutmaya devam eder.

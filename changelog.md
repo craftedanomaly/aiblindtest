@@ -4,6 +4,13 @@
 
 ## 2026-11-18
 
+### 42 Studio promptu, daha geniş görsel alanı ve dokunmatik yakınlaştırma
+
+- Studio'daki yeni 42 prompt ve başarıyla üretilen 194 WebP görsel mevcut testin sonuna eklendi. Başarısız 16 üretimden görsel alınmadı. Tek test artık 100 prompt ve 472 görsel içeriyor. İlk 58 prompt, görsel eşleşmeleri, test ve kampanya kimlikleri korundu.
+- `public/styles.css` ana sayfadaki metin ve düğme grubunu 1440 px genişlikte yaklaşık 61 px daha sağa alır. Puanlama ekranında başlık ve alt kontrol bandı küçültüldü. **Finish test**, yıldızlar ve ilerleme düğmesi aynı satırda. Küçük görseller dar ekranlarda yatay kaydırılabilir.
+- `public/app.js` görsel üzerinde iki parmakla 4× yakınlaşmayı ve yakınlaştırılmış görseli iki yönde sürüklemeyi destekler. Görsel değişiminde veya ekran boyutu değiştiğinde görsel başlangıç ölçeğine döner. Kontroller güvenli ekran kenarlarını hesaba katar.
+- `npm test`, Impeccable taraması, `git diff --check` ve 472 dosyalık medya envanteri geçti. Playwright ile 320–1440 px yerleşim, erken bitirme, izole oy kaydı ve gerçek arşivden yeni prompt açma doğrulandı. Chromium dokunmatik tarayıcı emülasyonunda pinch, iki eksende sürükleme, yatay küçük resim kaydırma ve ekran yönü değişimi kontrol edildi. Canlı veritabanına oy yazılmadı. Migration gerekmiyor.
+
 ### Erken bitirme onayı ve yeni ana sayfa görseli
 
 - `public/app.js`, `public/index.html` ve `public/styles.css` test boyunca sol altta **Finish test** düğmesi gösterir. Onay penceresi kalan puanlanmamış görsel sayısını ve sonuçların verilen puanlarla sınırlı olacağını açıklar. İptal mevcut puanları korur. Tüm görseller puanlandıysa uyarı atlanır. Puan yoksa sonuç ekranı boş durumu gösterir ve oy gönderilmez.
