@@ -4,6 +4,11 @@
 
 ## 2026-11-18
 
+### Varsayılan test boyutu 25 prompt
+
+- `public/index.html` yeni testlerde **25** seçeneğini önceden seçer.
+- `npm test` ve `git diff --check` geçti. Chrome ile farklı ekran boyutlarında 25 değerinin önceden seçili olduğu, dört seçeneğin çalıştığı ve taslakların kendi uzunluklarıyla açıldığı doğrulandı. Migration gerekmiyor.
+
 ### Testi yeni görsellerle tekrar çözme
 
 - Başlangıç ekranındaki uzunluk etiketi **Test size** oldu. Bitmiş bir turdan sonra puanlanmamış görseller varsa **Take the test again**, tüm görseller puanlandığında **View your results** gösterilir. Seçilen uzunluğa yetecek prompt kalmazsa tur kalan promptlarla açılır.
