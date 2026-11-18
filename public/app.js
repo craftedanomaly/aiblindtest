@@ -19,10 +19,10 @@ const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => 
 const imageUrl = (id) => `/media/${encodeURIComponent(id)}.webp`;
 const draftKey = (id) => `public-model-test-draft:${id}`;
 
-async function request({ test, ratings } = {}) {
+async function request({ test, ratings, revisions, action } = {}) {
   const url = ratings ? "/api/benchmark" : test ? `/api/benchmark?test=${encodeURIComponent(test)}` : "/api/benchmark";
   const result = await fetch(url, ratings ? {
-    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ testId: test, ratings }),
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ testId: test, ratings, revisions, action }), keepalive: action === "progress",
   } : {});
   const body = await result.json().catch(() => null);
   if (!result.ok || !body) throw new Error(body?.error || "The test is temporarily unavailable.");
@@ -47,14 +47,15 @@ function renderHome() {
   }
   const completed = home.completed.includes(test.id);
   const saved = storedDraft(test.id);
-  const label = completed ? "View your results" : saved ? "Resume test" : "Start test";
+  const label = completed ? "View your results" : (saved || home.inProgress?.includes(test.id)) ? "Resume test" : "Start test";
+  document.querySelector("#autosave-notice").hidden = !home.inProgress;
   startTest.innerHTML = `${label} <span class="arrow" aria-hidden="true"></span>`;
   startTest.disabled = false;
   openCommunity.disabled = false;
   homeStatus.textContent = "";
 }
 
-function showCommunity(show) {
+async function showCommunity(show) {
   if (show) {
     communityContent.innerHTML = board("Model rankings", home.community, true);
   }
@@ -63,6 +64,15 @@ function showCommunity(show) {
   community.hidden = !show;
   if (show) document.querySelector("#community-title").focus({ preventScroll: true });
   else openCommunity.focus({ preventScroll: true });
+  if (show) {
+    try {
+      const latest = await request();
+      if (!community.hidden) {
+        home = latest;
+        communityContent.innerHTML = board("Model rankings", home.community, true);
+      }
+    } catch { /* The last loaded leaderboard is still available. */ }
+  }
 }
 
 function storedDraft(id) {
@@ -70,10 +80,67 @@ function storedDraft(id) {
 }
 
 function saveDraft() {
-  const { test, ratings, index } = review;
-  const draft = { ratings, index, promptId: test.prompts[index].id, promptOrder: test.prompts.map(({ id }) => id) };
+  const { test, ratings, revisions, index } = review;
+  const draft = { ratings, revisions, index, promptId: test.prompts[index].id, promptOrder: test.prompts.map(({ id }) => id) };
   try { localStorage.setItem(draftKey(test.id), JSON.stringify(draft)); } catch {}
 }
+
+// Keep unacknowledged changes independently of the navigation draft. Tabs editing
+// different images can retry their own writes without replacing each other's data.
+const pendingRatings = new Map();
+let progressRetry;
+let retryDelay = 2000;
+
+const pendingPrefix = (testId) => `public-model-test-pending:${testId}:`;
+function queueRating(testId, id, stars, revision) {
+  const key = pendingPrefix(testId) + id;
+  const change = { testId, id, stars, revision };
+  pendingRatings.set(key, change);
+  try { localStorage.setItem(key, JSON.stringify(change)); } catch {}
+}
+
+function restorePending(testId) {
+  try {
+    for (const key of Object.keys(localStorage)) {
+      if (!key.startsWith(pendingPrefix(testId))) continue;
+      const change = JSON.parse(localStorage.getItem(key));
+      if (change?.testId === testId && key === pendingPrefix(testId) + change.id &&
+          stars.includes(change.stars) && Number.isSafeInteger(change.revision)) pendingRatings.set(key, change);
+    }
+  } catch {}
+}
+
+function acknowledge(change) {
+  const key = pendingPrefix(change.testId) + change.id;
+  if (pendingRatings.get(key)?.revision === change.revision) pendingRatings.delete(key);
+  try {
+    if (JSON.parse(localStorage.getItem(key))?.revision === change.revision) localStorage.removeItem(key);
+  } catch {}
+}
+
+async function flushProgress() {
+  const batch = [...pendingRatings.values()].filter(change => !change.sending);
+  if (!batch.length || !home?.inProgress || !navigator.onLine) return;
+  const ratings = {}, revisions = {};
+  for (const change of batch) {
+    change.sending = true;
+    ratings[change.id] = change.stars;
+    revisions[change.id] = change.revision;
+  }
+  try {
+    await request({ test: batch[0].testId, ratings, revisions, action: "progress" });
+    batch.forEach(acknowledge);
+    retryDelay = 2000;
+  } catch {
+    for (const change of batch) change.sending = false;
+    clearTimeout(progressRetry);
+    progressRetry = setTimeout(flushProgress, retryDelay);
+    retryDelay = Math.min(60000, retryDelay * 2);
+  }
+}
+
+window.addEventListener("online", flushProgress);
+document.addEventListener("visibilitychange", () => { if (document.hidden) void flushProgress(); });
 
 function shuffled(items) {
   const result = items.slice();
@@ -284,9 +351,22 @@ async function openTest() {
     const test = { ...result.test, prompts };
     const validIds = new Set(test.prompts.flatMap(({ images }) => images.map(({ id }) => id)));
     const ratings = Object.fromEntries(Object.entries(saved?.ratings ?? {}).filter(([id, value]) => validIds.has(id) && stars.includes(value)));
+    const revisions = {};
+    for (const [id, value] of Object.entries(result.draft ?? {})) {
+      if (!validIds.has(id)) continue;
+      const localRevision = saved?.revisions?.[id] ?? 0;
+      if (!ratings[id] || value.revision >= localRevision) ratings[id] = value.stars;
+      revisions[id] = Math.max(value.revision ?? 0, localRevision);
+    }
+    for (const [id, score] of Object.entries(ratings)) {
+      const revision = revisions[id] ?? saved?.revisions?.[id] ?? 0;
+      revisions[id] = revision;
+      if (!result.draft?.[id] || revision > result.draft[id].revision) queueRating(test.id, id, score, revision);
+    }
+    void flushProgress();
     const savedIndex = prompts.findIndex(({ id }) => id === saved?.promptId);
     const fallbackIndex = Number.isInteger(saved?.index) ? Math.max(0, Math.min(saved.index, prompts.length - 1)) : 0;
-    review = { test, index: savedIndex >= 0 ? savedIndex : fallbackIndex, active: 0, ratings, saving: false };
+    review = { test, index: savedIndex >= 0 ? savedIndex : fallbackIndex, active: 0, ratings, revisions, saving: false };
     saveDraft();
     renderPrompt();
   } catch (error) {
@@ -336,7 +416,8 @@ async function finishTest() {
   const status = dialog.querySelector("#review-error");
   status.textContent = "Saving ratings…";
   try {
-    const result = await request({ test: current.test.id, ratings: current.ratings });
+    const result = await request({ test: current.test.id, ratings: current.ratings, revisions: current.revisions, action: "finish" });
+    for (const change of pendingRatings.values()) if (change.testId === current.test.id) acknowledge(change);
     home = result;
     try { localStorage.removeItem(draftKey(current.test.id)); } catch {}
     if (dialog.open && current === review) {
@@ -424,6 +505,10 @@ dialog.addEventListener("change", (event) => {
   const imageId = images[active].id;
   const wasUnrated = !ratings[imageId];
   ratings[imageId] = Number(event.target.value);
+  const revision = Math.max(Date.now() * 1000 + Math.floor(Math.random() * 1000), (review.revisions[imageId] ?? 0) + 1);
+  review.revisions[imageId] = revision;
+  queueRating(test.id, imageId, ratings[imageId], revision);
+  void flushProgress();
 
   const nextUnrated = images.findIndex(({ id }, position) => position > active && !ratings[id]);
   const firstUnrated = nextUnrated >= 0 ? nextUnrated : images.findIndex(({ id }) => !ratings[id]);
@@ -465,5 +550,14 @@ dialog.addEventListener("close", () => {
 
 window.addEventListener("resize", () => resetImageZoom?.());
 
-try { home = await request(); renderHome(); }
+try {
+  home = await request();
+  renderHome();
+  const testId = home.tests[0]?.id;
+  if (testId) {
+    restorePending(testId);
+    if (home.completed.includes(testId)) pendingRatings.forEach(acknowledge);
+    else void flushProgress();
+  }
+}
 catch (error) { homeStatus.textContent = error.message || "Could not load the test. Reload the page to try again."; }

@@ -52,14 +52,15 @@ async function jsonBody(req) {
   return JSON.parse(Buffer.concat(chunks).toString("utf8"));
 }
 
-function collectChoices(test, ratings) {
+function collectChoices(test, ratings, revisions) {
   if (!ratings || typeof ratings !== "object" || Array.isArray(ratings)) throw new RequestError(400, "Invalid ratings.");
   const images = new Map(test.prompts.flatMap(({ images }) => images.map(({ id, model }) => [id, model])));
   const entries = Object.entries(ratings);
   if (!entries.length) throw new RequestError(400, "Rate at least one image.");
   return Object.fromEntries(entries.map(([id, stars]) => {
     if (!images.has(id) || !Number.isInteger(stars) || stars < 1 || stars > 5) throw new RequestError(400, "Invalid image or rating.");
-    return [id, { model: images.get(id), stars }];
+    if (revisions !== undefined && (!Number.isSafeInteger(revisions?.[id]) || revisions[id] < 0)) throw new RequestError(400, "Invalid rating revision.");
+    return [id, { model: images.get(id), stars, ...(revisions === undefined ? {} : { revision: revisions[id] }) }];
   }));
 }
 
@@ -116,9 +117,16 @@ export function createHandler({ dataset = loadDataset, rpc = supabaseRpc, access
       const test = testId && PUBLIC_ID.test(testId) ? source.tests.find(({ id }) => id === testId) : undefined;
       if ((req.method === "POST" || testId) && !test) throw new RequestError(404, "Test not found.");
       const visitorId = visitor(req, res, key);
-      if (req.method === "POST") await rpc("record_public_model_test_vote", {
-        ...base, p_test: test.id, p_visitor: visitorId, p_choices: collectChoices(test, body.ratings),
-      });
+      if (req.method === "POST") {
+        const params = { ...base, p_test: test.id, p_visitor: visitorId, p_choices: collectChoices(test, body.ratings, body.revisions) };
+        if (body.action === "progress") {
+          if (!body.revisions) throw new RequestError(400, "Missing rating revisions.");
+          await rpc("save_public_model_test_ratings", { ...params, p_finalize: false });
+          return json(res, 200, { saved: true });
+        }
+        if (body.action !== undefined && body.action !== "finish") throw new RequestError(400, "Unknown action.");
+        await rpc("record_public_model_test_vote", params);
+      }
       const state = await rpc("read_public_model_test_state", { ...base, p_visitor: visitorId, p_test: test?.id ?? null });
       const { choices, ...stats } = state;
       for (const scope of ["community", "personal"]) stats[scope] = stats[scope].map((entry) => ({

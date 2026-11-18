@@ -4,6 +4,13 @@
 
 ## 2026-11-18
 
+### Test bitmeden yıldızları kaydetme
+
+- `migrations/20261118_partial_ratings.sql` devam eden oyları topluluk istatistiklerine dahil eder. Eski kayıtlar tamamlanmış kalır. Aynı görselin yeni puanı eskisinin yerini alır. Tekrarlanan veya gecikmiş kayıtlar toplamı artırmaz. Kişisel model sonuçları test bitirildiğinde açılır.
+- `api/benchmark.mjs` ve `public/app.js` her puanı sunucuya gönderir. Tarayıcı onaylanmamış değişiklikleri saklar ve bağlantı geri geldiğinde veya sayfa tekrar açıldığında gönderir. Sunucudaki kısmi puanlar aynı katılımcının çereziyle geri yüklenir. Ana sayfa otomatik kayıt etkin olduğunda bunu bildirir.
+- İzole PostgreSQL uyumlu PGlite ve Chrome ile mevcut kayıt üzerine migration, migration tekrarı, düzenlenen puan, sırası değişen istek, oy verdikten sonra sekmeyi kapatma, yerel taslak silinince sunucudan dönüş, çevrimdışıyken kapanan sekmenin tekrar açılması ve bitirmede çift sayım kontrol edildi. API testleri, JavaScript sözdizimi ve diff kontrolleri geçti.
+- Canlı Supabase migration’ını kullanıcı çalıştıracak. Mevcut kampanya için SQL Editor’da yalnızca `migrations/20261118_partial_ratings.sql` uygulanır. Uygulama bu adım sonrasında otomatik kaydı etkinleştirir.
+
 ### Tam ekran görsel üzerinde yüzen puanlama kontrolleri
 
 - `public/app.js` ve `public/styles.css` ile testte görsel kırpılmadan tüm ekranı kullanır. Prompt sol üstte açılır. Küçük görseller masaüstünde sol kenarda, dikey telefonda puanlama alanının üzerinde yatay dizilir. Hangi görsele oy verildiği ve kaçının puanlandığı yıldızlarla aynı yerde gösterilir.

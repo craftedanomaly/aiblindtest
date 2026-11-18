@@ -316,6 +316,7 @@ td.score { color: var(--accent); font-weight: 700; }
 .hero-actions .secondary:hover:not(:disabled) { background: #2e3228; border-color: #9d9e8d; }
 .arrow { position: relative; flex: none; width: .85rem; height: 1px; background: currentColor; }
 .arrow::after { content: ""; position: absolute; right: 0; top: 50%; width: .37rem; height: .37rem; border: solid currentColor; border-width: 1px 1px 0 0; transform: translateY(-50%) rotate(45deg); }
+#autosave-notice { margin-top: .65rem; font-size: .8rem; color: var(--screen-muted); }
 .home-status { position: absolute; top: calc(100% - 1.4rem); max-width: 32ch; font-size: .875rem; color: var(--screen-muted); }
 
 .community-panel {

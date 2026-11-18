@@ -57,3 +57,32 @@ test("blind results, server-mapped ratings, cookie scope and repeat votes", asyn
     await new Promise((resolve) => server.close(resolve));
   }
 });
+
+test("progress validates revisions, maps the blind image and avoids a full leaderboard read", async () => {
+  const calls = [];
+  const handler = createHandler({
+    dataset: async () => dataset,
+    accessKey: () => "f".repeat(64),
+    rpc: async (name, args) => { calls.push({ name, args }); },
+  });
+  const server = createServer(handler).listen(0, "127.0.0.1");
+  await once(server, "listening");
+  const origin = `http://127.0.0.1:${server.address().port}`;
+  const post = (revisions) => fetch(origin + "/api/benchmark", {
+    method: "POST", headers: { Origin: origin, "Content-Type": "application/json" },
+    body: JSON.stringify({ action: "progress", testId, ratings: { [image]: 4 }, revisions }),
+  });
+  try {
+    for (const invalid of [undefined, {}, { [image]: 1.3 }, { [image]: -1 }]) {
+      assert.equal((await post(invalid)).status, 400);
+    }
+    assert.equal(calls.length, 0);
+    assert.deepEqual(await (await post({ [image]: 123 })).json(), { saved: true });
+    assert.equal(calls.length, 1);
+    assert.equal(calls[0].name, "save_public_model_test_ratings");
+    assert.equal(calls[0].args.p_finalize, false);
+    assert.deepEqual(calls[0].args.p_choices, { [image]: { model: "alpha", stars: 4, revision: 123 } });
+  } finally {
+    await new Promise(resolve => server.close(resolve));
+  }
+});
