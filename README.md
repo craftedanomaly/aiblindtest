@@ -1,6 +1,6 @@
 # Görsel Model Testi
 
-Studio arşivinden dışarı aktarılmış karşılaştırmalar için bağımsız Türkçe uygulama. Görseller kör sırada gösterilir. Başlık üstüne gelince veya başlığa dokununca tam prompt açılır. Katılımcı her görsele 1–5 yıldız verebilir. Bir test tamamlandığında modeller, kişisel sıralama ve topluluk sıralaması görünür.
+Studio arşivinden dışarı aktarılmış karşılaştırmaları tek bir kör testte sunan bağımsız İngilizce uygulama. Başlığa gelince veya dokununca tam prompt açılır. Katılımcı görsellere 1–5 yıldız verebilir ve en az bir görseli puanladıktan sonra testi bitirebilir. Modeller ve kişisel sıralama test sonunda, topluluk sıralaması ana sayfadan görünür.
 
 ## Paketin içeriği
 
@@ -21,12 +21,12 @@ Uygulama çalışma zamanında Studio anahtarı, R2 anahtarı veya Supabase serv
 
 ## Vercel'e GitHub üzerinden dağıtım
 
-Bu repo bağımsız yayın paketidir; 4 test, 60 prompt ve 288 WebP görsel Git'e dahildir. Mevcut kampanyanın Supabase migration'ı ve kaydı hazırlanmıştır; aynı veritabanı ve kampanya anahtarıyla tekrar kayıt gerekmez.
+Bu repo bağımsız yayın paketidir; tek testte 59 prompt ve 284 WebP görsel Git'e dahildir. Mevcut kampanyanın Supabase migration'ı ve kaydı hazırlanmıştır; aynı veritabanı ve kampanya anahtarıyla tekrar kayıt gerekmez.
 
 1. Vercel'de **Add New → Project** üzerinden `craftedanomaly/aiblindtest` reposunu içe aktar.
 2. **Root Directory** repo kökü (`./`), **Framework Preset** `Other` olsun. Build Command için override açma; bu uygulama derleme gerektirmez. Output Directory `public` değeri `vercel.json` ile ayarlıdır.
 3. **Environment Variables** bölümüne mevcut yerel `.env.local` dosyasındaki `SUPABASE_URL`, `SUPABASE_PUBLIC_KEY` ve `BENCHMARK_ACCESS_KEY` değerlerini ekle. Mevcut kampanya için yeni anahtar üretme. Production ve kullanacaksan Preview ortamlarını seç.
-4. **Deploy** ile yayınla. Ana sayfada 4 testin görünmesini, bir testin ve görselin açılmasını kontrol et. Gerçek değerlendirme yapmak istemiyorsan test sonunda oy gönderme.
+4. **Deploy** ile yayınla. Ana sayfadan **Start test** ve **Community results** düğmelerinin çalıştığını kontrol et. Gerçek değerlendirme yapmak istemiyorsan test sonunda oy gönderme.
 
 `.env.local` Git'e dahil değildir. Sunucu `data/benchmark.json` dosyasını okur; `vercel.json` bu dosyayı API işlevine ekler. Dışarıya yalnızca `public/` statik dosyaları açılır. GitHub kaynak reposu herkese açıktır; model eşleşmelerini de içeren kaynak veri burada görülebilir. Kör değerlendirme, web uygulamasının puanlama öncesi yanıtlarında model adlarını gizler.
 

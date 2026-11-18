@@ -35,30 +35,30 @@ function json(res, status, body) {
 }
 
 async function jsonBody(req) {
-  if (!/^application\/json(?:;|$)/i.test(req.headers["content-type"] ?? "")) throw new RequestError(415, "JSON bekleniyor.");
-  if (Number(req.headers["content-length"]) > MAX_BODY) throw new RequestError(413, "İstek çok büyük.");
+  if (!/^application\/json(?:;|$)/i.test(req.headers["content-type"] ?? "")) throw new RequestError(415, "Expected a JSON request.");
+  if (Number(req.headers["content-length"]) > MAX_BODY) throw new RequestError(413, "The request is too large.");
   if (req.body !== undefined) {
     const raw = typeof req.body === "string" ? req.body : JSON.stringify(req.body);
-    if (Buffer.byteLength(raw) > MAX_BODY) throw new RequestError(413, "İstek çok büyük.");
+    if (Buffer.byteLength(raw) > MAX_BODY) throw new RequestError(413, "The request is too large.");
     return JSON.parse(raw);
   }
   const chunks = [];
   let bytes = 0;
   for await (const chunk of req) {
     bytes += chunk.length;
-    if (bytes > MAX_BODY) throw new RequestError(413, "İstek çok büyük.");
+    if (bytes > MAX_BODY) throw new RequestError(413, "The request is too large.");
     chunks.push(chunk);
   }
   return JSON.parse(Buffer.concat(chunks).toString("utf8"));
 }
 
 function collectChoices(test, ratings) {
-  if (!ratings || typeof ratings !== "object" || Array.isArray(ratings)) throw new RequestError(400, "Puanlar geçersiz.");
+  if (!ratings || typeof ratings !== "object" || Array.isArray(ratings)) throw new RequestError(400, "Invalid ratings.");
   const images = new Map(test.prompts.flatMap(({ images }) => images.map(({ id, model }) => [id, model])));
   const entries = Object.entries(ratings);
-  if (!entries.length) throw new RequestError(400, "En az bir görseli puanla.");
+  if (!entries.length) throw new RequestError(400, "Rate at least one image.");
   return Object.fromEntries(entries.map(([id, stars]) => {
-    if (!images.has(id) || !Number.isInteger(stars) || stars < 1 || stars > 5) throw new RequestError(400, "Puan veya görsel geçersiz.");
+    if (!images.has(id) || !Number.isInteger(stars) || stars < 1 || stars > 5) throw new RequestError(400, "Invalid image or rating.");
     return [id, { model: images.get(id), stars }];
   }));
 }
@@ -98,7 +98,7 @@ async function supabaseRpc(name, args) {
 export function createHandler({ dataset = loadDataset, rpc = supabaseRpc, accessKey = () => process.env.BENCHMARK_ACCESS_KEY } = {}) {
   return async function handler(req, res) {
     try {
-      if (req.method !== "GET" && req.method !== "POST") throw new RequestError(405, "Yöntem desteklenmiyor.");
+      if (req.method !== "GET" && req.method !== "POST") throw new RequestError(405, "Method not allowed.");
       const key = accessKey();
       if (!/^[a-f0-9]{64}$/.test(key ?? "")) throw new DatabaseUnavailable();
       const source = await dataset();
@@ -108,13 +108,13 @@ export function createHandler({ dataset = loadDataset, rpc = supabaseRpc, access
       if (req.method === "POST") {
         const origin = req.headers.origin;
         if (req.headers["sec-fetch-site"] === "cross-site" || !origin || new URL(origin).host !== req.headers.host) {
-          throw new RequestError(403, "İstek doğrulanamadı.");
+          throw new RequestError(403, "Could not verify the request.");
         }
         body = await jsonBody(req);
       }
       const testId = req.method === "POST" ? body?.testId : url.searchParams.get("test");
       const test = testId && PUBLIC_ID.test(testId) ? source.tests.find(({ id }) => id === testId) : undefined;
-      if ((req.method === "POST" || testId) && !test) throw new RequestError(404, "Test bulunamadı.");
+      if ((req.method === "POST" || testId) && !test) throw new RequestError(404, "Test not found.");
       const visitorId = visitor(req, res, key);
       if (req.method === "POST") await rpc("record_public_model_test_vote", {
         ...base, p_test: test.id, p_visitor: visitorId, p_choices: collectChoices(test, body.ratings),
@@ -136,7 +136,7 @@ export function createHandler({ dataset = loadDataset, rpc = supabaseRpc, access
       const known = error instanceof RequestError;
       const invalidJson = error instanceof SyntaxError;
       json(res, known ? error.status : invalidJson ? 400 : 503, {
-        error: known ? error.message : invalidJson ? "İstek geçersiz." : "Test verileri şu anda kullanılamıyor.",
+        error: known ? error.message : invalidJson ? "Invalid request." : "The test is temporarily unavailable.",
       });
     }
   };

@@ -1,20 +1,17 @@
-const dashboard = document.querySelector("#dashboard");
 const homeStatus = document.querySelector("#home-status");
+const landing = document.querySelector("#landing");
+const hero = document.querySelector("#hero");
+const community = document.querySelector("#community");
+const communityContent = document.querySelector("#community-content");
+const startTest = document.querySelector("#start-test");
+const openCommunity = document.querySelector("#open-community");
+const backHome = document.querySelector("#back-home");
 const dialog = document.querySelector("#review");
-const sectionLinks = document.querySelector("#section-links");
-const introAction = document.querySelector(".intro-action");
 const stars = [1, 2, 3, 4, 5];
-const covers = new Map([
-  ["bbe27cf0e1e1f9545aef657c", "3312870e3d97b0c3b8d2b4c9"],
-  ["0b5f91cdb242b2a0997970f7", "f6c52089f3ab5590940590c7"],
-  ["dd20cc45793294c529d32969", "e4a4e0c63b72b279d9749d8a"],
-  ["2c6b7fecef1d51a56f138941", "3bb114737ab7fd3d76dd0584"],
-]);
-const number = new Intl.NumberFormat("tr-TR", { maximumFractionDigits: 2 });
-const integer = new Intl.NumberFormat("tr-TR", { maximumFractionDigits: 0 });
+const number = new Intl.NumberFormat("en", { maximumFractionDigits: 2 });
+const integer = new Intl.NumberFormat("en", { maximumFractionDigits: 0 });
 let home;
 let review;
-let opener;
 
 const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
 const imageUrl = (id) => `/media/${encodeURIComponent(id)}.webp`;
@@ -25,43 +22,45 @@ async function request({ test, ratings } = {}) {
   const result = await fetch(url, ratings ? {
     method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ testId: test, ratings }),
   } : {});
-  const body = await result.json();
-  if (!result.ok) throw new Error(body.error);
+  const body = await result.json().catch(() => null);
+  if (!result.ok || !body) throw new Error(body?.error || "The test is temporarily unavailable.");
   return body;
 }
 
 function board(title, rows, isCommunity = false) {
   return `<section class="surface" aria-label="${title}">
-    <header><h3>${title}</h3>${isCommunity && home.participants ? `<p class="quiet">${integer.format(home.participants)} katılımcı</p>` : ""}</header>
+    <header><h3>${title}</h3>${isCommunity && home.participants ? `<p class="quiet">${integer.format(home.participants)} ${home.participants === 1 ? "participant" : "participants"}</p>` : ""}</header>
     ${rows.length ? `<div class="scroll-table" tabindex="0"><table>
-      <thead><tr><th scope="col">Model</th><th scope="col">Ort. yıldız</th><th scope="col">Puan</th>${isCommunity ? '<th scope="col">Katılımcı</th>' : ""}</tr></thead>
+      <thead><tr><th scope="col">Model</th><th scope="col">Avg. rating</th><th scope="col">Ratings</th>${isCommunity ? '<th scope="col">Voters</th>' : ""}</tr></thead>
       <tbody>${rows.map((entry) => `<tr><th scope="row">${escapeHtml(entry.model)}</th><td class="score">${number.format(entry.average)} / 5</td><td>${integer.format(entry.votes)}</td>${isCommunity ? `<td>${integer.format(entry.participants)}</td>` : ""}</tr>`).join("")}</tbody>
-    </table></div>` : `<p class="empty">${isCommunity ? "İlk değerlendirmeler geldikçe sıralama burada görünecek." : "Puan verdiğin modeller burada sıralanacak."}</p>`}
+    </table></div>` : `<p class="empty">${isCommunity ? "No ratings yet. Take the test to add yours." : "The models you rate will appear here."}</p>`}
   </section>`;
 }
 
 function renderHome() {
-  homeStatus.hidden = true;
-  dashboard.hidden = false;
-  sectionLinks.hidden = false;
-  introAction.hidden = false;
-  dashboard.innerHTML = `<section class="archive" aria-labelledby="archive-title">
-    <header class="section-head"><h2 id="archive-title" tabindex="-1">Test arşivi</h2><p class="quiet">${home.tests.length} test · ${integer.format(home.tests.reduce((sum, test) => sum + test.images, 0))} görsel</p></header>
-    <ul class="tests">${home.tests.map((test) => {
-      const cover = covers.get(test.id);
-      const completed = home.completed.includes(test.id);
-      const hasDraft = !completed && Object.keys(storedDraft(test.id)?.ratings ?? {}).length > 0;
-      const label = completed ? "Sonuçları gör" : hasDraft ? "Teste devam et" : "Teste başla";
-      return `<li>
-        ${cover ? `<img class="test-cover" src="${imageUrl(cover)}" alt="" loading="lazy">` : ""}
-        <div class="test-info"><h3>${escapeHtml(test.title)}</h3><p class="quiet">${test.prompts} prompt · ${test.images} görsel</p></div>
-        <button type="button" class="test-action" data-test="${escapeHtml(test.id)}">${label}<span class="arrow" aria-hidden="true"></span></button>
-      </li>`;
-    }).join("")}</ul>
-  </section><section class="rankings" aria-labelledby="rankings-title">
-    <header class="section-head"><h2 id="rankings-title" tabindex="-1">Sıralamalar</h2></header>
-    <div class="boards">${board("Topluluk sıralaması", home.community, true)}${board("Kişisel sıralaman", home.personal)}</div>
-  </section>`;
+  const test = home.tests[0];
+  if (!test) {
+    homeStatus.textContent = "The test is currently unavailable.";
+    return;
+  }
+  const completed = home.completed.includes(test.id);
+  const saved = storedDraft(test.id);
+  const label = completed ? "View your results" : saved ? "Resume test" : "Start test";
+  startTest.innerHTML = `${label} <span class="arrow" aria-hidden="true"></span>`;
+  startTest.disabled = false;
+  openCommunity.disabled = false;
+  homeStatus.textContent = "";
+}
+
+function showCommunity(show) {
+  if (show) {
+    communityContent.innerHTML = board("Model rankings", home.community, true);
+  }
+  landing.classList.toggle("show-community", show);
+  hero.hidden = show;
+  community.hidden = !show;
+  if (show) document.querySelector("#community-title").focus({ preventScroll: true });
+  else openCommunity.focus({ preventScroll: true });
 }
 
 function storedDraft(id) {
@@ -85,11 +84,11 @@ function renderResult(test) {
   const ranked = test.prompts.flatMap((prompt) => prompt.images.map((image) => ({ ...image, prompt: prompt.title })))
     .sort((a, b) => (b.stars ?? 0) - (a.stars ?? 0));
   dialog.innerHTML = `<div class="result"><main class="result-inner">
-    <header class="result-top"><div><h2 tabindex="-1">Test sonuçların</h2><p class="quiet">${escapeHtml(test.title)}</p></div><button class="action secondary" type="button" data-close>Arşive dön</button></header>
-    <div class="result-boards">${board("Kişisel sıralaman", home.personal)}${board("Topluluk sıralaması", home.community, true)}</div>
-    <h3 class="gallery-heading">Görsel sıralaması</h3>
+    <header class="result-top"><h2 tabindex="-1">Your results</h2><button class="action secondary" type="button" data-close>Back to home</button></header>
+    <div class="result-boards">${board("Your rankings", home.personal)}${board("Community rankings", home.community, true)}</div>
+    <h3 class="gallery-heading">Image rankings</h3>
     <div class="result-grid">${ranked.map((image) => `<figure><img loading="lazy" src="${imageUrl(image.id)}" alt="${escapeHtml(image.model)}">
-      <figcaption><div><strong>${escapeHtml(image.model)}</strong><span class="result-score">${image.stars ? `${image.stars} / 5` : "Puanlanmadı"}</span></div><p class="quiet">${escapeHtml(image.prompt)}</p></figcaption></figure>`).join("")}</div>
+      <figcaption><div><strong>${escapeHtml(image.model)}</strong><span class="result-score">${image.stars ? `${image.stars} / 5` : "Unrated"}</span></div><p class="quiet">${escapeHtml(image.prompt)}</p></figcaption></figure>`).join("")}</div>
   </main></div>`;
   dialog.querySelector("h2").focus();
 }
@@ -99,8 +98,8 @@ function updateControls() {
   const image = prompt.images[review.active];
   const rated = prompt.images.filter(({ id }) => review.ratings[id]).length;
   const final = review.index === review.test.prompts.length - 1;
-  dialog.querySelector("#rating-progress").textContent = `${rated}/${prompt.images.length} puanlandı`;
-  dialog.querySelector("#rating-label").textContent = `Görsel ${review.active + 1} için yıldız`;
+  dialog.querySelector("#rating-progress").textContent = `${rated}/${prompt.images.length} rated`;
+  dialog.querySelector("#rating-label").textContent = `Rating for image ${review.active + 1}`;
   for (const [index, button] of [...dialog.querySelectorAll(".option")].entries()) {
     button.setAttribute("aria-current", index === review.active ? "true" : "false");
     const score = review.ratings[prompt.images[index].id];
@@ -112,8 +111,12 @@ function updateControls() {
     input.parentElement.classList.toggle("filled", Number(input.value) <= (review.ratings[image.id] ?? 0));
   }
   const next = dialog.querySelector("[data-next]");
-  next.textContent = final ? "Sonuçları gör" : rated === prompt.images.length ? "Sonraki" : "Geç";
-  next.disabled = review.saving || (final && !Object.keys(review.ratings).length);
+  next.textContent = final ? "View results" : rated === prompt.images.length ? "Next" : "Skip";
+  const hasRatings = Object.keys(review.ratings).length > 0;
+  next.disabled = review.saving || (final && !hasRatings);
+  const finish = dialog.querySelector('[data-finish]');
+  finish.hidden = final || !hasRatings;
+  finish.disabled = review.saving;
 }
 
 function selectImage(index) {
@@ -123,11 +126,11 @@ function selectImage(index) {
   const image = dialog.querySelector("#active-image");
   const status = dialog.querySelector("#image-status");
   status.hidden = false;
-  status.textContent = "Görsel yükleniyor…";
+  status.textContent = "Loading image…";
   image.onload = () => { status.hidden = true; dialog.querySelector(".stars").disabled = false; };
-  image.onerror = () => { status.textContent = "Görsel yüklenemedi."; };
+  image.onerror = () => { status.textContent = "Could not load this image."; };
   dialog.querySelector(".stars").disabled = true;
-  image.alt = `Görsel ${index + 1}`;
+  image.alt = `Image ${index + 1}`;
   image.src = imageUrl(prompt.images[index].id);
   if (image.complete && image.naturalWidth) image.onload();
   updateControls();
@@ -142,19 +145,19 @@ function renderPrompt() {
         <button type="button" class="prompt-title" aria-expanded="false" aria-controls="full-prompt" data-prompt><span>${escapeHtml(prompt.title)}</span></button>
         <div class="prompt-text" id="full-prompt" tabindex="0">${escapeHtml(prompt.prompt)}</div>
       </div>
-      <button type="button" class="icon-button" data-close aria-label="Arşive dön">✕</button>
+      <button type="button" class="icon-button" data-close aria-label="Back to home">✕</button>
     </header>
-    <progress class="prompt-progress" value="${index + 1}" max="${test.prompts.length}" aria-label="Testteki prompt ilerlemesi"></progress>
-    <div class="image-stage"><img id="active-image" alt="" fetchpriority="high"><p class="stage-status" id="image-status" role="status">Görsel yükleniyor…</p></div>
+    <progress class="prompt-progress" value="${index + 1}" max="${test.prompts.length}" aria-label="Prompt progress"></progress>
+    <div class="image-stage"><img id="active-image" alt="" fetchpriority="high"><p class="stage-status" id="image-status" role="status">Loading image…</p></div>
     <footer class="review-foot">
-      <div class="options" role="group" aria-label="Bu promptun görselleri">${prompt.images.map(({ id }, i) => `<button type="button" class="option" data-image="${i}" aria-label="Görsel ${i + 1}"><img src="${imageUrl(id)}" alt="" loading="lazy"><span hidden></span></button>`).join("")}</div>
+      <div class="options" role="group" aria-label="Images for this prompt">${prompt.images.map(({ id }, i) => `<button type="button" class="option" data-image="${i}" aria-label="Image ${i + 1}"><img src="${imageUrl(id)}" alt="" loading="lazy"><span hidden></span></button>`).join("")}</div>
       <div class="review-actions">
-        <button type="button" class="icon-button" data-back aria-label="Önceki prompt" ${index === 0 ? "disabled" : ""}>‹</button>
-        <fieldset class="stars"><legend id="rating-label" class="sr-only">Görsel için yıldız</legend>
-        ${stars.map((score) => `<label><input type="radio" value="${score}" name="stars"><span aria-hidden="true">★</span><span class="sr-only">${score} yıldız</span></label>`).join("")}</fieldset>
-        <button type="button" class="action" data-next>Geç</button>
+        <button type="button" class="icon-button" data-back aria-label="Previous prompt" ${index === 0 ? "disabled" : ""}>‹</button>
+        <fieldset class="stars"><legend id="rating-label" class="sr-only">Image rating</legend>
+        ${stars.map((score) => `<label><input type="radio" value="${score}" name="stars"><span aria-hidden="true">★</span><span class="sr-only">${score} ${score === 1 ? "star" : "stars"}</span></label>`).join("")}</fieldset>
+        <button type="button" class="action" data-next>Skip</button>
       </div>
-      <p id="rating-progress" class="quiet" role="status"></p>
+      <div class="review-status"><p id="rating-progress" class="quiet" role="status"></p><button class="finish-link" type="button" data-finish hidden>Finish test</button></div>
       <p id="review-error" class="warning" role="status"></p>
     </footer>
   </div>`;
@@ -162,11 +165,13 @@ function renderPrompt() {
   dialog.querySelector("[data-prompt]").focus();
 }
 
-async function openTest(button) {
-  opener = button;
-  button.disabled = true;
+async function openTest() {
+  startTest.disabled = true;
+  openCommunity.disabled = true;
+  homeStatus.textContent = "Opening the test…";
   try {
-    const result = await request({ test: button.dataset.test });
+    const result = await request({ test: home.tests[0].id });
+    homeStatus.textContent = "";
     home = result;
     dialog.showModal();
     if (result.test.completed) {
@@ -181,16 +186,16 @@ async function openTest(button) {
     review = { test, index: Number.isInteger(saved?.index) ? Math.max(0, Math.min(saved.index, test.prompts.length - 1)) : 0, active: 0, ratings, saving: false };
     renderPrompt();
   } catch (error) {
-    homeStatus.hidden = false;
-    homeStatus.textContent = error.message || "Test açılamadı.";
+    homeStatus.textContent = error.message || "Could not open the test. Try again.";
   } finally {
-    button.disabled = false;
+    startTest.disabled = false;
+    openCommunity.disabled = false;
   }
 }
 
-async function advance() {
+async function advance(finish = false) {
   if (!review || review.saving) return;
-  if (review.index < review.test.prompts.length - 1) {
+  if (!finish && review.index < review.test.prompts.length - 1) {
     review.index++;
     saveDraft();
     renderPrompt();
@@ -201,7 +206,7 @@ async function advance() {
   current.saving = true;
   updateControls();
   const status = dialog.querySelector("#review-error");
-  status.textContent = "Puanlar kaydediliyor…";
+  status.textContent = "Saving ratings…";
   try {
     const result = await request({ test: current.test.id, ratings: current.ratings });
     home = result;
@@ -215,15 +220,17 @@ async function advance() {
   } catch (error) {
     current.saving = false;
     if (current === review) {
-      status.textContent = error.message || "Puanlar kaydedilemedi. Tekrar dene.";
+      status.textContent = error.message || "Could not save your ratings. Try again.";
       updateControls();
     }
   }
 }
 
-dashboard.addEventListener("click", (event) => {
-  const button = event.target.closest("button[data-test]");
-  if (button) void openTest(button);
+startTest.addEventListener("click", openTest);
+openCommunity.addEventListener("click", () => showCommunity(true));
+backHome.addEventListener("click", () => showCommunity(false));
+community.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") showCommunity(false);
 });
 
 dialog.addEventListener("click", (event) => {
@@ -239,6 +246,7 @@ dialog.addEventListener("click", (event) => {
     renderPrompt();
   }
   if ("next" in button.dataset) void advance();
+  if ("finish" in button.dataset) void advance(true);
 });
 
 dialog.addEventListener("change", (event) => {
@@ -260,12 +268,9 @@ dialog.addEventListener("cancel", (event) => {
 
 dialog.addEventListener("close", () => {
   review = null;
-  if (home) {
-    const id = opener?.dataset.test;
-    renderHome();
-    [...dashboard.querySelectorAll("[data-test]")].find((button) => button.dataset.test === id)?.focus();
-  }
+  renderHome();
+  startTest.focus({ preventScroll: true });
 });
 
 try { home = await request(); renderHome(); }
-catch (error) { homeStatus.textContent = error.message || "Test arşivi yüklenemedi."; }
+catch (error) { homeStatus.textContent = error.message || "Could not load the test. Reload the page to try again."; }

@@ -11,32 +11,9 @@
   },
   "tests": [
     {
-      "id": "bbe27cf0e1e1f9545aef657c",
-      "title": "Test 01",
+      "id": "aeb4a4ff523cbd9d20391a23",
+      "title": "The Blind Image Test",
       "prompts": [
-        {
-          "id": "cb20526f8ca1be8c2652090a",
-          "title": "Digital illustration A yellow meeple character",
-          "prompt": "Digital illustration: A yellow meeple character wearing a brown fedora, holding a notepad and pen, with \"MEEPLE PRESS\" text below, on a gray background",
-          "images": [
-            {
-              "id": "fbc6a92aafbb99f420bb7102",
-              "model": "bytedance/seedream-5.5"
-            },
-            {
-              "id": "7f591e20d9c9951c6ee0042d",
-              "model": "kling/v4/image"
-            },
-            {
-              "id": "0c83ab3cf34748593c0efbda",
-              "model": "openai/gpt-image-2.6-sunburst"
-            },
-            {
-              "id": "4bc54db32cb11040abe1faec",
-              "model": "gemini-nano-banana-2.1"
-            }
-          ]
-        },
         {
           "id": "4969fd76689c4fe8f474d528",
           "title": "A cinematic photograph shot on 16mm",
@@ -85,8 +62,8 @@
         },
         {
           "id": "f32675e844cea788918cf794",
-          "title": "RAW AUTHENTIC PHOTOGRAPH BASED ON THESE",
-          "prompt": "GENERATE A RAW, AUTHENTIC PHOTOGRAPH BASED ON THESE SPECIFICATIONS:\n\nSUBJECT: bu çantayı taşıyan casual chick bir adam, istanbul'da kalabalık bir meydanda, aceleyle yürüyor. görüntü tamamen motion blur dolu, yüksek bir yerden oldukça tele bir lens ile çekilmiş. 70s hollywood style look & grade ama günümüzde geçiyor. gözlüklü, tasarımcı gibi bir adam taşıyor çantayı, 9:16\nCAMERA: Arriflex 35 BL\nLENS: 300mm tele (32mm) -> Look: soft focus corners, low contrast, organic bloom, optical imperfections\nLIGHTING: Neon Practical ()\nISO/TEXTURE: 500 (authentic texture)\nSTYLE: Kodak Vision3 500T (5219), Mixed Lighting, Heavy Grit\nVIBE: Christopher Doyle style, saturated neon color wash, rainy streets, handheld intimacy, motion blur as emotion, step printing effect.\nCOMPOSITION: Rule of Thirds\n\n\nCRITICAL INSTRUCTIONS:\n1. Visualize the scene using the optical characteristics of the 300mm tele (DOF, distortion).\n2. Render the lighting exactly as \"Neon Practical\".\n3. Aspect Ratio: tall vertical portrait (9:16).\n4. IMPORTANT: USE THE PROMPT EXACTLY AS WRITTEN. DO NOT REWRITE OR \"ENHANCE\" THE DESCRIPTION. \n5. NO TEXT OVERLAYS OR GRAPHICS. Just the raw photo.\n\nSTYLE: Cinematic, IMAX quality, teal & orange grading.",
+          "title": "Man crossing a crowded square in Istanbul",
+          "prompt": "GENERATE A RAW, AUTHENTIC PHOTOGRAPH BASED ON THESE SPECIFICATIONS:\n\nSUBJECT: A casual, stylish man carrying this bag hurries across a crowded square in Istanbul. The image is full of motion blur, shot from high above with a long telephoto lens. It has a 1970s Hollywood look and grade, set in the present day. The man carrying the bag wears glasses and looks like a designer. 9:16.\nCAMERA: Arriflex 35 BL\nLENS: 300mm tele (32mm) -> Look: soft focus corners, low contrast, organic bloom, optical imperfections\nLIGHTING: Neon Practical ()\nISO/TEXTURE: 500 (authentic texture)\nSTYLE: Kodak Vision3 500T (5219), Mixed Lighting, Heavy Grit\nVIBE: Christopher Doyle style, saturated neon color wash, rainy streets, handheld intimacy, motion blur as emotion, step printing effect.\nCOMPOSITION: Rule of Thirds\n\n\nCRITICAL INSTRUCTIONS:\n1. Visualize the scene using the optical characteristics of the 300mm tele (DOF, distortion).\n2. Render the lighting exactly as \"Neon Practical\".\n3. Aspect Ratio: tall vertical portrait (9:16).\n4. IMPORTANT: USE THE PROMPT EXACTLY AS WRITTEN. DO NOT REWRITE OR \"ENHANCE\" THE DESCRIPTION. \n5. NO TEXT OVERLAYS OR GRAPHICS. Just the raw photo.\n\nSTYLE: Cinematic, IMAX quality, teal & orange grading.",
           "images": [
             {
               "id": "3312870e3d97b0c3b8d2b4c9",
@@ -151,13 +128,7 @@
               "model": "gemini-nano-banana-2.1"
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "0b5f91cdb242b2a0997970f7",
-      "title": "Test 02",
-      "prompts": [
+        },
         {
           "id": "e9722a51a0d0f0e22b104778",
           "title": "A close-up low-angle shot of a",
@@ -451,13 +422,7 @@
               "model": "gemini-nano-banana-2.1"
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "dd20cc45793294c529d32969",
-      "title": "Test 03",
-      "prompts": [
+        },
         {
           "id": "7bef86ed3880f39065d79cf5",
           "title": "A professional studio photograph of exactly",
@@ -862,13 +827,7 @@
               "model": "bytedance/seedream-5.5"
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "2c6b7fecef1d51a56f138941",
-      "title": "Test 04",
-      "prompts": [
+        },
         {
           "id": "0de6519065e97f6a4c1ff670",
           "title": "A haunting black-and-white silent film frame",

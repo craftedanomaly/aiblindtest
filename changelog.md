@@ -4,6 +4,13 @@
 
 ## 2026-11-18
 
+### Tek İngilizce test ve tam ekran açılış
+
+- `data/benchmark.json` dört arşivi tek teste birleştirir. Meeple Press promptu ve dört WebP dosyası yayın paketinden çıkarıldı. Kalan 59 promptun sırası ve 284 görselin model eşleşmeleri doğrulandı. Bir promptun Türkçe açıklaması İngilizceye çevrildi. Görsellerde istenen özel ad ve metinler korundu.
+- `public/index.html`, `public/styles.css` ve `public/app.js` arşiv ana sayfasını tek tam ekran fotoğraf, sağa doğru kararan geçiş, büyük başlık ve iki düğme ile değiştirir. Topluluk sonuçları aynı ekranda animasyonla açılır ve azaltılmış hareket tercihine uyar. Puanlama, sonuçlar ve API hata mesajları İngilizce. En az bir puandan sonra test erken bitirilebilir. Başlık yazı tipi lisansıyla birlikte yerel olarak sunulur.
+- Aynı Supabase kampanyası kullanılır. Birleşik testin yeni kimliği vardır. Çalışma öncesinde canlı toplulukta kayıtlı katılımcı görünmüyordu. Veritabanı migration'ı veya Vercel ortam değişkeni değişikliği gerekmez.
+- `npm test`, JavaScript sözdizimi kontrolü ve `git diff --check` geçti. Playwright 320, 390, 700, 768 ve 1440 px genişliklerde açılış taşması, sonuç animasyonu, klavye odağı ve azaltılmış hareket tercihini doğruladı. Masaüstü ve mobil puanlama izole veritabanında doğrulandı. Canlıya deneme oyu yazılmadı.
+
 ### Görsel test arayüzü iyileştirmeleri
 
 - Impeccable yerel Codex skill dizinine kuruldu ve mevcut arayüzü iyileştirmek için kullanıldı. Skill dosyaları repoya eklenmedi.

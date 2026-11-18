@@ -3,7 +3,13 @@ import { createReadStream } from "node:fs";
 import { stat } from "node:fs/promises";
 import benchmark from "./api/benchmark.mjs";
 
-const staticTypes = new Map([["/", "text/html; charset=utf-8"], ["/app.js", "text/javascript; charset=utf-8"], ["/styles.css", "text/css; charset=utf-8"]]);
+const staticTypes = new Map([
+  ["/", "text/html; charset=utf-8"],
+  ["/app.js", "text/javascript; charset=utf-8"],
+  ["/styles.css", "text/css; charset=utf-8"],
+  ["/fonts/barlow-condensed-latin-700-normal.woff2", "font/woff2"],
+  ["/fonts/Barlow-OFL.txt", "text/plain; charset=utf-8"],
+]);
 export const server = createServer(async (req, res) => {
   const { pathname } = new URL(req.url, "http://localhost");
   if (pathname === "/api/benchmark") return benchmark(req, res);
