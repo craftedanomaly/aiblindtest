@@ -4,6 +4,11 @@
 
 ## 2026-11-18
 
+### Yeni testlerde rastgele prompt sırası
+
+- `public/app.js`, her yeni denemede 100 promptun sırasını karıştırır. Bir deneme yarıda bırakılırsa prompt sırası, geçerli prompt ve puanlar tarayıcı taslağından geri yüklenir. Eski taslaklar kaldığı prompttan açılır. Görsellerin prompt içindeki karışımı devam eder.
+- `npm test`, JavaScript sözdizimi ve `git diff --check` geçti. Playwright ile iki yeni denemenin farklı sıralar aldığı, her promptun tek kez yer aldığı ve yenileme sonrası sıranın, geçerli promptun ve puanın korunduğu doğrulandı. Eski ve eksik sıralı taslaklar denendi. Canlıya oy yazılmadı. Migration gerekmiyor.
+
 ### 42 Studio promptu, daha geniş görsel alanı ve dokunmatik yakınlaştırma
 
 - Studio'daki yeni 42 prompt ve başarıyla üretilen 194 WebP görsel mevcut testin sonuna eklendi. Başarısız 16 üretimden görsel alınmadı. Tek test artık 100 prompt ve 472 görsel içeriyor. İlk 58 prompt, görsel eşleşmeleri, test ve kampanya kimlikleri korundu.

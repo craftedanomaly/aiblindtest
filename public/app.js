@@ -70,16 +70,32 @@ function storedDraft(id) {
 }
 
 function saveDraft() {
-  try { localStorage.setItem(draftKey(review.test.id), JSON.stringify({ ratings: review.ratings, index: review.index })); } catch {}
+  const { test, ratings, index } = review;
+  const draft = { ratings, index, promptId: test.prompts[index].id, promptOrder: test.prompts.map(({ id }) => id) };
+  try { localStorage.setItem(draftKey(test.id), JSON.stringify(draft)); } catch {}
 }
 
-function shuffled(images) {
-  const result = images.slice();
+function shuffled(items) {
+  const result = items.slice();
   for (let i = result.length - 1; i > 0; i--) {
     const other = Math.floor(Math.random() * (i + 1));
     [result[i], result[other]] = [result[other], result[i]];
   }
   return result;
+}
+
+function orderPrompts(prompts, draft) {
+  if (!draft) return shuffled(prompts);
+  if (!Array.isArray(draft.promptOrder)) return prompts;
+
+  const remaining = new Map(prompts.map((prompt) => [prompt.id, prompt]));
+  const ordered = [];
+  for (const id of draft.promptOrder) {
+    if (!remaining.has(id)) continue;
+    ordered.push(remaining.get(id));
+    remaining.delete(id);
+  }
+  return [...ordered, ...shuffled([...remaining.values()])];
 }
 
 function renderResult(test) {
@@ -251,11 +267,15 @@ async function openTest() {
       renderResult(result.test);
       return;
     }
-    const test = { ...result.test, prompts: result.test.prompts.map((prompt) => ({ ...prompt, images: shuffled(prompt.images) })) };
-    const saved = storedDraft(test.id);
+    const saved = storedDraft(result.test.id);
+    const prompts = orderPrompts(result.test.prompts, saved).map((prompt) => ({ ...prompt, images: shuffled(prompt.images) }));
+    const test = { ...result.test, prompts };
     const validIds = new Set(test.prompts.flatMap(({ images }) => images.map(({ id }) => id)));
     const ratings = Object.fromEntries(Object.entries(saved?.ratings ?? {}).filter(([id, value]) => validIds.has(id) && stars.includes(value)));
-    review = { test, index: Number.isInteger(saved?.index) ? Math.max(0, Math.min(saved.index, test.prompts.length - 1)) : 0, active: 0, ratings, saving: false };
+    const savedIndex = prompts.findIndex(({ id }) => id === saved?.promptId);
+    const fallbackIndex = Number.isInteger(saved?.index) ? Math.max(0, Math.min(saved.index, prompts.length - 1)) : 0;
+    review = { test, index: savedIndex >= 0 ? savedIndex : fallbackIndex, active: 0, ratings, saving: false };
+    saveDraft();
     renderPrompt();
   } catch (error) {
     homeStatus.textContent = error.message || "Could not open the test. Try again.";
