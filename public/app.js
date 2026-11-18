@@ -20,10 +20,10 @@ const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => 
 const imageUrl = (id) => `/media/${encodeURIComponent(id)}.webp`;
 const draftKey = (id) => `public-model-test-draft:${id}`;
 
-async function request({ test, ratings, revisions, action } = {}) {
-  const url = ratings ? "/api/benchmark" : test ? `/api/benchmark?test=${encodeURIComponent(test)}` : "/api/benchmark";
+async function request({ test, ratings, revisions, action, attempt, forReview } = {}) {
+  const url = ratings ? "/api/benchmark" : test ? `/api/benchmark?test=${encodeURIComponent(test)}${forReview ? "&review=1" : ""}` : "/api/benchmark";
   const result = await fetch(url, ratings ? {
-    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ testId: test, ratings, revisions, action }), keepalive: action === "progress",
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ testId: test, ratings, revisions, action, attempt }), keepalive: action === "progress",
   } : {});
   const body = await result.json().catch(() => null);
   if (!result.ok || !body) throw new Error(body?.error || "The test is temporarily unavailable.");
@@ -47,9 +47,11 @@ function renderHome() {
     return;
   }
   const completed = home.completed.includes(test.id);
-  const resumable = storedDraft(test.id) || home.inProgress?.includes(test.id);
-  promptCount.hidden = Boolean(completed || resumable);
-  const label = completed ? "View your results" : resumable ? "Resume test" : "Start test";
+  const saved = storedDraft(test.id);
+  const resumable = (saved && (saved.attempt ?? 1) === (test.attempt ?? 1)) || home.inProgress?.includes(test.id);
+  const resultsOnly = completed && !test.canReplay;
+  promptCount.hidden = Boolean(resultsOnly || resumable);
+  const label = resultsOnly ? "View your results" : resumable ? "Resume test" : completed ? "Take the test again" : "Start test";
   document.querySelector("#autosave-notice").hidden = !home.inProgress;
   startTest.innerHTML = `${label} <span class="arrow" aria-hidden="true"></span>`;
   startTest.disabled = false;
@@ -83,7 +85,7 @@ function storedDraft(id) {
 
 function saveDraft() {
   const { test, ratings, revisions, index } = review;
-  const draft = { ratings, revisions, index, promptCount: test.prompts.length, promptId: test.prompts[index].id, promptOrder: test.prompts.map(({ id }) => id) };
+  const draft = { ratings, revisions, index, attempt: test.attempt ?? 1, promptCount: test.prompts.length, promptId: test.prompts[index].id, promptOrder: test.prompts.map(({ id }) => id) };
   try { localStorage.setItem(draftKey(test.id), JSON.stringify(draft)); } catch {}
 }
 
@@ -94,9 +96,9 @@ let progressRetry;
 let retryDelay = 2000;
 
 const pendingPrefix = (testId) => `public-model-test-pending:${testId}:`;
-function queueRating(testId, id, stars, revision) {
+function queueRating(testId, id, stars, revision, attempt) {
   const key = pendingPrefix(testId) + id;
-  const change = { testId, id, stars, revision };
+  const change = { testId, id, stars, revision, attempt };
   pendingRatings.set(key, change);
   try { localStorage.setItem(key, JSON.stringify(change)); } catch {}
 }
@@ -121,8 +123,11 @@ function acknowledge(change) {
 }
 
 async function flushProgress() {
-  const batch = [...pendingRatings.values()].filter(change => !change.sending);
-  if (!batch.length || !home?.inProgress || !navigator.onLine) return;
+  const changes = [...pendingRatings.values()].filter(change => !change.sending);
+  if (!changes.length || !home?.inProgress || !navigator.onLine) return;
+  const testId = changes[0].testId;
+  const attempt = changes[0].attempt ?? 1;
+  const batch = changes.filter(change => change.testId === testId && (change.attempt ?? 1) === attempt);
   const ratings = {}, revisions = {};
   for (const change of batch) {
     change.sending = true;
@@ -130,9 +135,10 @@ async function flushProgress() {
     revisions[change.id] = change.revision;
   }
   try {
-    await request({ test: batch[0].testId, ratings, revisions, action: "progress" });
+    await request({ test: testId, ratings, revisions, action: "progress", attempt });
     batch.forEach(acknowledge);
     retryDelay = 2000;
+    void flushProgress();
   } catch {
     for (const change of batch) change.sending = false;
     clearTimeout(progressRetry);
@@ -354,7 +360,7 @@ async function openTest() {
   openCommunity.disabled = true;
   homeStatus.textContent = "Opening the test…";
   try {
-    const result = await request({ test: home.tests[0].id });
+    const result = await request({ test: home.tests[0].id, forReview: true });
     homeStatus.textContent = "";
     home = result;
     dialog.showModal();
@@ -363,7 +369,9 @@ async function openTest() {
       renderResult(result.test);
       return;
     }
-    const saved = storedDraft(result.test.id);
+    const local = storedDraft(result.test.id);
+    const attempt = result.test.attempt ?? 1;
+    const saved = (local?.attempt ?? 1) === attempt ? local : null;
     // Legacy drafts and server-only resumes use the whole catalog so existing ratings stay in view.
     const fullCount = result.test.prompts.length;
     const savedCount = Number.isInteger(saved?.promptCount) && saved.promptCount > 0 ? saved.promptCount : fullCount;
@@ -384,7 +392,7 @@ async function openTest() {
     for (const [id, score] of Object.entries(ratings)) {
       const revision = revisions[id] ?? saved?.revisions?.[id] ?? 0;
       revisions[id] = revision;
-      if (!result.draft?.[id] || revision > result.draft[id].revision) queueRating(test.id, id, score, revision);
+      if (!result.draft?.[id] || revision > result.draft[id].revision) queueRating(test.id, id, score, revision, attempt);
     }
     void flushProgress();
     const savedIndex = prompts.findIndex(({ id }) => id === saved?.promptId);
@@ -429,7 +437,7 @@ function requestFinish() {
 async function finishTest() {
   if (!review || review.saving) return;
   const current = review;
-  if (!Object.keys(current.ratings).length) {
+  if (!Object.keys(current.ratings).length && (current.test.attempt ?? 1) === 1) {
     try { localStorage.removeItem(draftKey(current.test.id)); } catch {}
     review = null;
     renderResult(current.test);
@@ -440,7 +448,10 @@ async function finishTest() {
   const status = dialog.querySelector("#review-error");
   status.textContent = "Saving ratings…";
   try {
-    const result = await request({ test: current.test.id, ratings: current.ratings, revisions: current.revisions, action: "finish" });
+    const result = Object.keys(current.ratings).length
+      ? await request({ test: current.test.id, ratings: current.ratings, revisions: current.revisions, action: "finish", attempt: current.test.attempt })
+      : await request({ test: current.test.id });
+    if (!result.test.completed) throw new Error("This test changed in another tab. Reopen it to continue.");
     for (const change of pendingRatings.values()) if (change.testId === current.test.id) acknowledge(change);
     home = result;
     try { localStorage.removeItem(draftKey(current.test.id)); } catch {}
@@ -531,7 +542,7 @@ dialog.addEventListener("change", (event) => {
   ratings[imageId] = Number(event.target.value);
   const revision = Math.max(Date.now() * 1000 + Math.floor(Math.random() * 1000), (review.revisions[imageId] ?? 0) + 1);
   review.revisions[imageId] = revision;
-  queueRating(test.id, imageId, ratings[imageId], revision);
+  queueRating(test.id, imageId, ratings[imageId], revision, test.attempt ?? 1);
   void flushProgress();
 
   const nextUnrated = images.findIndex(({ id }, position) => position > active && !ratings[id]);
@@ -580,8 +591,13 @@ try {
   const testId = home.tests[0]?.id;
   if (testId) {
     restorePending(testId);
-    if (home.completed.includes(testId)) pendingRatings.forEach(acknowledge);
-    else void flushProgress();
+    const attempt = home.tests[0].attempt ?? 1;
+    if (home.completed.includes(testId)) {
+      for (const change of pendingRatings.values()) {
+        if ((change.attempt ?? 1) < attempt || !home.tests[0].canReplay) acknowledge(change);
+      }
+    }
+    void flushProgress();
   }
 }
 catch (error) { homeStatus.textContent = error.message || "Could not load the test. Reload the page to try again."; }

@@ -72,11 +72,19 @@ function testView(test, choices, names) {
     completed: revealed,
     prompts: test.prompts.map(({ images, ...prompt }) => ({
       ...prompt,
-      images: images.map(({ id, model }) => revealed
-        ? { id, model: names[model] ?? model, stars: choices[id]?.stars }
+      images: images.map(({ id, model }) => choices?.[id]
+        ? { id, model: names[model] ?? model, stars: choices[id].stars }
         : { id }),
     })),
   };
+}
+
+function attemptView(test, progress, completed) {
+  const attempt = (progress?.number ?? 1) + Number(completed);
+  const prompts = test.prompts.map((prompt) => ({
+    ...prompt, images: prompt.images.filter(({ id }) => (progress?.images[id] ?? attempt) === attempt),
+  })).filter(({ images }) => images.length);
+  return { attempt, prompts };
 }
 
 class DatabaseUnavailable extends Error {}
@@ -119,26 +127,43 @@ export function createHandler({ dataset = loadDataset, rpc = supabaseRpc, access
       const visitorId = visitor(req, res, key);
       if (req.method === "POST") {
         const params = { ...base, p_test: test.id, p_visitor: visitorId, p_choices: collectChoices(test, body.ratings, body.revisions) };
+        if (body.attempt !== undefined && (!Number.isInteger(body.attempt) || body.attempt < 1 || body.attempt > 2147483647)) {
+          throw new RequestError(400, "Invalid test attempt.");
+        }
         if (body.action === "progress") {
           if (!body.revisions) throw new RequestError(400, "Missing rating revisions.");
-          await rpc("save_public_model_test_ratings", { ...params, p_finalize: false });
+          if (body.attempt > 1) await rpc("save_public_model_test_attempt", { ...params, p_finalize: false, p_attempt: body.attempt });
+          else await rpc("save_public_model_test_ratings", { ...params, p_finalize: false });
           return json(res, 200, { saved: true });
         }
         if (body.action !== undefined && body.action !== "finish") throw new RequestError(400, "Unknown action.");
-        await rpc("record_public_model_test_vote", params);
+        if (body.attempt > 1) await rpc("save_public_model_test_attempt", { ...params, p_finalize: true, p_attempt: body.attempt });
+        else await rpc("record_public_model_test_vote", params);
       }
       const state = await rpc("read_public_model_test_state", { ...base, p_visitor: visitorId, p_test: test?.id ?? null });
-      const { choices, ...stats } = state;
+      const { choices, attempts, ...stats } = state;
+      const nextTest = test && attempts ? attemptView(test, attempts[test.id], Boolean(choices)) : null;
+      const review = req.method === "GET" && url.searchParams.get("review") === "1";
+      const viewingResults = choices && (!review || !nextTest?.prompts.length);
       for (const scope of ["community", "personal"]) stats[scope] = stats[scope].map((entry) => ({
         ...entry, model: source.models[entry.model] ?? entry.model,
       }));
       return json(res, 200, {
         ...stats,
-        tests: source.tests.map(({ id, title, prompts }) => ({
-          id, title, prompts: prompts.length, images: prompts.reduce((sum, prompt) => sum + prompt.images.length, 0),
-          topics: prompts.slice(0, 3).map((prompt) => prompt.title),
-        })),
-        ...(test ? { test: testView(test, choices, source.models) } : {}),
+        tests: source.tests.map((item) => {
+          const { id, title, prompts } = item;
+          const completed = stats.completed.includes(id);
+          const next = attempts && attemptView(item, attempts[id], completed);
+          return {
+            id, title, prompts: prompts.length, images: prompts.reduce((sum, prompt) => sum + prompt.images.length, 0),
+            topics: prompts.slice(0, 3).map((prompt) => prompt.title),
+            attempt: next?.attempt ?? 1,
+            canReplay: Boolean(completed && next?.prompts.length),
+          };
+        }),
+        ...(test ? { test: viewingResults || !nextTest
+          ? testView(test, choices, source.models)
+          : { ...testView({ ...test, prompts: nextTest.prompts }, null, source.models), attempt: nextTest.attempt } } : {}),
       });
     } catch (error) {
       const known = error instanceof RequestError;

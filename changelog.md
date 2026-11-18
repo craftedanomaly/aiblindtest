@@ -4,6 +4,13 @@
 
 ## 2026-11-18
 
+### Testi yeni görsellerle tekrar çözme
+
+- Başlangıç ekranındaki uzunluk etiketi **Test size** oldu. Bitmiş bir turdan sonra puanlanmamış görseller varsa **Take the test again**, tüm görseller puanlandığında **View your results** gösterilir. Seçilen uzunluğa yetecek prompt kalmazsa tur kalan promptlarla açılır.
+- `api/benchmark.mjs`, `public/app.js` ve `migrations/20261118_repeat_attempts.sql` önceki puanları ziyaretçinin aynı kaydında tutar. Yeni turda önceki görseller çıkarılır. Tur numarası önceki tura ait gecikmiş yazıları engeller. Kişisel sonuçlar tüm biten turların puanlarını gösterir.
+- API testleri, JavaScript sözdizimi ve diff kontrolü geçti. İzole PostgreSQL uyumlu PGlite ve Chrome ile mevcut puanları koruma, migration tekrarı, kör tekrar, yarım kalan ikinci tura dönüş, gecikmiş yazı, tek katılımcı sayımı ve görseller tükendiğinde sonuçlara geçiş doğrulandı.
+- Canlı Supabase SQL Editor’da `migrations/20261118_repeat_attempts.sql` uygulanınca tekrar çözme etkinleşir. Önceki otomatik kayıt migration'ı zaten uygulanmış kampanyada bu dosya yeterli.
+
 ### Instagram Story tanıtım görseli
 
 - Testteki fırtınalı kıyı görseli ve puanlama ekranının gerçek tarayıcı görüntüsü ile İngilizce bir Story afişi hazırlandı. Grafik düzen HTML ve CSS ile yapıldı ve 1080 × 1920 PNG olarak dışa aktarıldı.

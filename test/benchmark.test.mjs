@@ -86,3 +86,31 @@ test("progress validates revisions, maps the blind image and avoids a full leade
     await new Promise(resolve => server.close(resolve));
   }
 });
+
+test("a completed participant can open a blind test with only previously unrated images", async () => {
+  const state = {
+    participants: 1, community: [], personal: [], completed: [testId], inProgress: [],
+    attempts: { [testId]: { number: 1, images: { [image]: 1 } } },
+    choices: { [image]: { model: "alpha", stars: 4 } },
+  };
+  const handler = createHandler({ dataset: async () => dataset, accessKey: () => "f".repeat(64), rpc: async () => state });
+  const server = createServer(handler).listen(0, "127.0.0.1");
+  await once(server, "listening");
+  const url = `http://127.0.0.1:${server.address().port}/api/benchmark?test=${testId}`;
+  try {
+    const results = await (await fetch(url)).json();
+    assert.deepEqual(results.test.prompts[0].images, [{ id: image, model: "Alpha", stars: 4 }, { id: otherImage }]);
+    const again = await (await fetch(url + "&review=1")).json();
+    assert.equal(again.tests[0].canReplay, true);
+    assert.equal(again.test.completed, false);
+    assert.equal(again.test.attempt, 2);
+    assert.deepEqual(again.test.prompts[0].images, [{ id: otherImage }]);
+    state.attempts[testId].images[otherImage] = 1;
+    state.choices[otherImage] = { model: "beta", stars: 5 };
+    const exhausted = await (await fetch(url + "&review=1")).json();
+    assert.equal(exhausted.tests[0].canReplay, false);
+    assert.equal(exhausted.test.completed, true);
+  } finally {
+    await new Promise(resolve => server.close(resolve));
+  }
+});
