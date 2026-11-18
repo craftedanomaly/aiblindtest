@@ -1,0 +1,1610 @@
+{
+  "benchmarkId": "studio-image-tests-v1",
+  "models": {
+    "bytedance/seedream-5.5": "Seedream 5.5",
+    "kling/v4/image": "Kling Image 4",
+    "openai/gpt-image-2.6-sunburst": "GPT Image 2.6 Sunburst",
+    "gemini-nano-banana-2.1": "Nano Banana 2.1",
+    "blackforestlabs/flux-3/image": "FLUX 3 Image",
+    "gemini-3-pro-image": "Nano Banana Pro",
+    "qwen/qwen-image-3-pro": "Qwen Image 3 Pro"
+  },
+  "tests": [
+    {
+      "id": "bbe27cf0e1e1f9545aef657c",
+      "title": "Test 01",
+      "prompts": [
+        {
+          "id": "cb20526f8ca1be8c2652090a",
+          "title": "Digital illustration A yellow meeple character",
+          "prompt": "Digital illustration: A yellow meeple character wearing a brown fedora, holding a notepad and pen, with \"MEEPLE PRESS\" text below, on a gray background",
+          "images": [
+            {
+              "id": "fbc6a92aafbb99f420bb7102",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "7f591e20d9c9951c6ee0042d",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "0c83ab3cf34748593c0efbda",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "4bc54db32cb11040abe1faec",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "4969fd76689c4fe8f474d528",
+          "title": "A cinematic photograph shot on 16mm",
+          "prompt": "A cinematic photograph shot on 16mm film, grainy analog texture, strong motion blur throughout the frame, 4:3 aspect ratio framing. Nighttime scene, shot from just beside a moving car, camera positioned slightly above and to the side, looking down through the open window. The car speeds forward, streaks of motion blur trailing across the background — city lights, streetlamps, or road elements smeared horizontally from the velocity.\nA young woman leans her head out of the car window, hair whipping and flowing dramatically in the wind, caught mid-motion with visible blur strands. She is smiling happily, eyes closed, face tilted slightly upward in a moment of pure joy and freedom. Her expression is relaxed and euphoric.\nNight lighting is moody and atmospheric — ambient city glow, passing light streaks, deep shadows, minimal fill light on her face aside from ambient ambient ambient bounce and passing light flares. Grain is heavy and organic, true 16mm night-stock look, slight halation around bright light sources, low-light color shift toward cool tones with occasional warm light bleed from passing lamps.\nCRITICAL INSTRUCTIONS: strict 4:3 frame, camera positioned outside the car at an elevated side angle looking down at the woman, pronounced directional motion blur on hair, background, and any passing light sources to sell speed, woman's eyes must be closed with a genuine happy smile, authentic grainy 16mm night film stock — not a clean digital look, natural asymmetrical hair movement, no artificial symmetry.",
+          "images": [
+            {
+              "id": "661f99b4ead6d880445137e1",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "eccfcf9a20e6811832a76563",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "82a025c535f40560e17473b1",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "b99cd5e085f2594e3aadefb2",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "4e4405aba95454e85e82df03",
+          "title": "PROMPT A cinematic photograph shot on",
+          "prompt": "PROMPT:\nA cinematic photograph shot on 16mm film, grainy analog texture, handheld camera slightly unsteady, 4:3 aspect ratio framing. Interior of a minimalist contemporary museum gallery. On the wall hangs a sculptural artwork whose form closely resembles the shape in @img1, mounted as the focal piece of the room. Two young people stand in front of it, seen from behind, both gazing up at the sculpture. They wear modern, elegant streetwear-adjacent fashion — clean silhouettes, chic and understated. The camera is positioned directly behind the two figures, framing them from the shoulders down as they face the artwork, creating a quiet voyeuristic gallery-viewing perspective.\nColor palette is strictly limited to light powder blue, deep violet/purple, black, and white — applied consistently across the wardrobe, the gallery walls, the lighting, and the sculpture itself. No warm tones, no other colors permitted anywhere in frame.\nLighting is soft and diffused, museum gallery lighting with a cool cast, subtle film grain and slight halation typical of 16mm stock, muted contrast, no oversaturation.\nCRITICAL INSTRUCTIONS: maintain strict 4:3 frame, visible handheld camera micro-movement/imperfection in composition (slightly off-center, natural), authentic 16mm grain structure — not a digital clean look, color restricted only to light blue / purple / black / white, both figures shown from behind with faces not visible, sculpture shape must match @img1 reference.",
+          "images": [
+            {
+              "id": "b525d69cd3f0351b286bd5a7",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "a8819b4b85f0a3e23d075d9a",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "df8dc8bca5342ccb04ef5dce",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "7ebbb56ccdbb380270fb593e",
+              "model": "bytedance/seedream-5.5"
+            }
+          ]
+        },
+        {
+          "id": "f32675e844cea788918cf794",
+          "title": "RAW AUTHENTIC PHOTOGRAPH BASED ON THESE",
+          "prompt": "GENERATE A RAW, AUTHENTIC PHOTOGRAPH BASED ON THESE SPECIFICATIONS:\n\nSUBJECT: bu çantayı taşıyan casual chick bir adam, istanbul'da kalabalık bir meydanda, aceleyle yürüyor. görüntü tamamen motion blur dolu, yüksek bir yerden oldukça tele bir lens ile çekilmiş. 70s hollywood style look & grade ama günümüzde geçiyor. gözlüklü, tasarımcı gibi bir adam taşıyor çantayı, 9:16\nCAMERA: Arriflex 35 BL\nLENS: 300mm tele (32mm) -> Look: soft focus corners, low contrast, organic bloom, optical imperfections\nLIGHTING: Neon Practical ()\nISO/TEXTURE: 500 (authentic texture)\nSTYLE: Kodak Vision3 500T (5219), Mixed Lighting, Heavy Grit\nVIBE: Christopher Doyle style, saturated neon color wash, rainy streets, handheld intimacy, motion blur as emotion, step printing effect.\nCOMPOSITION: Rule of Thirds\n\n\nCRITICAL INSTRUCTIONS:\n1. Visualize the scene using the optical characteristics of the 300mm tele (DOF, distortion).\n2. Render the lighting exactly as \"Neon Practical\".\n3. Aspect Ratio: tall vertical portrait (9:16).\n4. IMPORTANT: USE THE PROMPT EXACTLY AS WRITTEN. DO NOT REWRITE OR \"ENHANCE\" THE DESCRIPTION. \n5. NO TEXT OVERLAYS OR GRAPHICS. Just the raw photo.\n\nSTYLE: Cinematic, IMAX quality, teal & orange grading.",
+          "images": [
+            {
+              "id": "3312870e3d97b0c3b8d2b4c9",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "b0ecb42f7fdf55c2e9f4fa2d",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "66a3fc9bd39a612a23c5bd8d",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "d339f4261cde1e704e59ac22",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "fd2d3664e42bf4474b57cd0e",
+          "title": "Handheld 35mm motion picture film still",
+          "prompt": "Handheld 35mm motion picture film still, Kodak Vision3 250D, grain, halation, slight motion blur at the frame edge as if seen from a passing car. A quiet grassy turnout beside an Alpine road in late golden light: a 1920s black open touring car parked at the edge of the meadow, and a young couple in 1920s travelling clothes (she in a cloche hat and fur-collared leather coat, he in a cap with driving goggles) picnicking on a blanket, a travelling companion standing a little behind. Natural colours, quiet, believable, like a memory that is physically present. No text, no logos, no captions.",
+          "images": [
+            {
+              "id": "db448af0d5f897dab7c22f18",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "e9626880c6348e2f9508bd00",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "26325c5d41303200e11d6ce3",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "e35cb959372517b069f9a1e7",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "d3aef565772f3b5c2816131f",
+          "title": "RAW AUTHENTIC PHOTOGRAPH BASED ON THESE",
+          "prompt": "GENERATE A RAW, AUTHENTIC PHOTOGRAPH BASED ON THESE SPECIFICATIONS:\nSUBJECT: A dark, restrained arthouse horror scene inside a small Berlin apartment bedroom at night. Lilith, a woman in her early thirties, floats silently in mid-air above the wooden floor, suspended by an invisible force. She is not vertical; her body is horizontal, parallel to the floor, lying on her back as if weightless. Her spine makes a slight unnatural arc, chest lifted subtly upward, arms loose, fingers relaxed, hair hanging downward toward the floor. Her posture feels ritualistic, impossible and tragic — not violent, not theatrical.\nLilith is dressed like a modern urban Wiccan living in Berlin: black layered sheer top over a dark fitted dress and long skirt, worn leather ankle boots, silver occult jewelry, stacked rings, crescent moon earrings, a thin black choker, dark nails, slightly smudged eyeliner, deep muted lipstick, dark auburn / black-red hair. Her style is elegant but tired, contemporary rather than costume-like — someone who lives inside this aesthetic, not someone dressed for Halloween.\nBeneath her, a faint unfinished ritual circle is visible on the wooden floor, drawn with chalk and dark red ritual traces. The circle is irregular, incomplete, intimate, handmade. A small amount of blood-like staining has seeped into parts of the chalk line and floorboards, more like ritual residue than gore. No visible wounds, no explicit injury, no active violence. The image should suggest that something terrible and sacred has already happened, without showing the act itself. Around the circle: scattered papers, extinguished candles, a small mirror with a cracked obsidian-dark surface, tarot cards, personal belongings, fragments of dried herbs, a tipped-over glass, a few drops and smears catching the dim light.\nThe room feels lived-in but abandoned: cheap Berlin apartment walls, old wooden floor, half-open wardrobe, unmade bed, a curtain and wall corner swallowed by deep shadow. Outside the window, faint rainy Berlin street light spills into the room. The atmosphere is quiet, haunted, intimate, and exhausted.\nCAMERA: Arriflex 16 SR3, Super 16mm — NOT 35mm. The smaller gauge is essential. The image must feel like it was captured on a format that cannot contain what it is recording.\n\nLENS: Cooke Speed Panchro 18mm T1.3, wide open — severe softness outside the central sweet spot, vignetting at corners, the room warping slightly at the edges as if the walls are leaning inward. Focus is set on Lilith's hanging hair and hands; her face is slightly soft, readable but not sharp. The ritual circle on the floor falls into shallow depth-of-field blur.\n\nFRAME: Static medium-wide frame, camera at floor level, shooting slightly upward. The camera is low enough that the scattered objects on the floor — candles, mirror, tarot cards — are in the extreme foreground, large and severely out of focus, creating dark soft shapes that frame the bottom of the image. Lilith's floating body occupies the middle band. The ceiling is felt but barely visible, crushed into darkness.\n\nCOMPOSITION: Lilith floating slightly off-center to the right, ritual circle beneath her anchoring the frame, the dark wall corner consuming the left third of the image. The curtain and window occupy the far background, providing the only depth cue. The image feels compressed — the room is too small for what is happening inside it.\n\nLIGHTING: A single weak practical lamp on the floor, partially obscured by the bed, providing a dim amber side-light that catches Lilith's hanging hair and the chalk lines on the floor. Faint cold spill from the Berlin street window — blue-grey, diluted by rain on the glass. The two light sources do not mix well — they create a sickly split-tone that the film stock cannot reconcile. Deep corners of the room are absolute black. The lamp flickers — there is a subtle exposure inconsistency across the frame, as if the light changed during a long exposure.\n\nISO/TEXTURE: 1000 ISO pushed to 2000. Heavy, aggressive Super 16mm grain that eats into the image — in the dark areas the grain is larger than the details it obscures. Lilith's black clothing merges with the shadows; only the skin of her hands, her hair, and the faint chalk lines separate her from the void. Visible halation around the practical lamp — a soft amber bloom that bleeds into the surrounding darkness. Gate weave present — the frame has a barely perceptible instability, a tremor. Dust and hair caught in the gate visible as thin dark lines in the upper portion of the frame.\n\nFILM STOCK: Kodak Vision3 500T 5219 pushed two stops beyond rating on a Super 16mm negative. Color integrity has partially collapsed — the amber of the lamp and the blue of the window exist in separate zones with a dead grey-green no-man's-land between them. Skin tones in the lamp light are over-warm, almost orange. Skin tones in the window light are cadaverous blue. The chalk on the floor reads as a sickly yellow-white. The blood-like traces on the floorboards are nearly black — they read as dark stains, not red. Highlights are blown around the lamp. Shadows are crushed everywhere else. The image looks like it was developed incorrectly — too hot, too long, with chemicals that were already exhausted.\n\nSTYLE: The image should look like the last usable frame from a roll that was damaged in processing. Not stylishly degraded — genuinely compromised. The camera was there, it recorded something impossible, and the film barely survived. Christopher Doyle's nocturnal intimacy filtered through the material poverty of a student film shot on expired stock. The floating body should feel like something the camera stumbled upon and lacked the technical means to properly capture — too dark, too grainy, too soft, and yet undeniably there. The imperfection IS the evidence. A clean image would look like a lie. This image looks like a confession.\nVISUAL DIRECTION: Restrained supernatural realism, tragic rather than shocking. The camera observes the impossible event calmly, as if refusing to dramatize it. But the camera is also failing — the stock is pushed, the lens is wide open and breathing, the grain is consuming the image from the edges inward. What remains visible is only what the light and the film fought hardest to preserve: the impossible curve of a body in the air, the faint geometry on the floor, and the weight of absolute silence in a room where something has ended.\nCRITICAL INSTRUCTIONS:\n\nAspect ratio: 1:1 square.\nSuper 16mm, NOT 35mm. The grain structure, the softness, the vignetting, the gate weave — all must read as a smaller, more desperate format. 35mm is too clean for this image.\nLilith's face must be partially soft or partially in shadow — recognizable but not portrait-sharp. The sharpest elements should be her hanging hair, her fingers, and the chalk lines. The human detail is secondary to the spatial wrongness.\nThe mirror on the floor should have a cracked dark surface — obsidian-like — catching no reflection, a dead black oval among the scattered objects.\nNo gore, no visible wounds, no explicit violence, no active self-harm. Blood-like traces only as dark stains on floor and chalk lines — they read as brown-black residue, not fresh red.\nNo text overlays, no graphics, no symbols floating in the air.\nThe grain must be extreme enough that at thumbnail size, the image is nearly abstract — a dark rectangle with a faint horizontal shape and points of amber light. Only at full size does the floating body become readable.\nJust the raw film still.",
+          "images": [
+            {
+              "id": "202cabb560458d700f66e771",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "6f07fdbef96ece7971574ad8",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "66f4b5b512c271477c7aad40",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "fa14d4403c40cb7ce52f1f1c",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "0b5f91cdb242b2a0997970f7",
+      "title": "Test 02",
+      "prompts": [
+        {
+          "id": "e9722a51a0d0f0e22b104778",
+          "title": "A close-up low-angle shot of a",
+          "prompt": "A close-up, low-angle shot of a woman's face, heavily adorned with glitter and shimmering makeup. The lighting is dramatic and cinematic, with strong highlights and lens flares creating a dreamy, ethereal effect. The background is dark and out of focus, emphasizing the subject's face and the sparkling details. The overall aesthetic is glamorous, futuristic, and reminiscent of 1980s fashion editorials, with a surreal and high-end feel.",
+          "images": [
+            {
+              "id": "8b89cf076a30d599fef5143e",
+              "model": "blackforestlabs/flux-3/image"
+            },
+            {
+              "id": "490f613a5ec6d8df1fffe274",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "76f8b68faa401d467e1c1e5c",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "dbc3ff393e6fb51f05603274",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "8ad6429c49d8970b27929d83",
+              "model": "gemini-3-pro-image"
+            }
+          ]
+        },
+        {
+          "id": "037901f020139a65795c756c",
+          "title": "Close portrait of a young woman",
+          "prompt": "*Close portrait of a young woman, femme fatale. Short blonde hair with heavy blunt bangs, slightly disheveled. Piercing light green-blue eyes with bold black eyeliner, red lips, fair skin. Expression calm and self-assured — she knows something you don't. Vintage style, timeless and dangerous beauty.*; *Young woman, femme fatale, short blonde hair with blunt straight bangs, slightly tousled and effortless. Light blue-green eyes, red lips, porcelain skin. Wearing a white vintage graphic crop t-shirt, low-rise denim shorts, brown leather belt. Confident, sensual and slightly dangerous posture. Alluring and mysterious.*",
+          "images": [
+            {
+              "id": "a05306cb706ccd4fdead59cd",
+              "model": "blackforestlabs/flux-3/image"
+            },
+            {
+              "id": "1543ef70be2aeb64fc4bb2a1",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "ac01b42b6f853ef0524cf400",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "df27e400f4b982aa64e0e21f",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "3c06f6d2f1bb259c2d78137d",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "4332af9f89c167212626d41f",
+              "model": "bytedance/seedream-5.5"
+            }
+          ]
+        },
+        {
+          "id": "45d38476db8711d155983043",
+          "title": "Botanical illustration of a lemon tree",
+          "prompt": "Botanical illustration of a lemon tree branch (Citrus limonum), featuring ripe yellow lemons, green leaves, and delicate white blossoms. Highly detailed scientific illustration, with realistic textures and precise botanical accuracy. Include one sliced lemon showing the interior structure.\nStyle inspired by vintage botanical plates from the 18th–19th century, natural history illustration, fine linework and subtle shading, soft watercolor tones. Clean composition on a light neutral background (off-white or parchment).\nOptional small botanical details: buds, seeds, and flower anatomy elements arranged around the main branch.\nElegant, minimal, balanced layout, no modern elements. High resolution, refined, delicate, and natural.",
+          "images": [
+            {
+              "id": "f6c52089f3ab5590940590c7",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "05321bbdfae249749948f97d",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "337144f5de91a18d98532320",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "8c29387e73f81c3be883b681",
+              "model": "blackforestlabs/flux-3/image"
+            },
+            {
+              "id": "33473a1f030f372c250b9b71",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "22f7745e53d92aad7e14e0bd",
+              "model": "openai/gpt-image-2.6-sunburst"
+            }
+          ]
+        },
+        {
+          "id": "ab1e2c27e898ad4c28a05f25",
+          "title": "İmg1 a mechanic is handling the",
+          "prompt": "@img1 a mechanic is handling the grip in front of the engine, extreme close up, year 1926 inside a zeppelin, the mechanic wearing maybach gloves @img2 cinematic natural neutral colors, shot on 35mm film",
+          "images": [
+            {
+              "id": "5115e111002ea8974d496de1",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "0e8c748e76b282f6ad83a7c4",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "0aafc280efe765f4b5151464",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "ed892c93d58d770b0f42493f",
+              "model": "blackforestlabs/flux-3/image"
+            },
+            {
+              "id": "34dc2551219a93489848581b",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "ddc6f02f3062f667476d2beb",
+              "model": "gemini-3-pro-image"
+            }
+          ]
+        },
+        {
+          "id": "d6bf4699f312127cae77a845",
+          "title": "A playful mixed-media editorial image featuring",
+          "prompt": "A playful mixed-media editorial image featuring a giant flat vector-style illustrated girl integrated into a realistic street photography scene on a rainy day in the city. The composition captures a wet urban street from an eye-level perspective, with reflective pavement, puddles, traffic lights, storefronts, parked cars, neon reflections, and soft rainy atmosphere creating a cinematic documentary-style environment.\n\nAmong the realistic city surroundings, one oversized illustrated female character walks naturally down the sidewalk holding a large umbrella, blending into the scene like a surreal animated public-art intervention. She has exaggerated long limbs, oversized wide-leg pants, huge fashionable sneakers, a simplified smiling face with minimal black line-art facial details, and stylized hair tied in a large rounded ponytail. Her posture feels dynamic and relaxed, mid-step as if casually strolling through the rain, one hand holding the umbrella above her head while the other rests inside her pocket.\n\nThe illustration uses a bold limited color palette of vivid ultramarine blue, cream white, pale pink skin tones, black outlines, and warm yellow sneakers. Clean flat vector shapes only, no gradients, crisp edges, contemporary editorial illustration style.\n\nThe background is a realistic rainy urban street photograph with wet asphalt, reflective puddles, blurred headlights, metallic surfaces, shop windows, subtle steam from street vents, muted advertising signs, and realistic rain droplets visible in the atmosphere. The environment feels authentic and slightly gritty, with soft reflections bouncing across the ground and windows.\n\nSoft overcast cinematic lighting, low contrast, muted realistic tones, subtle film grain, authentic rainy-day city mood. The contrast between the colorful flat illustration and the moody realistic rainy environment creates playful visual tension.\n\nComposition is centered and balanced, with strong leading lines from the wet street and reflections guiding attention toward the illustrated character. 35mm analog street photography aesthetic, editorial campaign style, contemporary urban realism mixed with clean modern vector illustration, joyful surrealism, authentic city texture.",
+          "images": [
+            {
+              "id": "838d1b13532d8a6dd228eeaa",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "f310263686cd40d5e528c49f",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "bd646057e0bc560459063a86",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "a1dbad1982351b9f843f9ca3",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "aa9dc5ea7a71e2562ba2fbd4",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "180c0399a56bab3295d93b90",
+              "model": "blackforestlabs/flux-3/image"
+            }
+          ]
+        },
+        {
+          "id": "3ddc275b294aa3250bf6b87a",
+          "title": "Riso print style illustration in two",
+          "prompt": "Riso print style illustration in two colors: vibrant fuchsia pink and deep blue. Centered composition featuring a bird in mid-flight with open wings, drawn with refined, delicate linework and clean, modern shapes. The style is minimal, elegant, and contemporary, with a lighter, more sophisticated feel. Background fully filled with fine linear floral motifs in pink, covering the entire surface edge-to-edge. The floral elements are thin, detailed, and varied (leaves, stems, abstract botanical shapes), creating a dense but airy pattern that surrounds and interacts with the bird. No empty background areas.\nThe bird is rendered in solid blue with subtle texture and fine internal line details, maintaining a clean and modern silhouette. The illustration should feel fresh and original, not symmetrical or repetitive.\nSubtle risograph characteristics: soft grain, light halftone texture, minimal ink bleed, and slight misregistration between colors for a refined print effect (not too rough).\nOff-white or warm beige paper background tone.\nFlat, graphic composition with a balanced, editorial aesthetic. Clean margins, elegant spacing, and a cohesive interaction between the bird and the floral background.",
+          "images": [
+            {
+              "id": "46f71972be915fdca26aca02",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "1d542ac2f6e8758f38f2c2c9",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "0293cb2a35775cd6bce09ad5",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "f87727a7e98ee5651a21464f",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "c97bcf43077841af4c67366f",
+              "model": "blackforestlabs/flux-3/image"
+            },
+            {
+              "id": "c9a2227188572b85cdf0d777",
+              "model": "kling/v4/image"
+            }
+          ]
+        },
+        {
+          "id": "2131c94f11d7c43a22ca19df",
+          "title": "Extreme wide aerial shot captured by",
+          "prompt": "Extreme wide aerial shot captured by an FPV drone, high above the landscape looking forward toward the horizon. Two jet-black horses without any saddle or equipment are far below, small but visible figures running forward across the terrain, seen from behind, their black silhouettes cutting through the ground, powerful and in sync. High above the horses, an eagle @img2 soars with wings fully spread, gliding effortlessly in the same direction, leading the way forward. A significant vertical gap separates the eagle from the horses — the eagle commands the upper third of the frame against the open sky, the horses occupy the lower third on the ground, the vast middle space filled with atmosphere, mist and the scale of the landscape between them. The eagle does not hover directly over the horses — it flies ahead and above, a distant guide pulling them forward. On the far horizon, a subtle golden hour sun breaks through the remaining dark cloud cover, a thin warm band of amber light along the horizon line, the rest of the sky still moody and overcast. The sheer distance of the shot makes the horses and eagle feel like small elements within an epic landscape, emphasizing the scale of the journey. Light drizzle fading, mist lingering over the ground. Muted desaturated teal-orange color grade, dark and atmospheric, warm tone only on the distant horizon. Filmic grain. Shot on ARRI Alexa 35, 2.39:1 aspect ratio. Hollywood-grade cinematic commercial footage.",
+          "images": [
+            {
+              "id": "d7938321773b42ce24d8d2bd",
+              "model": "blackforestlabs/flux-3/image"
+            },
+            {
+              "id": "83be55cbac3cb4cac27b6b5a",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "4d9529bd18a33ed371026dde",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "e66e4d3028d49684549d46c6",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "befe0e5cd65bd155d9dffbeb",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "003792217fa6cc494574edf4",
+              "model": "gemini-3-pro-image"
+            }
+          ]
+        },
+        {
+          "id": "dd49ea2e1881b59fdee41bb6",
+          "title": "Ultra cinematic close-up portrait for a",
+          "prompt": "Create an ultra cinematic close-up portrait for a premium documentary-style commercial film. This portrait is part of a final human montage showing different people across Turkey from different professional, social, and cultural backgrounds. Character: a Turkish woman in her early 60s who is an Anatolian ceramic artisan from Kütahya. She looks directly into the camera with a gentle, wise smile that conveys craft, tradition, and quiet pride. Give her a warm artisanal look: light-olive skin with natural age character, silver-gray hair tied back, kind dark eyes, soft strong facial features, steady nurturing presence. This person must look clearly different from all previous portraits. Avoid repeating the same artisan face or stereotypical craft-worker expression. Framing and camera rules: tight close-up portrait, eye-level camera, face perfectly centered, direct eye contact, full head visible with enough headroom, 85mm cinematic portrait lens feeling, shallow depth of field, eyes sharp and clear. Clothing and styling: simple high-quality workwear—linen blouse with subtle clay-stained texture, minimal makeup, hands slightly visible if needed, impeccable personal grooming. Background: softly blurred traditional pottery workshop with warm kiln tones, defocused handcrafted tiles and shelves, rustic elegant ambience. Lighting design: warm soft light with cool fill, highlighting textured skin and hands, cinematic realism. Color palette: deep navy, warm beige, muted gold-brown interiors, soft gray-blue shadows. Camera and finish: ARRI Alexa 35 cinematic realism, organic skin rendering, soft highlight roll-off, gentle film grain, natural lens softness. Overall feeling: a dignified portrait of a Turkish craftswoman representing heritage, contemporary practice, and cultural continuity.",
+          "images": [
+            {
+              "id": "c57ad2544cc713f58d45e902",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "ec6b9c2ddca463f6fbb0af98",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "387eefa19ee951ce32618968",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "cb4c72aceed610e8df97c15a",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "add7378efc0cf236148049fd",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "a3573c85058babd51da1ed97",
+              "model": "blackforestlabs/flux-3/image"
+            }
+          ]
+        },
+        {
+          "id": "ada1b85a8c690293545aa269",
+          "title": "Ultra-close-up of a kiss captured mid-press",
+          "prompt": "Ultra-close-up of a kiss captured mid-press between two different people. Latin man and caucasian woman. Skin texture, pores and lips in hyperdetail. Tender and intimate with a muted, emotional color palette.",
+          "images": [
+            {
+              "id": "89176679ea7496c302a93b7d",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "b062c7701e10a92f71771534",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "a158c30a7a69739eb769350f",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "d0646fad70f8f2db2155ca22",
+          "title": "Man moving down on spiral staircase",
+          "prompt": "Man moving down on spiral staircase against wall",
+          "images": [
+            {
+              "id": "7592c29590498a4871452d99",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "b1914181bd4b6ef8c8d742f1",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "26b708b68db3002c1119fc44",
+              "model": "blackforestlabs/flux-3/image"
+            },
+            {
+              "id": "8cc9bf44e44f2ac47a80dd1f",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "6270559062795c07b90a0753",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "1c3c8434273c22431dc83b48",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dd20cc45793294c529d32969",
+      "title": "Test 03",
+      "prompts": [
+        {
+          "id": "7bef86ed3880f39065d79cf5",
+          "title": "A professional studio photograph of exactly",
+          "prompt": "A professional studio photograph of exactly seven ceramic mugs arranged on a wooden table. Four mugs are bright red and three mugs are cobalt blue. All seven mugs are fully visible, separated from one another, and arranged in a single straight row. Plain beige background, soft studio lighting, eye-level camera.",
+          "images": [
+            {
+              "id": "eea49971d5dee85be758ea60",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "91f75fb7b54a97dd00071d0e",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "8442e1cfc0b627e50f9b8aa2",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "5a31c5230fd5a0307c5c11f3",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "9137f35ee9ad6f0f0ca435af",
+              "model": "bytedance/seedream-5.5"
+            }
+          ]
+        },
+        {
+          "id": "137d694379dbb0a7918833b7",
+          "title": "A still life photograph featuring a",
+          "prompt": "A still life photograph featuring a transparent green glass bottle, a matte red ceramic teapot, a shiny yellow metal bowl, and a blue velvet-covered box. The four objects are arranged on a neutral gray tabletop, each clearly separated. Natural window lighting, realistic textures, commercial product photography.",
+          "images": [
+            {
+              "id": "5e528bd161e0c4fcbe1014b8",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "68faf4c1b620a1f228c983f3",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "509a26e0c53af5ea9c162ca9",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "06905d33540273c0deebac06",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "7602756df3458a3143f2a5d1",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "4a4da0f54a5f8a0b1571b274",
+          "title": "A realistic photograph of a small",
+          "prompt": "A realistic photograph of a small living room. An orange cat is sleeping underneath a wooden chair. A white dog is sitting directly behind the chair. A blue balloon is tied to the chair's right armrest, and a tiny red toy car is resting on the chair's seat. Three-quarter camera angle, all objects clearly visible.",
+          "images": [
+            {
+              "id": "e4a4e0c63b72b279d9749d8a",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "15ac72a09b4a81b43c5c67ba",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "3f9cd72a6c985acbc4331d48",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "f6de71093b378dbfc1fca8f9",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "3cfb4c6ac31cd01238a5eb7f",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "b1a3902c401ab996704cbf7b",
+          "title": "A perfectly symmetrical one-point perspective photograph",
+          "prompt": "A perfectly symmetrical, one-point perspective photograph of a long brutalist concrete corridor. The camera is positioned exactly at the center of the corridor, 120 centimeters above the floor, facing straight toward a single closed red door at the far end. Six identical ceiling lights recede into the distance at regular intervals. The floor and wall lines converge precisely at the center of the red door. Architectural photography, 24mm lens.",
+          "images": [
+            {
+              "id": "208aa1fcc2c60af7f8a17132",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "15c69f9c2e4c8f023febb076",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "93c94fb1533162b20bfa1768",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "523786d9d9b6b260473ac2aa",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "45563c1231c87bca0500a81d",
+              "model": "kling/v4/image"
+            }
+          ]
+        },
+        {
+          "id": "c5f814b9b4932592a99e796d",
+          "title": "An intimate photorealistic close-up photograph of",
+          "prompt": "An intimate, photorealistic close-up photograph of two adults playing cat's cradle with a single continuous red string. Their four hands are clearly visible, with the red string stretched between their fingers in a physically plausible geometric pattern. Correct human hand anatomy, natural finger articulation, believable skin texture. Soft afternoon sunlight, shallow depth of field.",
+          "images": [
+            {
+              "id": "e94ac3fe4b0c81b44ffaa7c0",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "f67fdec0c6283951e1caea53",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "59d4415e30266016dfe0ec5e",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "1746199c9d037e267b7b7a30",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "6b089289e783e0b03e6f0c5d",
+              "model": "bytedance/seedream-5.5"
+            }
+          ]
+        },
+        {
+          "id": "4cff787d35deb0a21d51825a",
+          "title": "A photorealistic photograph taken from directly",
+          "prompt": "A photorealistic photograph taken from directly behind a woman standing in front of a large rectangular bathroom mirror. The camera sees the back of her head and shoulders, while the mirror clearly reveals the front of her face. She is raising her right hand to touch her cheek. The reflection must correspond to her actual pose and position. Natural bathroom lighting, accurate mirror geometry.",
+          "images": [
+            {
+              "id": "be4cdcec6640eb0b8ef95be3",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "c4f15b1befb63e7df28e5c88",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "7a08934299743d3f509d4988",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "66d2007b99c35966e068a22c",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "6054fb2e8fa4d5a61ec50f78",
+              "model": "bytedance/seedream-5.5"
+            }
+          ]
+        },
+        {
+          "id": "6b562ea78fa19fadff8bfb1a",
+          "title": "A high-speed photograph capturing the exact",
+          "prompt": "A high-speed photograph capturing the exact moment a glass vase hits a hardwood floor and shatters. Water splashes outward from the point of impact, fresh flowers scatter across the floor, and irregular glass fragments fly away from the broken vase. Every fragment, water droplet, and flower follows physically plausible trajectories. Ultra-fast shutter speed, natural daylight, realistic motion frozen in time.",
+          "images": [
+            {
+              "id": "b85cea73d43e3f5c0ab7f527",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "0ef7170f4e68cda7a9cdd656",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "c74fe739d3aea86bccaba513",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "584b0e3b77d73c11667d8b30",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "4ae6f2f41d1051c55b8e6d92",
+              "model": "kling/v4/image"
+            }
+          ]
+        },
+        {
+          "id": "438f4f5cd44128d7bf7359e6",
+          "title": "Sophisticated editorial book cover for a",
+          "prompt": "Design a sophisticated editorial book cover for a contemporary Turkish novel. The main title reads exactly \"GÜNEŞ DOĞMADAN\" in large elegant serif typography, centered in the upper half. Directly underneath, in smaller typography, write exactly \"BİR GECE HİKÂYESİ\". At the bottom, write the author's name exactly \"DENİZ YILMAZ\". All Turkish characters, including Ü, Ğ, Ş and İ, must be accurate. Minimalist design, cream background, a single deep-red abstract sun, strong visual hierarchy.",
+          "images": [
+            {
+              "id": "39e5041ae4adbcec925e33a0",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "c1b3c32b9e859caf4afa204b",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "c353e48417732dacf1d77b0b",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "642086a57ca38c66484e2cdc",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "54716c4fe7f3fa1c2e9a74a5",
+              "model": "openai/gpt-image-2.6-sunburst"
+            }
+          ]
+        },
+        {
+          "id": "6fabb85c2b6e08766c9134a3",
+          "title": "Clean professional infographic containing a vertical",
+          "prompt": "Create a clean, professional infographic containing a vertical bar chart titled \"FRUIT SALES\". The chart has exactly four bars with these labels and values: APPLES 40, BANANAS 70, ORANGES 20, PEARS 90. The bar heights must accurately reflect the numerical values, with PEARS tallest and ORANGES shortest. Use a clear vertical axis from 0 to 100, evenly spaced gridlines, legible labels, and a minimalist editorial design on a white background.",
+          "images": [
+            {
+              "id": "cd6030ee0e7e010827276400",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "efd4f7e682141a7084c3d9e9",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "d4978094db8f0351ddf32db5",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "5f97474961ce2612c9194009",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "302d908b7fb0d5ae9b181709",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "ac5eeafd17e192ae68337c64",
+          "title": "A wide-angle documentary photograph of a",
+          "prompt": "A wide-angle documentary photograph of a completely empty indoor swimming pool in an abandoned sports center. The pool has absolutely no water in it. Its dry tiled bottom is fully exposed, with old lane markings and a few fallen leaves. There are no people, no furniture, and no plants growing inside the building. Overcast daylight enters through large dirty windows. Realistic, quiet, desolate atmosphere.",
+          "images": [
+            {
+              "id": "30fc164fcd77e40a5bb2d814",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "e300dd0826725b3fe7901375",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "dff5d202c314ca6c2a48e358",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "e59e212c93e9681e96d4d8dd",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "7aa0598edb63c148cff2fc1b",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "993b18ab3fd07cddefb63db5",
+          "title": "A luxury product photography composition featuring",
+          "prompt": "A luxury product photography composition featuring three identical spheres, each 15 centimeters in diameter, resting on a black stone surface. The left sphere is made of brushed stainless steel with subtle directional scratches. The center sphere is made of translucent milky white wax, with realistic subsurface scattering. The right sphere is made of tightly woven dark green velvet fabric, showing individual fibers. All three spheres are illuminated by the same large softbox from the upper left.",
+          "images": [
+            {
+              "id": "ea941c5d1b4a36857f67836d",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "a63dc7b7c9ac43362d9b986d",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "e72f5c0c1290b4fc48625069",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "a84456df4b096b9f9268558d",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "d7278a186d7c8ae058bf013e",
+              "model": "gemini-3-pro-image"
+            }
+          ]
+        },
+        {
+          "id": "3c52b77e8b1151d2d9193469",
+          "title": "An unposed documentary photograph of a",
+          "prompt": "An unposed documentary photograph of a crowded Istanbul ferry during a rainy November evening. Passengers of different ages sit naturally in worn blue seats, some looking at their phones, others watching the Bosphorus through rain-covered windows. A tea glass rests on a small metal ledge. Mixed fluorescent interior lighting and cool blue light from outside. Shot on a full-frame camera with a 35mm lens, natural skin texture, imperfect everyday details, authentic candid moment, no cinematic color grading.",
+          "images": [
+            {
+              "id": "5cb765f83c9528360d776cbb",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "d92a86128b51bf92076a7af5",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "7c484caa9c9bf952ee240fd3",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "d9e28c5200b1e609b097a75f",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "fc08aa81bf8791d65112e3ae",
+              "model": "bytedance/seedream-5.5"
+            }
+          ]
+        },
+        {
+          "id": "ce3c297d69b8504d073af9a7",
+          "title": "Minimalist vector poster for an imaginary",
+          "prompt": "Create a minimalist vector poster for an imaginary architecture festival named \"FORM\". Use only three solid colors: cobalt blue (#0047FF), bright orange (#FF6600), and off-white (#F5F1E8). The composition consists of exactly five overlapping geometric shapes: two circles, two rectangles, and one triangle. Large bold sans-serif typography spells \"FORM\" across the bottom. Flat vector aesthetic, no gradients, no shadows, no textures, no additional colors.",
+          "images": [
+            {
+              "id": "9cc390008af163af9827fae1",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "16280bd9ee9ab00bcb2efa11",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "3c9341461257bd6d315f7785",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "700dce2a51a1164020512b1c",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "832a4041a04df9e353729fd4",
+              "model": "gemini-3-pro-image"
+            }
+          ]
+        },
+        {
+          "id": "0cf0b0d412463a92c61f3d67",
+          "title": "Three-panel cinematic storyboard arranged horizontally showing",
+          "prompt": "Create a three-panel cinematic storyboard arranged horizontally, showing the same 45-year-old man with a short gray beard, round glasses, a distinctive scar above his left eyebrow, and a mustard-yellow raincoat.\n\nPanel 1: He stands outside a closed convenience store at night, holding a folded newspaper.\n\nPanel 2: The same man enters the store through its glass door, still holding the newspaper.\n\nPanel 3: Inside the store, he places the same folded newspaper on the counter.\n\nMaintain exactly the same facial identity, hairstyle, scar, clothing, and newspaper across all three panels. Realistic cinematic photography, consistent lighting, no captions.",
+          "images": [
+            {
+              "id": "2c987cf6ca1338407bb1cafc",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "8d602a31929440393e1f8d5c",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "fb0af045627536cef54bf464",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "224cb46857759fd4c2ffd504",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "5ef5cf9c5a37521f99d1d676",
+              "model": "kling/v4/image"
+            }
+          ]
+        },
+        {
+          "id": "4b20855f2441e8720ee05d86",
+          "title": "A surreal but photorealistic cinematic scene",
+          "prompt": "A surreal but photorealistic cinematic scene in an abandoned European train station at sunrise. In the center of the platform stands an enormous transparent glass whale, approximately ten meters long, filled with softly glowing golden water. Inside the whale, three miniature wooden sailboats float at different heights. An elderly woman in a dark green coat stands beside the whale, holding a small red umbrella despite the absence of rain. A black cat watches her from the roof of a blue suitcase. The station's enormous arched windows cast long, geometrically accurate shadows across the tiled floor. Wide cinematic composition, 28mm lens, sophisticated natural lighting, atmospheric depth, realistic scale relationships, physically convincing glass reflections and refractions.",
+          "images": [
+            {
+              "id": "ecb1748ad2106533df5af980",
+              "model": "gemini-3-pro-image"
+            },
+            {
+              "id": "b4b6889dab64a5b71d742379",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "c6da344bb975f248629af16d",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "284870acf254f95bdd0f527e",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "557be70004a9788747453918",
+              "model": "bytedance/seedream-5.5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2c6b7fecef1d51a56f138941",
+      "title": "Test 04",
+      "prompts": [
+        {
+          "id": "0de6519065e97f6a4c1ff670",
+          "title": "A haunting black-and-white silent film frame",
+          "prompt": "A haunting black-and-white silent film frame in the style of 1920s German Expressionism: a lone man in a long coat stands in a crooked alley with sharply distorted buildings leaning inward, exaggerated painted shadows on the walls, angular stairs, fog drifting across cobblestones, dramatic high-contrast lighting, eerie theatrical composition, hand-crafted set design, grainy monochrome texture, emotionally charged and uncanny.",
+          "images": [
+            {
+              "id": "3bb114737ab7fd3d76dd0584",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "4b1a2e44c39420a856b44c7f",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "0235444e8581c36977f59181",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "0749bf022424e49d4ec7c0f6",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "22ba4a4ade2b922d49b6ca25",
+              "model": "qwen/qwen-image-3-pro"
+            }
+          ]
+        },
+        {
+          "id": "01728c3e8a5207e95b2cb5a1",
+          "title": "A raw and naturalistic street scene",
+          "prompt": "A raw and naturalistic street scene in postwar Italy, photographed like a 1940s Italian neorealist film: a tired mother holding a child’s hand while walking past weathered apartment buildings, laundry hanging overhead, ordinary people in the background, soft daylight, unglamorous realism, subtle film grain, emotionally restrained, deeply human, documentary-like composition.",
+          "images": [
+            {
+              "id": "a920e602f3d63805f8cfabaf",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "f1dabd4544c8ef47d47df976",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "a667d821eb6ae62f0c8f9ff3",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "6ddc1f1fea72aa3712381b17",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "04714aa7c1351437260e482d",
+              "model": "bytedance/seedream-5.5"
+            }
+          ]
+        },
+        {
+          "id": "f50bd49722b6e60cc33e0f89",
+          "title": "A stylish 1960s French New Wave",
+          "prompt": "A stylish 1960s French New Wave film still: a young woman in a striped shirt sits at a small Paris café table, cigarette smoke curling through the air, playful but detached expression, slightly off-center framing, spontaneous energy, natural window light, grainy black-and-white texture, cool urban melancholy, effortless chic, intimate and intellectually restless atmosphere.",
+          "images": [
+            {
+              "id": "dd56ee2b95257f301692698b",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "142337f6d2f0b2d33571a632",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "4d3b7c3bc0abc1edea3de2bb",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "a6113fef862e7eac1b74e913",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "b61c2d6f1d348b9bc0ae81ca",
+              "model": "kling/v4/image"
+            }
+          ]
+        },
+        {
+          "id": "d40ecfdbb4d408739132e2db",
+          "title": "A cinematic frame inspired by 1970s",
+          "prompt": "A cinematic frame inspired by 1970s American New Hollywood: a disillusioned man in a brown leather jacket stands at a gas station at dusk, muted earthy color palette, soft naturalistic lighting, subtle zoom-lens feel, emotionally ambiguous composition, understated realism, slightly faded film stock, lonely roadside atmosphere, melancholy and anti-glamorous.",
+          "images": [
+            {
+              "id": "70fa074dbe29b5cb7781707d",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "34618131fe2463773963bc6b",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "5db5912c9e8958ac50bf1e1b",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "f345c25a8db20c2c1e19e895",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "ff71e2cd18a4af58d99063d2",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "28784c53824812f0f682d341",
+          "title": "A luxurious 1980s high-fashion editorial portrait",
+          "prompt": "A luxurious 1980s high-fashion editorial portrait: a confident model with sculptural hair and dramatic makeup poses in a mirrored interior, bold shoulder pads, glossy fabrics, intense studio lighting, rich jewel tones, polished magazine aesthetics, sharp highlights, controlled glamour, elegant excess, high-end editorial styling.",
+          "images": [
+            {
+              "id": "bc055c3845f610a98a4d5290",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "af4d699ada880f4978cf7377",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "006be05bf25cd0d5157a9561",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "d46918c118ed9aa292d76d7c",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "22e1dbab2f71b9f769eb7555",
+              "model": "bytedance/seedream-5.5"
+            }
+          ]
+        },
+        {
+          "id": "31290671da4cca8813307c4c",
+          "title": "A minimalist 1990s fashion campaign image",
+          "prompt": "A minimalist 1990s fashion campaign image: a model in simple neutral clothing leans against a plain concrete wall, soft desaturated color palette, understated sensuality, clean composition, subtle film grain, natural window light, quiet confidence, stripped-down styling, elegant simplicity, iconic minimalist advertising mood.",
+          "images": [
+            {
+              "id": "ed2ab9dd38fffb0db06d7b5b",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "e97db559d9a25f7065015348",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "1f71da6937d25cb412d1c4de",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "f15704bf42b444ff5f863a32",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "6d81893727364a529f2e8960",
+              "model": "qwen/qwen-image-3-pro"
+            }
+          ]
+        },
+        {
+          "id": "87d2b846804e13dce3ac8719",
+          "title": "A contemporary luxury perfume campaign image",
+          "prompt": "A contemporary luxury perfume campaign image: a glass perfume bottle placed on wet black stone at twilight, soft mist in the air, dramatic rim lighting, refined reflections, deep shadows, rich blue and amber tones, ultra-premium beauty advertising aesthetic, sensual and mysterious mood, meticulously art-directed, sleek and aspirational.",
+          "images": [
+            {
+              "id": "b96b1ceedd383dff2ee6d7c0",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "c7230f70f314091ba66e01e0",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "ea35148c666221c7ca70ffdd",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "433b43780dc28d30c7b3a2ab",
+              "model": "kling/v4/image"
+            }
+          ]
+        },
+        {
+          "id": "c18e86070fc43e3b006e2727",
+          "title": "A mouthwatering high-end food commercial still",
+          "prompt": "A mouthwatering high-end food commercial still: a plate of handmade pasta on a rustic ceramic dish, steam rising gently, golden side lighting, shallow depth of field, rich texture in the sauce, appetizing but elegant color palette, cinematic tabletop composition, premium culinary advertising aesthetic, tactile and indulgent.",
+          "images": [
+            {
+              "id": "dca8d73c02358a600942e2bd",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "62a760ef20a8f3eb1fe6f9fa",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "ac3d0aff2d87f5a29bf6db84",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "7b50f2a39750a971eea43776",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "d76aadb4efa8e16fe7922029",
+              "model": "kling/v4/image"
+            }
+          ]
+        },
+        {
+          "id": "b657f8288160a4c8ff3b1a8e",
+          "title": "A contemplative arthouse film frame a",
+          "prompt": "A contemplative arthouse film frame: a middle-aged woman sits alone in a dim motel room at dawn, pale blue light entering through thin curtains, static composition, long-take feeling, sparse decor, silence and emotional distance embedded in the image, muted color palette, realism with subtle poetic tension, understated and introspective.",
+          "images": [
+            {
+              "id": "0ad8eeaa82e184a1d0e6f7ea",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "33c584ada941ffd6e0707036",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "31370e82c9e9af8430021de2",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "ac1f053b78c538e4e0dfd9d8",
+              "model": "bytedance/seedream-5.5"
+            }
+          ]
+        },
+        {
+          "id": "15355817793275e89c805f6b",
+          "title": "A polished prestige-drama frame from a",
+          "prompt": "A polished prestige-drama frame from a contemporary streaming series: two siblings confront each other in an expensive modern kitchen at night, practical lighting mixed with soft cinematic fill, restrained but rich color grading, elegant production design, emotionally tense blocking, premium television look, high production value, dramatic but accessible.",
+          "images": [
+            {
+              "id": "a100a259c55c75e065ebd1de",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "f6b89db7834cbfa8932371ab",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "0a6fb3e58f813bf26b01f1d6",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "9d88f4b9351c228cfa84d86a",
+              "model": "openai/gpt-image-2.6-sunburst"
+            }
+          ]
+        },
+        {
+          "id": "e147a1d7bb90eb6697387a56",
+          "title": "An experimental black-and-white fine art photograph",
+          "prompt": "An experimental black-and-white fine art photograph: a dancer’s body captured in multiple ghosted exposures against a dark backdrop, motion blur blending with sharp fragments of the face and hands, strong contrast, abstract rhythm, surreal spatial ambiguity, tactile monochrome grain, elegant and unsettling, gallery-quality visual poetry.",
+          "images": [
+            {
+              "id": "96f471e1f014fe41821f7464",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "e4bfff239d1c5d39e8856fcc",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "a82159f293d232bbb3597b97",
+              "model": "qwen/qwen-image-3-pro"
+            }
+          ]
+        },
+        {
+          "id": "92781d2bbea867a0fdbfad95",
+          "title": "A surrealist oil painting a gigantic",
+          "prompt": "A surrealist oil painting: a gigantic moon hangs inside an empty living room, a dining table floats slightly above the floor, a woman in a red dress stands motionless beside a doorway, long impossible shadows stretch across the walls, smooth painterly brushwork, dream logic, symbolic tension, restrained but uncanny color palette.",
+          "images": [
+            {
+              "id": "b57b6aaa72f8b164be760d79",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "68869c5e17cc4aaef0f977ce",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "474abec7f5a3092969714aec",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "23c60fc363fcf5e40aa9d0a1",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "4a8ee88aa9670d5ff73eca03",
+              "model": "kling/v4/image"
+            }
+          ]
+        },
+        {
+          "id": "f95b8f4c0122195c1a5dd3dc",
+          "title": "An impressionist painting of a riverside",
+          "prompt": "An impressionist painting of a riverside garden at golden hour: figures strolling among flowers, shimmering reflections on water, loose visible brushstrokes, luminous warm light, soft color transitions, airy atmosphere, fleeting moment of everyday beauty, painterly texture and light-driven composition.",
+          "images": [
+            {
+              "id": "821fce7fd2e3117455cb57c2",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "71428458178e6d09398c0cb5",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "1b4ad0bf9d9af10bb42e42cb",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "b43e58f429e6320a68dd0a7d",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "4485a8c48c6629f62895cb8a",
+          "title": "A grand Baroque-style portrait painting an",
+          "prompt": "A grand Baroque-style portrait painting: an aristocratic woman seated beside a velvet curtain, wearing a dark jeweled gown, dramatic chiaroscuro lighting, rich textures in fabric and skin, deep warm shadows, dignified pose, ornate but controlled composition, painterly realism, opulent and theatrical.",
+          "images": [
+            {
+              "id": "53b951cb1f0d0566e7ad0c9b",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "3d1aa2be0907507b3e23172b",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "cd2ebb5b453cfbd7371a9c8e",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "f56d18d629ef08d87d110db8",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "a155fc418a08ba7d7e86ec39",
+              "model": "qwen/qwen-image-3-pro"
+            }
+          ]
+        },
+        {
+          "id": "3554cda19f03d861c57aa8ea",
+          "title": "A mid-century illustrated travel poster for",
+          "prompt": "A mid-century illustrated travel poster for an imaginary Mediterranean coastal town: stylized cliffs, a bright sea, simplified buildings, flat graphic shapes, optimistic composition, limited but vibrant color palette, elegant vintage typography space left blank, cheerful and sophisticated retro design.",
+          "images": [
+            {
+              "id": "3c7f96bea38b44cfbc9aaf11",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "f3622fb5d358310edce97cd3",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "9b6494c7711aae878acaefaa",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "b53d36a8138c70be3c9bda27",
+              "model": "kling/v4/image"
+            }
+          ]
+        },
+        {
+          "id": "a9df87c3a11dd03b3017ebee",
+          "title": "A tranquil scene rendered like a",
+          "prompt": "A tranquil scene rendered like a traditional Japanese woodblock print: a traveler crossing a bridge in light rain, pine trees bending in the wind, layered mountains in the background, flat yet elegant composition, delicate linework, muted natural colors, refined negative space, poetic seasonal atmosphere.",
+          "images": [
+            {
+              "id": "79d2ad86cf5dc2276f2b50b6",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "f0403b3c44cade45858ed5be",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "c3adb94225af91d328ba62bc",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "372a0029e38f4b133e67e2c5",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "ab7f76067b835a17c3fae9a6",
+              "model": "bytedance/seedream-5.5"
+            }
+          ]
+        },
+        {
+          "id": "eb9ad4e25b0b1d712c09298a",
+          "title": "A refined architecture editorial photograph of",
+          "prompt": "A refined architecture editorial photograph of a minimalist concrete house: early morning light casting long shadows across a courtyard, a lone figure in neutral clothing walking near a reflecting pool, precise geometric framing, muted palette, clean lines, serene luxury, magazine-quality composition, highly controlled and sophisticated.",
+          "images": [
+            {
+              "id": "2f504d9d71eeed2088aa48db",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "6d729ddc9534f63497051b2f",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "1b13b7323a3c5408e1d04fe3",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "53f3a9a61781b434a06f629c",
+              "model": "kling/v4/image"
+            }
+          ]
+        },
+        {
+          "id": "00f55dd3dceb171c53f36a09",
+          "title": "A large-scale commercial science-fiction film frame",
+          "prompt": "A large-scale commercial science-fiction film frame: a massive futuristic city stretches into the mist at sunrise, a lone protagonist stands on a rooftop in silhouette, layered holographic signage, dramatic atmospheric perspective, bold cinematic scale, polished production design, dynamic but clear composition, emotionally epic, premium blockbuster aesthetic.",
+          "images": [
+            {
+              "id": "67787e76cc45f3f7546274c1",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "43a78533121037fcfd9e6f80",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "6c982410613670a04f3fc507",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "1dee3449f314d20843fb3ab2",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "dfb665fba3e6a4cf0e11e3df",
+          "title": "A nostalgic indie coming-of-age film frame",
+          "prompt": "A nostalgic indie coming-of-age film frame shot on 16mm: three teenagers ride bicycles down a sunlit suburban street in late summer, warm golden light, soft lens imperfections, pastel tones, casual wardrobe, emotionally immediate and youthful atmosphere, gentle film grain, intimate and slightly dreamy, bittersweet freedom.",
+          "images": [
+            {
+              "id": "bd9316d19a9db577077d4e0b",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "c69c85b77cc9e90e7026e6b2",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "07ac050fdb3b217de440e883",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "ad50fe38bd5a85e249032872",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "8d5634ea800d3d937c4510f1",
+              "model": "qwen/qwen-image-3-pro"
+            }
+          ]
+        },
+        {
+          "id": "ac4c45c45220c2f3a94696a7",
+          "title": "A dark avant-garde fashion editorial image",
+          "prompt": "A dark avant-garde fashion editorial image: a model stands in a cavernous industrial room wearing a sculptural black outfit with exaggerated silhouette, stark directional lighting, deep shadows, monochrome palette with a subtle metallic accent, high-concept styling, severe elegance, conceptual luxury magazine aesthetic, bold and confrontational.",
+          "images": [
+            {
+              "id": "ddffc79d6edb5b3f70a9f329",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "0db915c3e8dc983569d0212b",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "872a1f48d421b80b5696b6ff",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "7ad742c3bc7c1e742508356b",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "284987f42445dbd9d221a21a",
+              "model": "kling/v4/image"
+            }
+          ]
+        },
+        {
+          "id": "9cd7506a8ac7084bce3bb616",
+          "title": "A retro-futurist magazine cover illustration imagining",
+          "prompt": "A retro-futurist magazine cover illustration imagining the year 2000 from the perspective of 1965: sleek monorails, elegant domed buildings, smiling citizens in geometric outfits, clean optimistic lines, limited palette, polished commercial illustration style, hopeful and design-forward.",
+          "images": [
+            {
+              "id": "c2bdbf675441d0b0795ce119",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "89bc5977cb8c7493e9c7ecb7",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "3975131f6a61f25f478d0905",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "459196a544f031530b904d31",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "b5e469dab87b3cb1787d94f5",
+              "model": "openai/gpt-image-2.6-sunburst"
+            }
+          ]
+        },
+        {
+          "id": "e13f5e789539ad90c0d3f817",
+          "title": "A moody noir-inspired black-and-white photograph a",
+          "prompt": "A moody noir-inspired black-and-white photograph: a detective in a trench coat stands under a streetlamp in wet midnight rain, cigarette smoke mixing with mist, sharp shadows, glistening pavement, venetian-blind lighting spilling from a nearby window, tense and fatalistic atmosphere.",
+          "images": [
+            {
+              "id": "9dfbbbbe374a0a730c826591",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "7c1249c220531320f3ff1805",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "724a23aba8f70b15d631a744",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "93d75d7b6586813cb4fc1f3e",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "d5b5282e2907483a906e39a1",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "9435bc428eb7c906cf22ef6a",
+          "title": "A dramatic Romantic-era style painting a",
+          "prompt": "A dramatic Romantic-era style painting: a solitary figure stands on a cliff overlooking a stormy sea at dawn, vast atmosphere, emotional sublime, swirling clouds, strong painterly movement, luminous horizon, poetic loneliness.",
+          "images": [
+            {
+              "id": "52dac3a2c5b5bd951ac2a24b",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "d86adb54c9c1cf4362ee420f",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "07dbd7d1cf462a4474ad42a8",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "9d94a5409fea6c31456e1a76",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "2a75f10fd5a5724c9f7d812c",
+              "model": "openai/gpt-image-2.6-sunburst"
+            }
+          ]
+        },
+        {
+          "id": "7343869aea424cbbc149153a",
+          "title": "A contemporary brutalist graphic poster stark",
+          "prompt": "A contemporary brutalist graphic poster: stark grid layout, oversized typography space left blank, black, white, and acid yellow palette, raw cut-and-paste collage elements, high contrast, anti-polished editorial energy, aggressively modern and experimental.",
+          "images": [
+            {
+              "id": "ead91e814fde294a1e6c962e",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "ae396cb7c99b889deb7ec797",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "d69c7416deb9fb8054cc0dfb",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "48c3c0e0cdbbdc606336ecbd",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "c21794b6dc91dc9d2c2868ee",
+          "title": "A gentle children’s book illustration of",
+          "prompt": "A gentle children’s book illustration of a fox reading under a tree in spring, soft pastel palette, hand-drawn textures, whimsical but calm atmosphere, tender linework, warm and inviting visual storytelling.",
+          "images": [
+            {
+              "id": "01a85dfd909c427ed3cbc78e",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "c8b64fcd0e307083d3523569",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "be663e6afb990931ef8e64de",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "9e4b50f65dd24c17ccc963f1",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "03efceb503c3892b76926d0b",
+              "model": "qwen/qwen-image-3-pro"
+            }
+          ]
+        },
+        {
+          "id": "c3179b0192b20d3a1eccce96",
+          "title": "A hyperreal beauty campaign close-up dewy",
+          "prompt": "A hyperreal beauty campaign close-up: dewy skin, glossy lips, soft diffused studio light, ultra-clean retouched luxury aesthetic, pale rose and cream palette, intimate crop, premium cosmetics advertising feel.",
+          "images": [
+            {
+              "id": "9ea418ad146f46592fd4d8cb",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "ece82b31b776aa852d39e979",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "996f378241de0c1d1f073941",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "4cee03527fd043824653d112",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "c21eb787e90212874f4c15db",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "c05eb64f2f27643e27c41133",
+          "title": "A handcrafted stop-motion style image a",
+          "prompt": "A handcrafted stop-motion style image: a small puppet boy in a wool coat stands in a tiny snow-covered village, visible handmade textures, miniature set design, tactile materials, warm practical lights in the windows, whimsical but melancholic tone.",
+          "images": [
+            {
+              "id": "855330d288f1fef619850e4f",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "a1b20ae90d6df4f4f1a61bf9",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "97254c020103d28cb8389393",
+              "model": "gemini-nano-banana-2.1"
+            },
+            {
+              "id": "50bef1f20638be05b7068063",
+              "model": "kling/v4/image"
+            }
+          ]
+        },
+        {
+          "id": "96eaf6bbf04346368492fd8a",
+          "title": "A high-fashion campaign set in a",
+          "prompt": "A high-fashion campaign set in a vast desert at sunset: a model in flowing cream fabric stands against monumental dunes, sculptural pose, wind shaping the garment, refined editorial composition, soft luxury palette, elegant emptiness, cinematic fashion minimalism.",
+          "images": [
+            {
+              "id": "368f184d042e32b1e6f30805",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "91ff9212d35766cd8f4e0b32",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "ac1241e7e7d7f6ab66b0f72b",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "ec3777334e1e765798f13fcc",
+              "model": "qwen/qwen-image-3-pro"
+            },
+            {
+              "id": "93c496788bc7ecbe0ece8052",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        {
+          "id": "d735228adf94fa5dc65b7f02",
+          "title": "A clean documentation photograph of a",
+          "prompt": "A clean documentation photograph of a contemporary art installation in a white gallery: suspended translucent fabrics, projected moving light patterns, a single viewer standing quietly, spacious composition, cool neutral tones, minimal and cerebral atmosphere.",
+          "images": [
+            {
+              "id": "eaae657718d120dcc0d1f718",
+              "model": "kling/v4/image"
+            },
+            {
+              "id": "38a3aab59271b4fbb419e27c",
+              "model": "bytedance/seedream-5.5"
+            },
+            {
+              "id": "df5a3dd165180ea37fb82688",
+              "model": "openai/gpt-image-2.6-sunburst"
+            },
+            {
+              "id": "9842c9f6720660511d43f14d",
+              "model": "gemini-nano-banana-2.1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

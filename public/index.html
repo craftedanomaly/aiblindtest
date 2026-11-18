@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#f4f3ed">
+    <title>Görsel Model Testi</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <header class="masthead"><a href="/" class="brand"><span aria-hidden="true">◒</span> Görsel Model Testi</a></header>
+    <main class="shell">
+      <div class="intro">
+        <h1>Görselleri karşılaştır.</h1>
+        <p>Bir test aç, aynı prompttan çıkan görsellere 1–5 yıldız ver. Test sonunda kendi sıralamanı ve topluluğun sonuçlarını gör.</p>
+      </div>
+      <p id="home-status" role="status">Testler yükleniyor…</p>
+      <div id="dashboard" class="dashboard" hidden></div>
+    </main>
+    <dialog id="review" aria-label="Kör değerlendirme"></dialog>
+  </body>
+</html>
